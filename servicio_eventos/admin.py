@@ -38,7 +38,6 @@ class ReservaDeServicioAdmin(admin.ModelAdmin):
     model = ReservaDeServicio
 
 
-
 admin.site.register(Cliente,ClienteAdmin) 
 admin.site.register(Empleado,EmpleadoAdmin)
 admin.site.register(Coordinador,CoordinadorAdmin)
