@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Cliente, Empleado, Coordinador, Servicio
+from .models import Cliente, Empleado, Coordinador, Servicio, ReservaDeServicio
 
 
 # Creamos super usuario para el admin:
@@ -34,7 +34,13 @@ class ServicioAdmin(admin.ModelAdmin):
     list_filter = ('activo',)
 
 
+class ReservaDeServicioAdmin(admin.ModelAdmin):
+    model = ReservaDeServicio
+
+
+
 admin.site.register(Cliente,ClienteAdmin) 
 admin.site.register(Empleado,EmpleadoAdmin)
 admin.site.register(Coordinador,CoordinadorAdmin)
 admin.site.register(Servicio,ServicioAdmin)
+admin.site.register(ReservaDeServicio,ReservaDeServicioAdmin)
