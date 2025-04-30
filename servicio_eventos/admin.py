@@ -1,6 +1,12 @@
 from django.contrib import admin
 from .models import Cliente, Empleado, Coordinador, Servicio
 
+
+# Creamos super usuario para el admin:
+# ID: admin 
+# Pass: admin123
+
+
 @admin.register(Cliente)
 class ClienteAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'apellido', 'activo')
