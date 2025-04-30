@@ -1,2 +1,9 @@
 <h1>Cargar servicios</h1>
 <h2>Formulario para cargar el servicio (evento)</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <h2>Datos del servicio</h2>
+    {{ form.as_p }}
+    <button type="submit"> Agregar servicio</button>
+</form>

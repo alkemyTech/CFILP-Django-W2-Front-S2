@@ -1,1 +1,7 @@
 <h1>Registrar Clientes</h1>
+<form method="post">
+    {% csrf_token %}
+    <h2>Datos del Cliente</h2>
+    {{ form.as_p }}
+    <button type="submit"> Agregar Cliente</button>
+</form>

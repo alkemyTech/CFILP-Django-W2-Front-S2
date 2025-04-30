@@ -1,1 +1,25 @@
 <h1>Servicios activos</h1>
+
+<table>
+    <tr>
+        <th> Nombre </th>
+        <th> Descripción </th>
+        <th> Precio </th>
+    </tr>
+    <tr>
+        {% if services|length >= 1 %}
+        <tr>
+            {% for service in services %}
+                <td>{{ service.nombre }}</td>
+                <td>{{ service.descripcion }}</td>
+                <td>{{ service.precio }}</td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="4">No hay servicios disponibles.</td>
+        </tr>
+        {% endif %}
+    </tr>
+</table>
+  
