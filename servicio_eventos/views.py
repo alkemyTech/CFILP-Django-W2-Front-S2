@@ -1,3 +1,9 @@
 from django.shortcuts import render
 
-# Create your views here.
+""" views.py 
+
+Toda la logica como intermediario entre el modelo y la vista se encuentra en este archivo.
+
+
+"""
+
