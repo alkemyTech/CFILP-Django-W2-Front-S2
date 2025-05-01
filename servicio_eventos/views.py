@@ -44,6 +44,11 @@ class ClienteFormView(FormView):
         form.save()
         return super().form_valid(form)
     
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+    
+    
 # ===================   EMPLEADOS       ========================
 # ===================   COORDINADORES   ========================
 # ===================   SERVICIOS       ========================
