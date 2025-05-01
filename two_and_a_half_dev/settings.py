@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'api',
     'rest_framework',
     'servicio_eventos',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -113,8 +114,8 @@ USE_I18N = True
 
 USE_TZ = True
 
-#Creamos una constante global para 'singin'
-LOGIN_URL = 'login'
+from django.urls import reverse_lazy
+LOGIN_URL = reverse_lazy('login')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/

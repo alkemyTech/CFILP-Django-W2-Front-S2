@@ -35,7 +35,7 @@ from .models import Cliente, Empleado, Coordinador, Servicio, ReservaDeServicio
 
 # ===================   CLIENTES        ========================
 
-class ClienteFormView(FormView):
+class ClienteFormView(LoginRequiredMixin,FormView):
     template_name = "servicio_eventos/register_clients.html"
     form_class = ClienteForm
     success_url = reverse_lazy("register_clients")
@@ -44,17 +44,13 @@ class ClienteFormView(FormView):
         form.save()
         return super().form_valid(form)
     
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super().dispatch(*args, **kwargs)
-    
-    
+
 # ===================   EMPLEADOS       ========================
 # ===================   COORDINADORES   ========================
 # ===================   SERVICIOS       ========================
 
 ## Crear
-class ReservaDeServicioFormView(FormView):
+class ReservaDeServicioFormView(LoginRequiredMixin,FormView):
     template_name = "servicio_eventos/load_services.html"
     form_class = ReservaDeServicioForm
     success_url = reverse_lazy("load_services")
@@ -64,14 +60,14 @@ class ReservaDeServicioFormView(FormView):
         return super().form_valid(form)
     
 ## Leer 
-class SerivicioListView(ListView):
+class SerivicioListView(LoginRequiredMixin,ListView):
     queryset = Servicio.objects.all()
     template_name = "servicio_eventos/services.html"
     context_object_name = "services"
 
 
 # ===================   SERVICIOS REALIZADOS      ========================
-class ReservaDeServicioRealizadosView(ListView):
+class ReservaDeServicioRealizadosView(LoginRequiredMixin,ListView):
     queryset = ReservaDeServicio.objects.all()
     template_name = "servicio_eventos/list_services.html"
     context_object_name = "list_services"

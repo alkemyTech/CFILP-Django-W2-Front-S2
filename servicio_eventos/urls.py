@@ -13,7 +13,6 @@ urlpatterns = [
     path("signup/",signup_view,name="signup"),
     path("logout/",logout_view,name="logout"),
 
-
     path('home/',view_home,name='home'), 
 
     # ===================== URLS CRUD ====================

@@ -3,6 +3,7 @@
 #======================== Formularios para crear cuenta de usuario              =============
 
 from django.shortcuts import render,redirect
+from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm # Una para crear y otra para autenticar si existe
 from django.http import HttpResponse
 from django.contrib.auth import login,logout,authenticate #Crea la cookie de sesion para el usuario
@@ -42,18 +43,17 @@ def logout_view(request):
 
 def login_view(request):
     if request.method == 'GET':
-        return render(request,'servicio_eventos/login.html',{'form': AuthenticationForm()}) # Renderiza el formulario de autenticación
-    if request.method == 'POST':
-        # debemos autenticar al usuario
-        user = authenticate(request,username = request.POST['username'],password = request.POST['password'])
-        if user is not None:
-            login(request,user)
-            return render(request,'home.html')
+        return render(request, 'servicio_eventos/login.html', {'form': AuthenticationForm()})
+
+    elif request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('home')  # nombre de la ruta, no url
         else:
-            return render(request,'servicio_eventos/login.html',{
-                'form': AuthenticationForm(),
-                'error': 'Usuario o contraseña incorrectos.'})
-
-
+            messages.error(request, 'Usuario o contraseña incorrectos.')
+            return render(request, 'servicio_eventos/login.html', {'form': AuthenticationForm()})
 
 #endregion
