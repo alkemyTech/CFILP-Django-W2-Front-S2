@@ -31,7 +31,7 @@
   </nav>
 
   <!-- CONTENIDO PRINCIPAL -->
-  <main class="container py-5">
+  <main class="container py-7">
     <h1 class="mb-4 text-primary">Servicios Pedidos</h1>
 
     {% if list_services is not none %}
@@ -45,6 +45,7 @@
               <th>Empleado</th>
               <th>Coordinador</th>
               <th>Total Precio (ARS)</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -56,6 +57,7 @@
                 <td>{{ service.empleado }}</td> <!-- Ajusta el atributo según tu modelo Empleado -->
                 <td>{{ service.coordinador }}</td> <!-- Ajusta el atributo según tu modelo Coordinador -->
                 <td>${{ service.total_precio }}</td>
+                <td>{{ service.status }}</td>
               </tr>
             {% endfor %}
           </tbody>

@@ -21,6 +21,7 @@ class LoginRequiredMixin:
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
     
+
 #==================================================================================
 
 #region de funciones para CRUD de clientes, empleados, coordinadores y servicios
@@ -67,11 +68,31 @@ class SerivicioListView(LoginRequiredMixin,ListView):
 
 
 # ===================   SERVICIOS REALIZADOS      ========================
+
+from pytz import timezone as pytz_timezone
+from django.utils import timezone
+
 class ReservaDeServicioRealizadosView(LoginRequiredMixin,ListView):
     queryset = ReservaDeServicio.objects.all()
     template_name = "servicio_eventos/list_services.html"
     context_object_name = "list_services"
     
+    def get_queryset(self):
+       hora_ar = timezone.now().astimezone(pytz_timezone("America/Argentina/Buenos_Aires")).date()
+       servicios = ReservaDeServicio.objects.all()
+       for s in servicios:
+           fecha_servicio = s.fecha_servicio.astimezone(pytz_timezone("America/Argentina/Buenos_Aires")).date()
+           if fecha_servicio < hora_ar:
+               s.status = "Finalizado"
+           elif fecha_servicio == hora_ar:
+               s.status = "En curso hoy"
+           else:
+               s.status = "Pendiente"
+       return servicios
     # Usamos select_related para obtener las relaciones de ForeignKey en una sola consulta
 
+
 #endregion
+
+
+
