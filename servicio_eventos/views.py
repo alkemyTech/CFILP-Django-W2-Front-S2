@@ -62,7 +62,7 @@ class ReservaDeServicioFormView(LoginRequiredMixin,FormView):
     
 ## Leer 
 class SerivicioListView(LoginRequiredMixin,ListView):
-    queryset = Servicio.objects.all()
+    queryset = Servicio.objects.filter(activo = True)
     template_name = "servicio_eventos/services.html"
     context_object_name = "services"
 
