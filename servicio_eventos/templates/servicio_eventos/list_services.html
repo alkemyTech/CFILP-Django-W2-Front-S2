@@ -34,7 +34,7 @@
   <main class="container py-5">
     <h1 class="mb-4 text-primary">Servicios Pedidos</h1>
 
-    {% if list_services %}
+    {% if list_services is not none %}
       <div class="table-responsive">
         <table class="table table-bordered table-hover">
           <thead class="table-dark">
@@ -51,10 +51,10 @@
             {% for service in list_services %}
               <tr>
                 <td>{{ service.fecha_servicio|date:"d/m/Y H:i" }}</td>
-                <td>{{ service.cliente.nombre }}</td> <!-- Ajusta el atributo según tu modelo Cliente -->
+                <td>{{ service.cliente }}</td> <!-- Ajusta el atributo según tu modelo Cliente -->
                 <td>{{ service.servicio.nombre }}</td> <!-- Ajusta el atributo según tu modelo Servicio -->
-                <td>{{ service.empleado.nombre }}</td> <!-- Ajusta el atributo según tu modelo Empleado -->
-                <td>{{ service.coordinador.nombre }}</td> <!-- Ajusta el atributo según tu modelo Coordinador -->
+                <td>{{ service.empleado }}</td> <!-- Ajusta el atributo según tu modelo Empleado -->
+                <td>{{ service.coordinador }}</td> <!-- Ajusta el atributo según tu modelo Coordinador -->
                 <td>${{ service.total_precio }}</td>
               </tr>
             {% endfor %}

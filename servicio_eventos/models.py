@@ -14,7 +14,7 @@ class Cliente(models.Model,ISwitchActivate):
     activo = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"Cliente: {self.nombre} {self.apellido}"
+        return f"{self.nombre} {self.apellido}"
 
 
 class Empleado(models.Model,ISwitchActivate):
@@ -24,7 +24,7 @@ class Empleado(models.Model,ISwitchActivate):
     activo = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"Empleado: {self.nombre} {self.apellido}"
+        return f"{self.nombre} {self.apellido}"
 
 
 class Coordinador(models.Model,ISwitchActivate):
@@ -35,7 +35,7 @@ class Coordinador(models.Model,ISwitchActivate):
     activo = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"Coordinador: {self.nombre} {self.apellido}"
+        return f"{self.nombre} {self.apellido}"
     
 
 class Servicio(models.Model,ISwitchActivate):
@@ -60,7 +60,8 @@ class ReservaDeServicio(models.Model):
     def __str__(self):
         return f"Reserva: {self.servicio} Coordinado por: {self.coordinador}"
     
-class ServiciosRealizados(models.Model):
+    
+"""class ServiciosRealizados(models.Model):
     fecha_reserva = models.DateTimeField(auto_now_add=True)
     fecha_servicio = models.DateTimeField()
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
@@ -71,4 +72,4 @@ class ServiciosRealizados(models.Model):
 
     def __str__(self):
         return f"Reserva: {self.servicio} Coordinado por: {self.coordinador}"
-    
+    """
