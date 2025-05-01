@@ -15,7 +15,7 @@ def view_home(request):
 from django.views.generic import FormView, ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import ClienteForm, EmpleadoForm, CoordinadorForm, ReservaDeServicioForm
-from .models import Cliente, Empleado, Coordinador, Servicio
+from .models import Cliente, Empleado, Coordinador, Servicio, ServiciosRealizados
 
 # ===================   CRUD FORMULARIO      ========================
 # ===================   CRUD : Crear, Leer, Actualizar, Borrar  ========================
@@ -51,6 +51,12 @@ class SerivicioListView(ListView):
     template_name = "servicio_eventos/services.html"
     context_object_name = "services"
 
-
+class ServiciosRealizadosView(ListView):
+    model = ServiciosRealizados
+    template_name = "servicio_eventos/list_services.html"
+    context_object_name = "list_services"
+    
+    # Usamos select_related para obtener las relaciones de ForeignKey en una sola consulta
+    queryset = ServiciosRealizados.objects.select_related('cliente', 'servicio', 'empleado', 'coordinador').all()
 
 #endregion

@@ -53,12 +53,22 @@ class ReservaDeServicio(models.Model):
     fecha_servicio = models.DateTimeField()
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
-    emeplado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
+    empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
     coordinador = models.ForeignKey(Coordinador, on_delete=models.CASCADE)
     total_precio = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
         return f"Reserva: {self.servicio} Coordinado por: {self.coordinador}"
     
-    
+class ServiciosRealizados(models.Model):
+    fecha_reserva = models.DateTimeField(auto_now_add=True)
+    fecha_servicio = models.DateTimeField()
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
+    empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
+    coordinador = models.ForeignKey(Coordinador, on_delete=models.CASCADE)
+    total_precio = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"Reserva: {self.servicio} Coordinado por: {self.coordinador}"
     
