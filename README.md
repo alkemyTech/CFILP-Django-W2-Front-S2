@@ -1,13 +1,13 @@
 # App de Reservas para Eventos
-Este proyecto consiste en una aplicación web desarrollada con Python y Django, orientada a la gestión de reservas para eventos. Está diseñada para mejorar la eficiencia, trazabilidad y automatización del proceso de reserva en instituciones educativas, centros culturales u organizaciones similares.
+Este proyecto consiste en una aplicación web desarrollada con Python y Django, orientada a la gestión de reservas para eventos. Está diseñada para mejorar la eficiencia, trazabilidad y automatización del proceso de reserva de eventos para instituciones educativas, centros culturales u organizaciones similares.
 
 ## 🚀 Objetivo
-El objetivo principal es ofrecer una herramienta digital que permita a empleados de una institucion, reservar espacios físicos o eventos, visualizar disponibilidad en tiempo real y generar reportes automatizados, optimizando la planificación y administración institucional.
+El objetivo principal es ofrecer una herramienta digital que permita a los empleados de una institucion o empresa, reservar eventos, visualizar disponibilidad en tiempo real, optimizando la planificación y administración institucional.
 
 ## 🗺️ Funcionalidades
 Registro y autenticación de usuarios
 
-Panel de administrador con control total sobre usuarios, eventos y reservas
+Panel de administrador con control total sobre usuarios, eventos, reservas y clientes
 
 Gestión de reservas: creación, modificación y cancelación
 
