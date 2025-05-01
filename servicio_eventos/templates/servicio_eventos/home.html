@@ -1,1 +1,90 @@
-<h1>Casa</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inicio | Sistema de Ventas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/home/">Two a and half dev</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/services/">Servicios Existentes</a></li>
+          <li class="nav-item"><a class="nav-link" href="/list_services/">Servicios realizados</a></li>
+          <li class="nav-item"><a class="nav-link" href="/register_clients/">Registrar cliente</a></li>
+          <li class="nav-item"><a class="nav-link" href="/load_services/">Cargar servicio</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="bg-primary text-white text-center py-5">
+    <div class="container">
+      <h1 class="display-4">Bienvenido a Two a and half dev</h1>
+      <p class="lead">Gestione servicios, reservas y clientes de forma simple y eficiente.</p>
+      <a href="/list_services/" class="btn btn-light btn-lg mt-3">Explorar Servicios realizados</a>
+    </div>
+  </header>
+
+  <!-- SECCIONES DESTACADAS -->
+  <section class="container py-5">
+    <div class="row text-center">
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Servicios Existentes</h5>
+            <p class="card-text">Visualice y administre todos los servicios ofrecidos.</p>
+            <a href="/services/" class="btn btn-outline-primary">Ver más</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mt-4 mt-md-0">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Cargar servicio</h5>
+            <p class="card-text">Revise y registre las reservas de los clientes.</p>
+            <a href="/load_services/" class="btn btn-outline-primary">Ver más</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mt-4 mt-md-0">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Registrar cliente</h5>
+            <p class="card-text">Consulte y edite información de los clientes.</p>
+            <a href="/register_clients/" class="btn btn-outline-primary">Ver más</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-dark text-white text-center py-3 mt-auto">
+    <small>&copy; 2025 Two a and half dev. Todos los derechos reservados.</small>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
