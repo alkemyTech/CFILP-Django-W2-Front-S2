@@ -9,6 +9,19 @@ Toda la logica como intermediario entre el modelo y la vista se encuentra en est
 def view_home(request):
     return render(request, "servicio_eventos/home.html")
 
+#==================================================================================
+# Para proteger la pagina, importo el decorador login_required
+from django.contrib.auth.decorators import login_required
+# method_decorator es para usar decoradores en CBV (Class Based Views)
+from django.utils.decorators import method_decorator
+
+# Mixin base para requerir login
+class LoginRequiredMixin:
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+    
+#==================================================================================
 
 #region de funciones para CRUD de clientes, empleados, coordinadores y servicios
 

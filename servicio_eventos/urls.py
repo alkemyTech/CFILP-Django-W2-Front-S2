@@ -5,9 +5,15 @@ from .views import (ClienteFormView,
                     ReservaDeServicioFormView,
                     ReservaDeServicioRealizadosView)
 
+from .login import signup_view, login_view, logout_view
 
 
 urlpatterns = [
+    path('',login_view,name='login'), # Login
+    path("signup/",signup_view,name="signup"),
+    path("logout/",logout_view,name="logout"),
+
+
     path('home/',view_home,name='home'), 
 
     # ===================== URLS CRUD ====================
