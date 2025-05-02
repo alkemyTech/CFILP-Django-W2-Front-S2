@@ -6,6 +6,8 @@ from .models import Cliente, Empleado, Coordinador, Servicio, ReservaDeServicio
 # ID: admin 
 # Pass: admin123
 
+# Usuarios normales para inicio de sesion:
+# ID: joa pass: joaquin1
 
 class ClienteAdmin(admin.ModelAdmin):
     model = Cliente

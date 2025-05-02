@@ -6,6 +6,7 @@ from .views import (ClienteFormView,
                     ReservaDeServicioRealizadosView)
 
 from .login import signup_view, login_view, logout_view
+from . import views
 
 
 urlpatterns = [
@@ -14,7 +15,7 @@ urlpatterns = [
     path("logout/",logout_view,name="logout"),
 
     path('home/',view_home,name='home'), 
-
+    path('cerrar-sesion/', views.cerrar_sesion, name='cerrar_sesion'),
     # ===================== URLS CRUD ====================
     # ===================== CLIENTES ====================
     path("register_clients/",ClienteFormView.as_view(),name="register_clients"),

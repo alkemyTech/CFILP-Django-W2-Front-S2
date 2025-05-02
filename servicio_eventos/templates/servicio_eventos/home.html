@@ -34,6 +34,10 @@
           <li class="nav-item"><a class="nav-link" href="/register_clients/">Registrar cliente</a></li>
           <li class="nav-item"><a class="nav-link" href="/load_services/">Cargar servicio</a></li>
         </ul>
+        <form action="{% url 'cerrar_sesion' %}" method="post">
+          {% csrf_token %}
+          <button type="submit">Cerrar sesión</button>
+      </form>
       </div>
     </div>
   </nav>

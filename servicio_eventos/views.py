@@ -21,7 +21,12 @@ class LoginRequiredMixin:
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
     
+from django.shortcuts import render, redirect
+from django.contrib.auth import logout
 
+def cerrar_sesion(request):
+    logout(request)  # Cierra la sesión del usuario
+    return redirect('login')  # Redirige al login (asegúrate de que 'login' sea el nombre de tu URL de login)
 #==================================================================================
 
 #region de funciones para CRUD de clientes, empleados, coordinadores y servicios
