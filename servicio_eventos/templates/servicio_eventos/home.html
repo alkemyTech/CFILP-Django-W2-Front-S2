@@ -28,16 +28,26 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="/services/">Servicios Existentes</a></li>
-          <li class="nav-item"><a class="nav-link" href="/list_services/">Servicios Pedidos</a></li>
-          <li class="nav-item"><a class="nav-link" href="/register_clients/">Registrar cliente</a></li>
-          <li class="nav-item"><a class="nav-link" href="/load_services/">Cargar servicio</a></li>
+        <ul class="navbar-nav ms-auto d-flex align-items-center gap-2">
+          <li class="nav-item">
+            <a class="btn btn-outline-light" href="/services/">Servicios Existentes</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-light" href="/list_services/">Servicios Pedidos</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-light" href="/register_clients/">Registrar cliente</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-light" href="/load_services/">Cargar servicio</a>
+          </li>
+          <li class="nav-item">
+            <form action="{% url 'cerrar_sesion' %}" method="post" class="d-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-light">Cerrar sesión</button>
+            </form>
+          </li>
         </ul>
-        <form action="{% url 'cerrar_sesion' %}" method="post">
-          {% csrf_token %}
-          <button type="submit">Cerrar sesión</button>
-      </form>
       </div>
     </div>
   </nav>
