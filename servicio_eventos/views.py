@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 Toda la logica como intermediario entre el modelo y la vista se encuentra en este archivo.
 
-
+# Linea de Ales Test en git
 """
 def view_home(request):
     return render(request, "servicio_eventos/home.html")
