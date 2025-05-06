@@ -1,5 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
-
-#Test en view Ales
+def view_home(request):
+    return render(request, "public/home.html")
