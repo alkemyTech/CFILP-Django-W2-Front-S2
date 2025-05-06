@@ -7,6 +7,7 @@ Toda la logica como intermediario entre el modelo y la vista se encuentra en est
 
 """
 def view_home(request):
+    # Ales comento
     return render(request, "servicio_eventos/home.html")
 
 #==================================================================================
