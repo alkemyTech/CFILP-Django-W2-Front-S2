@@ -49,11 +49,13 @@
           </thead>
           <tbody>
             {% for service in services %}
-              <tr>
-                <td>{{ service.nombre }}</td>
-                <td>{{ service.descripcion }}</td>
-                <td>${{ service.precio }}</td>
-              </tr>
+              {% if service.avtivo %}
+                <tr>
+                  <td>{{ service.nombre }}</td>
+                  <td>{{ service.descripcion }}</td>
+                  <td>${{ service.precio }}</td>
+                </tr>
+              {% endif %}
             {% endfor %}
           </tbody>
         </table>
