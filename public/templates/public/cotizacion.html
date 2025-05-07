@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizar Evento - FiestaPerfecta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-elegant-title {
+            font-family: 'Playfair Display', serif; /* Fuente elegante para títulos */
+        }
+        .form-label {
+            font-weight: 600;
+            color: #374151; /* text-gray-700 */
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #D1D5DB; /* border-gray-300 */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: #EC4899; /* focus:border-pink-500 */
+            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.3); /* focus:ring-pink-500 focus:ring-opacity-50 */
+            outline: none;
+        }
+        .cta-button {
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        .dopamine-bg {
+            background-color: #FF69B4; /* Rosa vibrante */
+        }
+        .dopamine-bg:hover {
+            background-color: #FF1493; /* Rosa más intenso */
+        }
+        /* Estilo para los pasos del formulario */
+        .step-indicator {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb; /* border-gray-200 */
+        }
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #9ca3af; /* text-gray-400 */
+            font-weight: 600;
+            position: relative;
+            flex: 1;
+        }
+        .step.active .step-circle {
+            background-color: #EC4899; /* bg-pink-500 */
+            color: white;
+            border-color: #EC4899; /* border-pink-500 */
+        }
+        .step.active .step-label {
+            color: #EC4899; /* text-pink-500 */
+        }
+        .step.completed .step-circle {
+            background-color: #10B981; /* bg-green-500 */
+            color: white;
+            border-color: #10B981; /* border-green-500 */
+        }
+        .step.completed .step-label {
+            color: #10B981; /* text-green-500 */
+        }
+        .step-circle {
+            width: 2.5rem; /* w-10 */
+            height: 2.5rem; /* h-10 */
+            border-radius: 9999px; /* rounded-full */
+            border: 2px solid #D1D5DB; /* border-gray-300 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .step-label {
+            font-size: 0.875rem; /* text-sm */
+            text-align: center;
+        }
+        /* Línea conectora (simplificada) */
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 1.25rem; /* Alineado con el centro del círculo */
+            left: calc(50% + 1.5rem); /* Empieza después del círculo */
+            width: calc(100% - 3rem); /* Ajusta para que no se superponga con el siguiente círculo */
+            height: 2px;
+            background-color: #D1D5DB; /* border-gray-300 */
+            z-index: -1;
+        }
+        .step.active:not(:last-child)::after, .step.completed:not(:last-child)::after {
+             background-color: #EC4899; /* border-pink-500 para activo/completado */
+        }
+
+
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/public/casa/" class="text-4xl font-elegant-title text-pink-500">FiestaPerfecta</a>
+            <div class="flex space-x-6 items-center">
+                <a href="/public/casa/#servicios" class="text-gray-600 hover:text-pink-500 hidden md:block">Servicios</a>
+                <a href="/public/casa/#testimonios" class="text-gray-600 hover:text-pink-500 hidden md:block">Testimonios</a>
+                <a href="/public/casa/#contacto" class="text-gray-600 hover:text-pink-500 hidden md:block">Contacto</a>
+                <a href="/public/casa/" class="cta-button dopamine-bg text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:shadow-lg">
+                    Volver al Inicio
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 md:px-6 py-12 md:py-16">
+        <header class="text-center mb-10 md:mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold text-pink-600 mb-4">Cotiza Tu Evento Soñado</h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                Completa el siguiente formulario con los detalles de tu celebración y te enviaremos una propuesta personalizada lo antes posible. ¡Estamos emocionados de ayudarte a crear un momento inolvidable!
+            </p>
+        </header>
+
+        <div class="step-indicator mb-12">
+            <div class="step active" id="step-indicator-1">
+                <div class="step-circle">1</div>
+                <div class="step-label">Info del Evento</div>
+            </div>
+            <div class="step" id="step-indicator-2">
+                <div class="step-circle">2</div>
+                <div class="step-label">Servicios Requeridos</div>
+            </div>
+            <div class="step" id="step-indicator-3">
+                <div class="step-circle">3</div>
+                <div class="step-label">Tus Datos</div>
+            </div>
+        </div>
+
+        <form id="cotizacionForm" action="#" method="POST" class="bg-white p-6 md:p-10 rounded-xl shadow-2xl max-w-3xl mx-auto">
+            
+            <div id="form-step-1" class="form-step">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-6 border-b pb-3">Paso 1: Detalles de Tu Celebración</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="tipo_evento" class="form-label">Tipo de Evento <span class="text-red-500">*</span></label>
+                        <select id="tipo_evento" name="tipo_evento" class="form-select" required>
+                            <option value="" disabled selected>Selecciona el tipo...</option>
+                            <option value="cumpleanos_infantil">Cumpleaños Infantil</option>
+                            <option value="cumpleanos_adulto">Cumpleaños Adulto</option>
+                            <option value="boda">Boda</option>
+                            <option value="aniversario">Aniversario</option>
+                            <option value="evento_corporativo">Evento Corporativo</option>
+                            <option value="despedida_soltero">Despedida de Soltero/a</option>
+                            <option value="baby_shower">Baby Shower</option>
+                            <option value="graduacion">Graduación</option>
+                            <option value="otro">Otro (especificar)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="otro_tipo_evento" class="form-label">Si es "Otro", especifica:</label>
+                        <input type="text" name="otro_tipo_evento" id="otro_tipo_evento" class="form-input" placeholder="Ej: Fiesta de compromiso">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="fecha_evento" class="form-label">Fecha Estimada del Evento <span class="text-red-500">*</span></label>
+                        <input type="date" name="fecha_evento" id="fecha_evento" class="form-input" required>
+                    </div>
+                    <div>
+                        <label for="hora_evento" class="form-label">Hora Estimada</label>
+                        <input type="time" name="hora_evento" id="hora_evento" class="form-input">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="cantidad_invitados" class="form-label">Número Estimado de Invitados <span class="text-red-500">*</span></label>
+                        <input type="number" name="cantidad_invitados" id="cantidad_invitados" class="form-input" placeholder="Ej: 50" min="1" required>
+                    </div>
+                    <div>
+                        <label for="locacion_evento" class="form-label">Lugar del Evento</label>
+                        <select id="locacion_evento" name="locacion_evento" class="form-select">
+                            <option value="" disabled selected>¿Ya tienes lugar?</option>
+                            <option value="salon_propio">Tengo salón/lugar propio</option>
+                            <option value="necesito_salon">Necesito ayuda para encontrar salón</option>
+                            <option value="domicilio_particular">Domicilio particular</option>
+                            <option value="aire_libre">Espacio al aire libre</option>
+                        </select>
+                    </div>
+                </div>
+                 <div class="mb-6">
+                    <label for="direccion_evento" class="form-label">Dirección (si ya la tienes)</label>
+                    <input type="text" name="direccion_evento" id="direccion_evento" class="form-input" placeholder="Calle, Número, Ciudad">
+                </div>
+
+                <div class="flex justify-end">
+                    <button type="button" onclick="nextStep(1)" class="cta-button dopamine-bg text-white font-semibold py-3 px-8 rounded-lg shadow-md">
+                        Siguiente <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="form-step-2" class="form-step hidden">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-6 border-b pb-3">Paso 2: ¿Qué Servicios Necesitas?</h2>
+                <p class="text-sm text-gray-500 mb-6">Selecciona todos los servicios que te interesan. Podemos adaptarnos a tus necesidades.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4 mb-6">
+                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="planificacion_integral" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Planificación Integral</span></label></div>
+                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="decoracion_tematica" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Decoración Temática</span></label></div>
+                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="catering_menu" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Catering / Menú</span></label></div>
+                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="barra_bebidas" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Barra de Bebidas</span></label></div>
+                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="dj_musica" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>DJ y Música</span></label></div>
+                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="fotografia_video" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Fotografía y Video</span></label></div>
+                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="animacion_shows" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Animación / Shows</span></label></div>
+                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="mobiliario" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Alquiler de Mobiliario</span></label></div>
+                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="iluminacion_sonido" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Iluminación y Sonido</span></label></div>
+                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="souvenirs" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Souvenirs / Recuerdos</span></label></div>
+                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="mesa_dulce_torta" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Mesa Dulce / Torta</span></label></div>
+                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="personal_asistencia" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Personal de Asistencia</span></label></div>
+                </div>
+
+                <div class="mb-6">
+                    <label for="presupuesto_estimado" class="form-label">Presupuesto Estimado (Opcional)</label>
+                    <input type="text" name="presupuesto_estimado" id="presupuesto_estimado" class="form-input" placeholder="Ej: $50.000 - $100.000 ARS">
+                    <p class="text-xs text-gray-500 mt-1">Saber tu rango de presupuesto nos ayuda a ofrecerte las mejores opciones.</p>
+                </div>
+
+                <div class="mb-6">
+                    <label for="comentarios_adicionales_servicios" class="form-label">Comentarios Adicionales sobre Servicios</label>
+                    <textarea name="comentarios_adicionales_servicios" id="comentarios_adicionales_servicios" rows="4" class="form-textarea" placeholder="Describe cualquier idea específica, tema, colores, o algo que debamos saber..."></textarea>
+                </div>
+
+                <div class="flex justify-between">
+                    <button type="button" onclick="prevStep(2)" class="cta-button bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold py-3 px-8 rounded-lg shadow-md">
+                        <i class="fas fa-arrow-left mr-2"></i> Anterior
+                    </button>
+                    <button type="button" onclick="nextStep(2)" class="cta-button dopamine-bg text-white font-semibold py-3 px-8 rounded-lg shadow-md">
+                        Siguiente <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="form-step-3" class="form-step hidden">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-6 border-b pb-3">Paso 3: Tus Datos de Contacto</h2>
+                <p class="text-sm text-gray-500 mb-6">Casi listo. Necesitamos esta información para enviarte tu cotización personalizada.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="nombre_completo" class="form-label">Nombre Completo <span class="text-red-500">*</span></label>
+                        <input type="text" name="nombre_completo" id="nombre_completo" class="form-input" placeholder="Tu nombre y apellido" required>
+                    </div>
+                    <div>
+                        <label for="email_contacto" class="form-label">Correo Electrónico <span class="text-red-500">*</span></label>
+                        <input type="email" name="email_contacto" id="email_contacto" class="form-input" placeholder="tu@email.com" required>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="telefono_contacto" class="form-label">Teléfono / WhatsApp <span class="text-red-500">*</span></label>
+                        <input type="tel" name="telefono_contacto" id="telefono_contacto" class="form-input" placeholder="+54 9 11 XXXX-XXXX" required>
+                    </div>
+                    <div>
+                        <label for="medio_preferido_contacto" class="form-label">Medio Preferido de Contacto</label>
+                        <select id="medio_preferido_contacto" name="medio_preferido_contacto" class="form-select">
+                            <option value="email">Email</option>
+                            <option value="whatsapp" selected>WhatsApp</option>
+                            <option value="llamada">Llamada Telefónica</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="como_nos_conocio" class="form-label">¿Cómo nos conociste?</label>
+                    <select id="como_nos_conocio" name="como_nos_conocio" class="form-select">
+                        <option value="">Selecciona una opción...</option>
+                        <option value="redes_sociales">Redes Sociales (Instagram, Facebook, etc.)</option>
+                        <option value="google">Búsqueda en Google</option>
+                        <option value="recomendacion">Recomendación de un amigo/familiar</option>
+                        <option value="publicidad_online">Publicidad Online</option>
+                        <option value="otro_medio">Otro Medio</option>
+                    </select>
+                </div>
+
+                <div class="mb-8">
+                    <label class="flex items-center space-x-2">
+                        <input type="checkbox" name="terminos_condiciones" id="terminos_condiciones" class="form-checkbox rounded text-pink-500 focus:ring-pink-500" required>
+                        <span>Acepto los <a href="/terminos-y-condiciones" target="_blank" class="text-pink-500 hover:underline">Términos y Condiciones</a> y la <a href="/politica-de-privacidad" target="_blank" class="text-pink-500 hover:underline">Política de Privacidad</a>. <span class="text-red-500">*</span></span>
+                    </label>
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <button type="button" onclick="prevStep(3)" class="cta-button bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold py-3 px-8 rounded-lg shadow-md">
+                        <i class="fas fa-arrow-left mr-2"></i> Anterior
+                    </button>
+                    <button type="submit" class="cta-button dopamine-bg text-white font-bold py-3 px-10 text-lg rounded-lg shadow-xl hover:shadow-2xl">
+                        <i class="fas fa-paper-plane mr-2"></i> Enviar Solicitud de Cotización
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div id="successMessage" class="hidden mt-10 max-w-xl mx-auto bg-green-100 border-l-4 border-green-500 text-green-700 p-6 rounded-md shadow-md" role="alert">
+            <div class="flex">
+                <div class="py-1"><svg class="fill-current h-6 w-6 text-green-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                <div>
+                    <p class="font-bold">¡Solicitud Enviada con Éxito!</p>
+                    <p class="text-sm">Hemos recibido tu información. Nos pondremos en contacto contigo a la brevedad con una propuesta a medida. ¡Gracias por confiar en FiestaPerfecta!</p>
+                </div>
+            </div>
+        </div>
+         <div id="errorMessage" class="hidden mt-10 max-w-xl mx-auto bg-red-100 border-l-4 border-red-500 text-red-700 p-6 rounded-md shadow-md" role="alert">
+            <div class="flex">
+                <div class="py-1"><svg class="fill-current h-6 w-6 text-red-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 5v6h2V5H9zm0 8h2v2H9v-2z"/></svg></div>
+                <div>
+                    <p class="font-bold">Error al Enviar la Solicitud</p>
+                    <p class="text-sm">Hubo un problema al procesar tu solicitud. Por favor, verifica los campos e inténtalo de nuevo. Si el problema persiste, contáctanos directamente.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 py-12 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-xl font-semibold text-white mb-4">FiestaPerfecta</p>
+            <p class="text-sm mb-4">Transformando tus sueños en celebraciones inolvidables.</p>
+            <div class="flex justify-center space-x-4 mb-6">
+                <a href="#" class="text-gray-300 hover:text-pink-400"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#" class="text-gray-300 hover:text-pink-400"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" class="text-gray-300 hover:text-pink-400"><i class="fab fa-whatsapp fa-lg"></i></a>
+            </div>
+            <p class="text-xs">&copy; 2025 FiestaPerfecta. Todos los derechos reservados.</p>
+            <p class="text-xs mt-1"><a href="/politica-privacidad.html" class="hover:text-pink-400">Política de Privacidad</a> | <a href="/terminos-condiciones.html" class="hover:text-pink-400">Términos y Condiciones</a></p>
+        </div>
+    </footer>
+
+    <script>
+        let currentStep = 1;
+        const formSteps = document.querySelectorAll('.form-step');
+        const stepIndicators = document.querySelectorAll('.step-indicator .step');
+
+        function showStep(stepNumber) {
+            formSteps.forEach(step => step.classList.add('hidden'));
+            document.getElementById(`form-step-${stepNumber}`).classList.remove('hidden');
+
+            stepIndicators.forEach(indicator => {
+                indicator.classList.remove('active', 'completed');
+            });
+
+            for (let i = 1; i <= stepIndicators.length; i++) {
+                const indicator = document.getElementById(`step-indicator-${i}`);
+                if (i < stepNumber) {
+                    indicator.classList.add('completed');
+                } else if (i === stepNumber) {
+                    indicator.classList.add('active');
+                }
+            }
+            window.scrollTo(0, 0); // Scroll al inicio de la página al cambiar de paso
+        }
+
+        function nextStep(step) {
+            if (validateStep(step)) {
+                currentStep++;
+                if (currentStep > formSteps.length) {
+                    currentStep = formSteps.length; // No exceder el número de pasos
+                }
+                showStep(currentStep);
+            }
+        }
+
+        function prevStep(step) {
+            currentStep--;
+            if (currentStep < 1) {
+                currentStep = 1; // No ir antes del primer paso
+            }
+            showStep(currentStep);
+        }
+        
+        function validateStep(stepNumber) {
+            // Validación simple para campos requeridos en el paso actual
+            const currentFormStep = document.getElementById(`form-step-${stepNumber}`);
+            const requiredInputs = currentFormStep.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredInputs.forEach(input => {
+                // Restablecer estilos de error
+                input.classList.remove('border-red-500', 'focus:border-red-500');
+                const errorMsgId = `error-${input.id}`;
+                const existingErrorMsg = document.getElementById(errorMsgId);
+                if (existingErrorMsg) {
+                    existingErrorMsg.remove();
+                }
+
+                if (!input.value.trim() || (input.type === 'checkbox' && !input.checked)) {
+                    isValid = false;
+                    input.classList.add('border-red-500', 'focus:border-red-500');
+                    // Añadir mensaje de error específico (opcional pero recomendado)
+                    const errorMsg = document.createElement('p');
+                    errorMsg.id = errorMsgId;
+                    errorMsg.className = 'text-red-500 text-xs mt-1';
+                    errorMsg.textContent = 'Este campo es obligatorio.';
+                    if(input.type === 'checkbox'){
+                         input.parentElement.insertAdjacentElement('afterend', errorMsg);
+                    } else {
+                         input.insertAdjacentElement('afterend', errorMsg);
+                    }
+                }
+            });
+            if (!isValid) {
+                // Opcional: Mostrar un mensaje general de error para el paso
+                // alert('Por favor, completa todos los campos obligatorios (*) antes de continuar.');
+            }
+            return isValid;
+        }
+
+
+        document.getElementById('cotizacionForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevenir el envío real del formulario para esta demo
+
+            if (!validateStep(currentStep)) {
+                 // alert('Por favor, completa todos los campos obligatorios (*) en el último paso.');
+                 return;
+            }
+
+            // Aquí iría la lógica para enviar los datos del formulario (por ejemplo, usando fetch o XMLHttpRequest)
+            // Simulamos un envío exitoso:
+            console.log('Formulario enviado (simulación)');
+            // Ocultar formulario y mostrar mensaje de éxito
+            this.classList.add('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+            document.querySelector('.step-indicator').classList.add('hidden'); // Ocultar indicadores de paso
+            window.scrollTo(0, 0);
+
+            // Para simular un error:
+            // this.classList.add('hidden');
+            // document.getElementById('errorMessage').classList.remove('hidden');
+            // document.querySelector('.step-indicator').classList.add('hidden');
+        });
+
+        // Inicializar el primer paso
+        showStep(currentStep);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios de Catering Exquisitos - FiestaPerfecta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Agrega scroll-behavior: smooth; al elemento html */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Lato', sans-serif;
+        }
+        /* Animación sutil para elementos al hacer hover */
+        .hover-lift {
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .cta-button {
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        .font-display-title {
+            font-family: 'Playfair Display', serif;
+        }
+        .hero-catering-bg {
+            background-image: url('https://placehold.co/1920x1000/FEE2E2/B91C1C?text=Sabores+Inolvidables'); /* Rojo claro/temática comida */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .section-title-catering {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 2.8rem;
+            line-height: 1.3;
+            color: #B91C1C; /* Rojo oscuro, ej: text-red-700 */
+        }
+        @media (max-width: 768px) {
+            .section-title-catering {
+                font-size: 2.2rem;
+            }
+        }
+        .catering-card {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .catering-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px -10px rgba(185, 28, 28, 0.2), 0 8px 15px -4px rgba(0,0,0,0.06); /* Sombra rojiza */
+        }
+        .catering-card-image {
+            width: 100%;
+            height: 240px; /* Altura fija para las imágenes */
+            object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
+        }
+        .catering-card-content {
+            padding: 1.5rem; /* p-6 */
+            flex-grow: 1; /* Para que el contenido ocupe el espacio */
+            display: flex;
+            flex-direction: column;
+        }
+        .catering-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem; /* text-2xl */
+            font-weight: 700;
+            color: #991B1B; /* text-red-800 */
+            margin-bottom: 0.75rem; /* mb-3 */
+        }
+        .catering-card-description {
+            color: #4B5563; /* text-gray-600 */
+            font-size: 0.95rem; /* Un poco más grande que text-sm */
+            line-height: 1.6;
+            margin-bottom: 1rem; /* mb-4 */
+            flex-grow: 1;
+        }
+        .catering-card-cta {
+            font-weight: 600;
+            color: #B91C1C; /* text-red-700 */
+            transition: color 0.3s ease;
+            display: inline-block; /* Para que el padding funcione bien */
+            padding-top: 0.5rem; /* Espacio antes del CTA */
+        }
+        .catering-card-cta:hover {
+            color: #EF4444; /* text-red-500 */
+        }
+        .cta-button {
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        .primary-catering-cta-bg {
+            background-color: #DC2626; /* Rojo principal, ej: bg-red-600 */
+            color: white;
+        }
+        .primary-catering-cta-bg:hover {
+            background-color: #B91C1C; /* Rojo más oscuro */
+        }
+        .nav-link-catering {
+            position: relative;
+            padding-bottom: 0.25rem;
+            font-weight: 600;
+        }
+        .nav-link-catering::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #DC2626; /* Color de acento rojo */
+            transition: width 0.3s ease-in-out;
+        }
+        .nav-link-catering:hover::after {
+            width: 100%;
+        }
+        .highlight-section {
+            background-color: #FEF2F2; /* bg-red-50 */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-700">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/public/casa/" class="text-3xl font-display-title font-bold text-pink-600">FiestaPerfecta</a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="/public/casa/#inicio" class="nav-link-catering text-gray-600 hover:text-red-600">Inicio</a>
+                <a href="/public/casa/#servicios" class="nav-link-catering text-gray-600 hover:text-red-600">Servicios</a>
+                <a href="/public/testimonios/" class="nav-link-catering text-gray-600 hover:text-red-600">Testimonios</a>
+                <a href="/public/cotizacion/" class="cta-button primary-catering-cta-bg font-semibold py-2 px-5 rounded-md shadow-sm">
+                    Solicitar Presupuesto
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <a href="/public/casa/#inicio" class="block py-3 px-6 text-gray-600 hover:bg-red-50 hover:text-red-600">Inicio</a>
+            <a href="/public/casa/#servicios" class="block py-3 px-6 text-gray-600 hover:bg-red-50 hover:text-red-600">Servicios</a>
+            <a href="/public/testimonios/" class="block py-3 px-6 text-gray-600 hover:bg-red-50 hover:text-red-600">Testimonios</a>
+            <a href="/public/cotizacion/" class="block py-3 px-6 text-center cta-button primary-catering-cta-bg font-semibold rounded-md m-4">
+                Solicitar Presupuesto
+            </a>
+        </div>
+    </nav>
+
+    <header class="hero-catering-bg text-white min-h-[70vh] md:min-h-screen flex items-center">
+        <div class="bg-black bg-opacity-40 w-full h-full flex items-center">
+            <div class="container mx-auto px-6 text-center py-20 z-10">
+                <h1 class="text-5xl md:text-7xl font-display-title mb-6 leading-tight">
+                    Sabores que <span class="text-red-300">Celebran</span>, Momentos que <span class="text-red-300">Perduran</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-12 max-w-3xl mx-auto font-light leading-relaxed">
+                    En FiestaPerfecta, creemos que la comida es una parte esencial de toda gran celebración. Descubre nuestras propuestas de catering diseñadas para deleitar a tus invitados y complementar la magia de tu evento.
+                </p>
+                <a href="#servicios" class="cta-button primary-catering-cta-bg font-semibold py-4 px-12 text-lg rounded-md shadow-xl hover:shadow-2xl">
+                    <i class="fas fa-utensils mr-2"></i> Ver Opciones de Menú
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="section-title-catering mb-6">Nuestra Filosofía <span class="text-pink-500">Gastronómica</span></h2>
+                <p class="text-lg text-gray-600 leading-relaxed mb-4">
+                    Para nosotros, el catering va más allá de simplemente servir comida. Se trata de crear una experiencia culinaria que refleje tu estilo, sorprenda a tus invitados y se integre perfectamente con la atmósfera de tu evento.
+                </p>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    Utilizamos ingredientes frescos y de la más alta calidad, priorizando proveedores locales. Nuestro equipo de chefs profesionales combina técnicas tradicionales con toques innovadores para ofrecerte platos llenos de sabor y creatividad.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="py-16 md:py-24 highlight-section">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title-catering text-center mb-12 md:mb-16">Un Festín para Cada <span class="text-pink-500">Ocasión</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="catering-card">
+                    <img src="https://placehold.co/600x400/FECDD3/991B1B?text=Buffet+Variado" alt="[Imagen de un buffet elegante y variado]" class="catering-card-image">
+                    <div class="catering-card-content">
+                        <h3 class="catering-card-title">Buffet Clásico y Moderno</h3>
+                        <p class="catering-card-description">
+                            Una opción versátil y abundante, ideal para eventos sociales y corporativos. Ofrecemos una amplia variedad de estaciones frías y calientes, ensaladas frescas, platos principales elaborados y postres tentadores, adaptados a todos los gustos.
+                        </p>
+                        <a href="/public/cotizacion/" class="catering-card-cta mt-auto">Solicitar Propuesta Buffet <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+
+                <div class="catering-card">
+                    <img src="https://placehold.co/600x400/FBCFE8/991B1B?text=Finger+Food+Creativo" alt="[Imagen de bocadillos creativos y finger food]" class="catering-card-image">
+                    <div class="catering-card-content">
+                        <h3 class="catering-card-title">Finger Food y Bocadillos Gourmet</h3>
+                        <p class="catering-card-description">
+                            Perfecto para recepciones, eventos informales o como complemento. Delicados bocados fríos y calientes, presentados de forma creativa y elegante, que invitan a la conversación y el disfrute sin formalidades.
+                        </p>
+                        <a href="/public/casa/#contacto" class="catering-card-cta mt-auto">Consultar Opciones <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+
+                <div class="catering-card">
+                    <img src="https://placehold.co/600x400/FEE2E2/991B1B?text=Men%C3%BA+Servido+Elegante" alt="[Imagen de un plato elegante servido en mesa]" class="catering-card-image">
+                    <div class="catering-card-content">
+                        <h3 class="catering-card-title">Menú Servido en Mesa (Banquete)</h3>
+                        <p class="catering-card-description">
+                            La opción más formal y sofisticada para bodas y cenas de gala. Diseñamos menús de varios pasos con platos elaborados, maridajes sugeridos y un servicio impecable que garantiza una experiencia culinaria de alto nivel.
+                        </p>
+                        <a href="/public/cotizacion/" class="catering-card-cta mt-auto">Solicitar Propuesta de Menú de Gala <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+
+                <div class="catering-card">
+                    <img src="https://placehold.co/600x400/FED7AA/991B1B?text=Estaciones+Tem%C3%A1ticas" alt="[Imagen de una estación de comida temática, ej: sushi o quesos]" class="catering-card-image">
+                    <div class="catering-card-content">
+                        <h3 class="catering-card-title">Estaciones de Comida Temáticas</h3>
+                        <p class="catering-card-description">
+                            Añade un toque interactivo y divertido a tu evento. Estaciones de sushi, quesos y fiambres, tacos, pastas frescas preparadas al momento, crepes, ¡y mucho más! Personaliza la experiencia gastronómica.
+                        </p>
+                        <a href="/public/casa/#contacto" class="catering-card-cta mt-auto">Pedir Inoformacion de Estaciones <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+
+                <div class="catering-card">
+                    <img src="https://placehold.co/600x400/A7F3D0/991B1B?text=Catering+Infantil+Divertido" alt="[Imagen de comida divertida y colorida para niños]" class="catering-card-image">
+                    <div class="catering-card-content">
+                        <h3 class="catering-card-title">Menús Infantiles Divertidos</h3>
+                        <p class="catering-card-description">
+                            Sabemos lo que les gusta a los más pequeños. Creamos menús coloridos, nutritivos y deliciosos, presentados de forma lúdica para que la hora de comer sea también parte de la diversión en cumpleaños y fiestas infantiles.
+                        </p>
+                        <a href="/public/cotizacion/" class="catering-card-cta mt-auto">Solicitar Menús para Niños <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+
+                <div class="catering-card">
+                    <img src="https://placehold.co/600x400/BFDBFE/991B1B?text=Catering+Corporativo+Profesional" alt="[Imagen de un coffee break o almuerzo ejecutivo]" class="catering-card-image">
+                    <div class="catering-card-content">
+                        <h3 class="catering-card-title">Catering para Eventos Corporativos</h3>
+                        <p class="catering-card-description">
+                            Desde coffee breaks y almuerzos de trabajo hasta cócteles de networking y cenas de gala empresariales. Soluciones gastronómicas profesionales que se adaptan a la imagen y necesidades de tu empresa.
+                        </p>
+                        <a href="/public/casa/#contacto" class="catering-card-cta mt-auto">Consultar Opciones Corporativas <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title-catering text-center mb-12 md:mb-16">Más que Comida, una <span class="text-pink-500">Experiencia Completa</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+                <div>
+                    <div class="text-red-600 text-4xl mb-4"><i class="fas fa-leaf"></i></div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Ingredientes Frescos y de Calidad</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Seleccionamos cuidadosamente cada ingrediente para garantizar el máximo sabor y frescura en nuestros platos.</p>
+                </div>
+                <div>
+                    <div class="text-red-600 text-4xl mb-4"><i class="fas fa-concierge-bell"></i></div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Servicio Profesional y Atento</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Nuestro personal de servicio está altamente capacitado para ofrecer una atención amable, eficiente y discreta.</p>
+                </div>
+                <div>
+                    <div class="text-red-600 text-4xl mb-4"><i class="fas fa-palette"></i></div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Presentación y Personalización</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Cuidamos la estética de cada plato y adaptamos nuestras propuestas a la temática y estilo de tu evento.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-20 md:py-28 bg-gradient-to-r from-red-600 to-pink-600 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-display-title mb-6">¿Listo para Deleitar a Tus <span class="text-red-200">Invitados</span>?</h2>
+            <p class="text-lg md:text-xl mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+                Cuéntanos sobre tu evento y tus ideas. Nuestro equipo gastronómico está listo para crear una propuesta de catering a medida que supere tus expectativas.
+            </p>
+            <a href="/public/casa/#contacto" class="cta-button bg-white text-red-700 font-semibold py-4 px-12 text-lg rounded-md shadow-xl hover:bg-gray-100">
+                <i class="fas fa-comments mr-2"></i> Solicitar Propuesta de Catering
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-2xl font-display-title font-bold text-pink-400 mb-4">FiestaPerfecta</p>
+            <div class="flex justify-center space-x-5 mb-6">
+                <a href="#" aria-label="Facebook de FiestaPerfecta" class="text-gray-400 hover:text-pink-400 transition-colors duration-300"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#" aria-label="Instagram de FiestaPerfecta" class="text-gray-400 hover:text-pink-400 transition-colors duration-300"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" aria-label="WhatsApp de FiestaPerfecta" class="text-gray-400 hover:text-pink-400 transition-colors duration-300"><i class="fab fa-whatsapp fa-lg"></i></a>
+            </div>
+            <p class="text-xs">&copy; 2025 FiestaPerfecta. Sabores que inspiran celebraciones.</p>
+            <p class="text-xs mt-1">
+                <a href="/public/politicas/" class="hover:text-purple-300 transition-colors duration-300">Política de Privacidad</a> |
+                <a href="/public/terminos/" class="hover:text-purple-300 transition-colors duration-300">Términos y Condiciones</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Script para menú móvil
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+    </script>
+
+</body>
+</html>

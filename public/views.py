@@ -1,21 +1,46 @@
 from django.shortcuts import render
-from datetime import datetime
 
-def view_home(request):
-    servicios = [
-        {"titulo": "Consultoría en Ventas", "descripcion": "Identificamos oportunidades de mejora."},
-        {"titulo": "Gestión de Clientes", "descripcion": "Optimización de relaciones comerciales."},
-        {"titulo": "Capacitación de Equipos", "descripcion": "Formación para equipos de venta."},
-    ]
-    contexto = {
-        "titulo_pagina": "Inicio | Mi Empresa",
-        "nombre_empresa": "Mi Empresa",
-        "descripcion_empresa": "Soluciones efectivas para ventas",
-        "quienes_somos": "Somos expertos en ventas adaptadas a tu negocio.",
-        "servicios": servicios,
-        "llamado_accion_texto": "Impulsa tus ingresos con nuestra ayuda.",
-        "anio_actual": datetime.now().year,
-        "email_contacto": "info@miempresa.com",
-        "telefono_contacto": "+54 11 1234-5678",
-    }
-    return render(request, "public/home.html", contexto)
+def view_casa(request):
+    return render(request, "public/casa.html")
+
+def view_cotizacion(request):
+    return render(request, "public/cotizacion.html")
+
+def view_cumple(request):
+    return render(request, "public/cumple.html")
+
+def view_boda(request):
+    return render(request, "public/boda.html")
+
+def view_ejecutivo(request):
+    return render(request, "public/ejecutivo.html")
+
+def view_politicas(request):
+    return render(request, "public/politicas.html")
+
+def view_terminos(request):
+    return render(request, "public/terminos.html")
+
+def view_testimonios(request):
+    return render(request, "public/testimonios.html")
+
+def view_agregar_testimonio(request):
+    return render(request, "public/agregar_testimonio.html")
+
+def view_catering(request):
+    return render(request, "public/catering.html")
+
+def view_deco(request):
+    return render(request, "public/deco.html")
+
+def view_dj(request):
+    return render(request, "public/dj.html")
+
+def view_foto_artistica(request):
+    return render(request, "public/foto_artistica.html")
+
+def view_galeria_fotos_boda(request):
+    return render(request, "public/galeria_fotos_boda.html")
+
+def view_lugares(request):
+    return render(request, "public/lugares.html")

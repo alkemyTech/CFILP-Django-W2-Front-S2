@@ -1,6 +1,34 @@
 from django.urls import path
-from .views import view_home
+from .views import (view_casa, 
+                    view_cotizacion, 
+                    view_cumple,
+                    view_boda,
+                    view_ejecutivo,
+                    view_politicas,
+                    view_terminos,
+                    view_testimonios,
+                    view_agregar_testimonio,
+                    view_catering,
+                    view_deco,
+                    view_dj,
+                    view_foto_artistica,
+                    view_galeria_fotos_boda,
+                    view_lugares)
 
 urlpatterns = [
-    path('home/',view_home,name='home'), 
+    path('casa/',view_casa,name='casa'),
+    path('cotizacion/',view_cotizacion,name='cotizacion'),
+    path('cumple/',view_cumple,name='cumple'),
+    path('boda/',view_boda,name='boda'),
+    path('ejecutivo/',view_ejecutivo,name='ejecutivo'),
+    path('politicas/',view_politicas,name='politicas'),
+    path('terminos/',view_terminos,name='terminos'),
+    path('testimonios/',view_testimonios,name='testimonios'),
+    path('agregar_testimonio/',view_agregar_testimonio,name='agregar_testimonio'),
+    path('catering/',view_catering,name='catering'),
+    path('deco/',view_deco,name='deco'),
+    path('dj/',view_dj,name='dj'),
+    path('foto_artistica/',view_foto_artistica,name='foto_artistica'),
+    path('galeria_fotos_boda/',view_galeria_fotos_boda,name='galeria_fotos_boda'),
+    path('lugares/',view_lugares,name='lugares'), 
 ]

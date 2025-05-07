@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lugares Exclusivos para Tu Evento - FiestaPerfecta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+        }
+        .font-display-title {
+            font-family: 'Playfair Display', serif;
+        }
+        .hero-lugares-bg {
+            background-image: url('https://placehold.co/1920x1000/D1FAE5/065F46?text=Espacios+%C3%9Anicos'); /* Verde suave */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; 
+        }
+        .section-title-lugares {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 2.8rem;
+            line-height: 1.3;
+            color: #065F46; /* Verde oscuro, ej: text-green-800 */
+        }
+        @media (max-width: 768px) {
+            .section-title-lugares {
+                font-size: 2.2rem;
+            }
+        }
+        .lugar-card {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 8px 16px -3px rgba(0,0,0,0.07), 0 3px Spx -2px rgba(0,0,0,0.04);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .lugar-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 25px -8px rgba(6, 95, 70, 0.2), 0 6px 12px -3px rgba(0,0,0,0.06); /* Sombra verdosa */
+        }
+        .lugar-card-image {
+            width: 100%;
+            height: 220px; 
+            object-fit: cover;
+        }
+        .lugar-card-content {
+            padding: 1.25rem; /* p-5 */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .lugar-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem; /* text-xl */
+            font-weight: 700;
+            color: #047857; /* text-green-700 */
+            margin-bottom: 0.5rem; /* mb-2 */
+        }
+        .lugar-card-description {
+            color: #4B5563; /* text-gray-600 */
+            font-size: 0.9rem; 
+            line-height: 1.6;
+            margin-bottom: 0.75rem; /* mb-3 */
+            flex-grow: 1;
+        }
+        .lugar-card-features {
+            font-size: 0.8rem;
+            color: #52525B; /* text-zinc-600 */
+            margin-bottom: 1rem; /* mb-4 */
+        }
+        .lugar-card-features .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.25rem; /* mb-1 */
+        }
+        .lugar-card-features .feature-item i {
+            margin-right: 0.5rem; /* mr-2 */
+            color: #10B981; /* text-emerald-500 */
+        }
+        .lugar-card-cta {
+            font-weight: 600;
+            color: #059669; /* text-green-600 */
+            transition: color 0.3s ease;
+            display: inline-block;
+            padding-top: 0.5rem;
+            margin-top: auto; /* Empuja el CTA al final de la tarjeta */
+        }
+        .lugar-card-cta:hover {
+            color: #10B981; /* text-emerald-500 */
+        }
+        .filter-button-lugares {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #A3E635; /* border-lime-400 */
+            color: #4D7C0F; /* text-lime-700 */
+            background-color: #F7FEE7; /* bg-lime-50 */
+            padding: 0.6rem 1.25rem; /* py-2.5 px-5 */
+        }
+        .filter-button-lugares.active, .filter-button-lugares:hover {
+            background-color: #84CC16; /* bg-lime-500 */
+            color: white;
+            border-color: #65A30D; /* border-lime-600 */
+            box-shadow: 0 2px 8px rgba(132, 204, 22, 0.4);
+        }
+        .nav-link-lugares {
+            position: relative;
+            padding-bottom: 0.25rem;
+            font-weight: 600;
+        }
+        .nav-link-lugares::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #059669; /* Color de acento verde */
+            transition: width 0.3s ease-in-out;
+        }
+        .nav-link-lugares:hover::after {
+            width: 100%;
+        }
+        .cta-button {
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        .primary-lugares-cta-bg { 
+            background-color: #10B981; /* Verde esmeralda, ej: bg-emerald-500 */
+            color: white;
+        }
+        .primary-lugares-cta-bg:hover {
+            background-color: #059669; /* Verde más oscuro */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/public/casa/" class="text-3xl font-display-title font-bold text-pink-600">FiestaPerfecta</a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="/public/casa/#inicio" class="nav-link-lugares text-gray-600 hover:text-green-600">Inicio</a>
+                <a href="/public/casa/#servicios" class="nav-link-lugares text-gray-600 hover:text-green-600">Servicios</a>
+                <a href="/public/catering/" class="nav-link-lugares text-gray-600 hover:text-green-600">Catering</a>
+                <a href="/public/testimonios/" class="nav-link-lugares text-gray-600 hover:text-green-600">Testimonios</a>
+                <a href="/public/cotizacion/" class="cta-button primary-lugares-cta-bg font-semibold py-2 px-5 rounded-md shadow-sm">
+                    Cotizar Evento
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <a href="/public/casa/#inicio" class="block py-3 px-6 text-gray-600 hover:bg-green-50 hover:text-green-600">Inicio</a>
+            <a href="/public/casa/#servicios" class="block py-3 px-6 text-gray-600 hover:bg-green-50 hover:text-green-600">Servicios</a>
+            <a href="/public/catering/" class="block py-3 px-6 text-gray-600 hover:bg-green-50 hover:text-green-600">Catering</a>
+            <a href="/public/testimonios/" class="block py-3 px-6 text-gray-600 hover:bg-green-50 hover:text-green-600">Testimonios</a>
+            <a href="/public/cotizacion/" class="block py-3 px-6 text-center cta-button primary-lugares-cta-bg font-semibold rounded-md m-4">
+                Cotizar Evento
+            </a>
+        </div>
+    </nav>
+
+    <header class="hero-lugares-bg text-white min-h-[60vh] md:min-h-[70vh] flex items-center">
+        <div class="bg-black bg-opacity-30 w-full h-full flex items-center">
+            <div class="container mx-auto px-6 text-center py-16 z-10">
+                <h1 class="text-4xl md:text-6xl font-display-title mb-4 leading-tight">
+                    El Escenario Perfecto para Tu <span class="text-green-300">Celebración</span>
+                </h1>
+                <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto font-light">
+                    Descubre nuestra selección de lugares exclusivos, cada uno con un encanto único, listos para transformarse en el marco ideal de tu evento soñado.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-10 md:py-12 bg-gray-50 sticky top-[68px] md:top-[76px] z-40 shadow-sm"> <div class="container mx-auto px-6">
+            <div class="flex flex-wrap justify-center gap-3 md:gap-4">
+                <button class="filter-button-lugares active rounded-md text-sm font-semibold" data-filter="todos">Todos los Lugares</button>
+                <button class="filter-button-lugares rounded-md text-sm font-semibold" data-filter="bodas">Para Bodas</button>
+                <button class="filter-button-lugares rounded-md text-sm font-semibold" data-filter="ejecutivos">Eventos Ejecutivos</button>
+                <button class="filter-button-lugares rounded-md text-sm font-semibold" data-filter="cumpleanos">Cumpleaños</button>
+            </div>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-6 py-12 md:py-16">
+        <div id="lugares-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+            
+            <div class="lugar-item" data-category="bodas">
+                <div class="lugar-card">
+                    <img src="https://placehold.co/600x400/F3E8FF/6B46C1?text=Estancia+Rom%C3%A1ntica" alt="[Imagen de una estancia elegante para bodas]" class="lugar-card-image">
+                    <div class="lugar-card-content">
+                        <h3 class="lugar-card-title">Estancia "El Suspiro"</h3>
+                        <p class="lugar-card-description">
+                            Un oasis de tranquilidad y elegancia, perfecto para bodas románticas al aire libre o en su distinguido salón colonial. Amplios jardines y vistas campestres.
+                        </p>
+                        <div class="lugar-card-features">
+                            <div class="feature-item"><i class="fas fa-users"></i> Capacidad: Hasta 250 personas</div>
+                            <div class="feature-item"><i class="fas fa-tree"></i> Espacios Verdes Amplios</div>
+                            <div class="feature-item"><i class="fas fa-concierge-bell"></i> Servicio de Catering Premium</div>
+                        </div>
+                        <a href="/public/casa/#contacto" class="lugar-card-cta">Consultar Disponibilidad <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lugar-item" data-category="ejecutivos">
+                <div class="lugar-card">
+                    <img src="https://placehold.co/600x400/DBEAFE/1E40AF?text=Centro+Convenciones+Moderno" alt="[Imagen de un centro de convenciones moderno]" class="lugar-card-image">
+                    <div class="lugar-card-content">
+                        <h3 class="lugar-card-title">Auditorium Connecta</h3>
+                        <p class="lugar-card-description">
+                            Espacio vanguardista con tecnología de punta, ideal para conferencias, seminarios y lanzamientos de producto. Salas modulables y excelente conectividad.
+                        </p>
+                         <div class="lugar-card-features">
+                            <div class="feature-item"><i class="fas fa-desktop"></i> Equipamiento AV Completo</div>
+                            <div class="feature-item"><i class="fas fa-wifi"></i> Wi-Fi de Alta Velocidad</div>
+                            <div class="feature-item"><i class="fas fa-parking"></i> Estacionamiento Privado</div>
+                        </div>
+                        <a href="/public/casa/#contacto" class="lugar-card-cta">Consultar Paquetes <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lugar-item" data-category="cumpleanos">
+                <div class="lugar-card">
+                    <img src="https://placehold.co/600x400/A7F3D0/065F46?text=Sal%C3%B3n+Infantil+Divertido" alt="[Imagen de un salón de fiestas infantiles colorido]" class="lugar-card-image">
+                    <div class="lugar-card-content">
+                        <h3 class="lugar-card-title">Magic Kids Zone</h3>
+                        <p class="lugar-card-description">
+                            Un mundo de diversión para los más pequeños. Áreas de juegos seguras, pelotero, sector temático y personal especializado en animación infantil.
+                        </p>
+                        <div class="lugar-card-features">
+                            <div class="feature-item"><i class="fas fa-child"></i> Capacidad: Hasta 80 niños</div>
+                            <div class="feature-item"><i class="fas fa-puzzle-piece"></i> Múltiples Zonas de Juego</div>
+                            <div class="feature-item"><i class="fas fa-birthday-cake"></i> Servicio de Catering Infantil</div>
+                        </div>
+                        <a href="/public/cotizacion/" class="lugar-card-cta">Reservar Fecha <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lugar-item" data-category="bodas ejecutivos">
+                <div class="lugar-card">
+                    <img src="https://placehold.co/600x400/E0E7FF/3730A3?text=Hotel+Boutique+Urbano" alt="[Imagen de un hotel boutique elegante]" class="lugar-card-image">
+                    <div class="lugar-card-content">
+                        <h3 class="lugar-card-title">Hotel Lumière Plaza</h3>
+                        <p class="lugar-card-description">
+                            Elegancia y versatilidad en el corazón de la ciudad. Salones sofisticados para bodas íntimas o reuniones ejecutivas, con servicio de gastronomía de autor.
+                        </p>
+                        <div class="lugar-card-features">
+                            <div class="feature-item"><i class="fas fa-users"></i> Capacidad: 50-150 personas</div>
+                            <div class="feature-item"><i class="fas fa-concierge-bell"></i> Servicio Personalizado</div>
+                            <div class="feature-item"><i class="fas fa-city"></i> Ubicación Céntrica</div>
+                        </div>
+                        <a href="/public/casa/#contacto" class="lugar-card-cta">Más Información <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lugar-item" data-category="cumpleanos ejecutivos">
+                <div class="lugar-card">
+                    <img src="https://placehold.co/600x400/FEF9C3/B45309?text=Terraza+Moderna+con+Vistas" alt="[Imagen de una terraza moderna con vistas urbanas]" class="lugar-card-image">
+                    <div class="lugar-card-content">
+                        <h3 class="lugar-card-title">Skyline Terrace Bar</h3>
+                        <p class="lugar-card-description">
+                            Celebra tu cumpleaños o un evento corporativo distendido con impresionantes vistas panorámicas de la ciudad. Ambiente moderno y coctelería de autor.
+                        </p>
+                         <div class="lugar-card-features">
+                            <div class="feature-item"><i class="fas fa-cocktail"></i> Barra Premium</div>
+                            <div class="feature-item"><i class="fas fa-mountain"></i> Vistas Panorámicas</div>
+                            <div class="feature-item"><i class="fas fa-music"></i> Música Ambiental / DJ</div>
+                        </div>
+                        <a href="/public/casa/#contacto" class="lugar-card-cta">Consultar Paquetes <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lugar-item" data-category="bodas">
+                <div class="lugar-card">
+                    <img src="https://placehold.co/600x400/FFEDD5/9A3412?text=Vi%C3%B1edo+Encantador" alt="[Imagen de un viñedo para bodas]" class="lugar-card-image">
+                    <div class="lugar-card-content">
+                        <h3 class="lugar-card-title">Viñedos del Alba</h3>
+                        <p class="lugar-card-description">
+                            Un entorno idílico entre viñedos para una boda con un toque rústico y sofisticado. Ideal para ceremonias al atardecer y banquetes bajo las estrellas.
+                        </p>
+                         <div class="lugar-card-features">
+                            <div class="feature-item"><i class="fas fa-wine-glass-alt"></i> Entorno Natural Único</div>
+                            <div class="feature-item"><i class="fas fa-star"></i> Bodas al Atardecer</div>
+                            <div class="feature-item"><i class="fas fa-utensils"></i> Gastronomía Regional</div>
+                        </div>
+                        <a href="/public/casa/#contacto" class="lugar-card-cta">Consultar Disponibilidad <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        <div class="text-center mt-16">
+             <a href="fiesta_cotizar_v1.html" class="cta-button primary-lugares-cta-bg font-semibold py-3 px-10 rounded-md shadow-md text-lg">
+                <i class="fas fa-search-location mr-2"></i> Encontrar Mi Lugar Ideal
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-2xl font-display-title font-bold text-pink-400 mb-4">FiestaPerfecta</p>
+            <div class="flex justify-center space-x-5 mb-6">
+                <a href="#" aria-label="Facebook de FiestaPerfecta" class="text-gray-400 hover:text-pink-400 transition-colors duration-300"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#" aria-label="Instagram de FiestaPerfecta" class="text-gray-400 hover:text-pink-400 transition-colors duration-300"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" aria-label="WhatsApp de FiestaPerfecta" class="text-gray-400 hover:text-pink-400 transition-colors duration-300"><i class="fab fa-whatsapp fa-lg"></i></a>
+            </div>
+            <p class="text-xs">&copy; 2025 FiestaPerfecta. El escenario perfecto para tus momentos.</p>
+            <p class="text-xs mt-1">
+                <a href="/public/politicas/" class="hover:text-purple-300 transition-colors duration-300">Política de Privacidad</a> | 
+                <a href="/public/terminos/" class="hover:text-purple-300 transition-colors duration-300">Términos y Condiciones</a>
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        // Script para menú móvil
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+        // Script para filtrar lugares
+        const filterButtonsLugares = document.querySelectorAll('.filter-button-lugares');
+        const lugarItems = document.querySelectorAll('.lugar-item');
+
+        filterButtonsLugares.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtonsLugares.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filter = button.dataset.filter;
+
+                lugarItems.forEach(item => {
+                    const categories = item.dataset.category.split(' '); // Permite múltiples categorías
+                    if (filter === 'todos' || categories.includes(filter)) {
+                        item.style.display = 'block'; 
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
