@@ -1,6 +1,8 @@
 # Archivos de compilación Python
 *.pyc
 __pycache__/
+**/__pycache__/
+**/*.pyc
 
 # Bases de datos locales
 *.sqlite3
@@ -16,3 +18,5 @@ venv/
 
 # Migraciones de Django
 **/migrations/*.py
+**/migrations/__pycache__/
+**/migrations/*.pyc
