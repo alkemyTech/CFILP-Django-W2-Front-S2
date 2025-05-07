@@ -17,9 +17,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
+# Biblioteca para la documentacion de la API 
+# Requerido: pip install drf-spectacular
+# Agregar en settings.py:     'drf_spectacular', 'drf_spectacular_sidecar',
+
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('servicio_eventos.urls')),
     path('api/', include('api.urls')),
     path('public/', include('public.urls')),
+
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    
+
 ]

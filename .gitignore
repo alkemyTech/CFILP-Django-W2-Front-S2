@@ -13,3 +13,6 @@ venv/
 
 # Archivos de configuración locales
 *.env
+
+# Migraciones de Django
+**/migrations/*.py
