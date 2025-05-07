@@ -1,9 +1,18 @@
 from django.shortcuts import render
+from servicio_eventos.models import Cliente
 
 def view_casa(request):
     return render(request, "public/casa.html")
 
 def view_cotizacion(request):
+    if request.method == "POST":
+        nombre = request.POST.get("nombre")
+        apellido = request.POST.get("apellido")
+        Cliente.objects.create(nombre=nombre, apellido=apellido, activo=True)
+        
+        print("Se hizo un POST")
+        # Aquí puedes agregar la lógica para guardar los datos o enviar un correo
+         
     return render(request, "public/cotizacion.html")
 
 def view_cumple(request):
