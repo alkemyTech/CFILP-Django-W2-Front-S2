@@ -158,17 +158,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
                         <label for="tipo_evento" class="form-label">Tipo de Evento <span class="text-red-500">*</span></label>
-                        <select id="tipo_evento" name="tipo_evento" class="form-select" required>
+                        <select id="tipo_evento" name="servicios" class="form-select" required>
                             <option value="" disabled selected>Selecciona el tipo...</option>
-                            <option value="cumpleanos_infantil">Cumpleaños Infantil</option>
-                            <option value="cumpleanos_adulto">Cumpleaños Adulto</option>
-                            <option value="boda">Boda</option>
-                            <option value="aniversario">Aniversario</option>
-                            <option value="evento_corporativo">Evento Corporativo</option>
-                            <option value="despedida_soltero">Despedida de Soltero/a</option>
-                            <option value="baby_shower">Baby Shower</option>
-                            <option value="graduacion">Graduación</option>
-                            <option value="otro">Otro (especificar)</option>
+                            {% for servicio in servicios %}
+                                <option value="{{ servicio.id }}">{{ servicio.nombre }}</option> <!-- Cambia "nombre" según tu modelo -->
+                            {% endfor %}
                         </select>
                     </div>
                     <div>

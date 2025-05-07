@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from servicio_eventos.models import Cliente
+from servicio_eventos.models import Cliente,Servicio
 
 def view_casa(request):
     return render(request, "public/casa.html")
@@ -12,8 +12,13 @@ def view_cotizacion(request):
         
         print("Se hizo un POST")
         # Aquí puedes agregar la lógica para guardar los datos o enviar un correo
-         
+    
+    if request.method == "GET":
+        servicios = Servicio.objects.all()  # Obtienes los servicios desde la base de datos
+        return render(request, "public/cotizacion.html", {"servicios": servicios})
+    
     return render(request, "public/cotizacion.html")
+    
 
 def view_cumple(request):
     return render(request, "public/cumple.html")
