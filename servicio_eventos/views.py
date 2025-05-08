@@ -42,6 +42,7 @@ from .models import Cliente, Empleado, Coordinador, Servicio, ReservaDeServicio
 
 # ===================   CLIENTES        ========================
 
+## Crear
 class ClienteFormView(LoginRequiredMixin,FormView):
     template_name = "servicio_eventos/register_clients.html"
     form_class = ClienteForm
@@ -50,10 +51,18 @@ class ClienteFormView(LoginRequiredMixin,FormView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
-    
+
+## Leer
+""" QUEDA IMPLEMENTAR """
+## Actualizar
+""" QUEDA IMPLEMENTAR """
+## Borrar
+""" QUEDA IMPLEMENTAR """
+
 
 # ===================   EMPLEADOS       ========================
 
+##Crear
 class EmpleadoFormView(LoginRequiredMixin,FormView):
     template_name = "servicio_eventos/register_employees.html"
     form_class = EmpleadoForm
@@ -62,10 +71,17 @@ class EmpleadoFormView(LoginRequiredMixin,FormView):
     def form_valid(self,form):
         form.save()
         return super().form_valid(form)
-    
+
+## Leer
+""" QUEDA IMPLEMENTAR """
+## Actualizar
+""" QUEDA IMPLEMENTAR """
+## Borrar
+""" QUEDA IMPLEMENTAR """
 
 # ===================   COORDINADORES   ========================
 
+## Crear
 class CoordinadorFormView(LoginRequiredMixin,FormView):
     template_name = "servicio_eventos/register_coordinador.html"
     form_class = CoordinadorForm
@@ -74,6 +90,13 @@ class CoordinadorFormView(LoginRequiredMixin,FormView):
     def form_valid(self,form):
         form.save()
         return super().form_valid(form)
+    
+## Leer
+""" QUEDA IMPLEMENTAR """
+## Actualizar
+""" QUEDA IMPLEMENTAR """
+## Borrar
+""" QUEDA IMPLEMENTAR """
 # ===================   SERVICIOS       ========================
 
 
@@ -98,11 +121,17 @@ class SerivicioListView(LoginRequiredMixin,ListView):
     context_object_name = "services"
 
 
+## Actualizar
+""" QUEDA IMPLEMENTAR """
+## Borrar
+""" QUEDA IMPLEMENTAR """
+
 # ===================   SERVICIOS REALIZADOS      ========================
 
 from pytz import timezone as pytz_timezone
 from django.utils import timezone
 
+## Crear
 class ReservaDeServicioRealizadosView(LoginRequiredMixin,ListView):
     queryset = ReservaDeServicio.objects.all()
     template_name = "servicio_eventos/list_services.html"
@@ -121,6 +150,14 @@ class ReservaDeServicioRealizadosView(LoginRequiredMixin,ListView):
                s.status = "Pendiente"
        return servicios
     # Usamos select_related para obtener las relaciones de ForeignKey en una sola consulta
+
+## Leer
+""" QUEDA IMPLEMENTAR """
+## Actualizar
+""" QUEDA IMPLEMENTAR """
+## Borrar
+""" QUEDA IMPLEMENTAR """
+
 
 
 #endregion
