@@ -8,7 +8,9 @@ def view_cotizacion(request):
     if request.method == "POST":
         nombre = request.POST.get("nombre")
         apellido = request.POST.get("apellido")
-        Cliente.objects.create(nombre=nombre, apellido=apellido, activo=True)
+        email = request.POST.get("email") or request.data.get('email')
+        telefono = request.POST.get("telefono")
+        Cliente.objects.create(nombre=nombre, apellido=apellido, email=email, telefono=telefono, activo=True)
         
         print("Se hizo un POST")
         # Aquí puedes agregar la lógica para guardar los datos o enviar un correo
