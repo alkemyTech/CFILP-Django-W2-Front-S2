@@ -53,8 +53,33 @@ class ClienteFormView(LoginRequiredMixin,FormView):
     
 
 # ===================   EMPLEADOS       ========================
+
+class EmpleadoFormView(LoginRequiredMixin,FormView):
+    template_name = "servicio_eventos/register_employees.html"
+    form_class = EmpleadoForm
+    success_url = reverse_lazy("home")
+
+    def form_valid(self,form):
+        form.save()
+        return super().form_valid(form)
+    
+
 # ===================   COORDINADORES   ========================
+
+class CoordinadorFormView(LoginRequiredMixin,FormView):
+    template_name = "servicio_eventos/register_coordinador.html"
+    form_class = CoordinadorForm
+    success_url = reverse_lazy("register_coordinadores")
+
+    def form_valid(self,form):
+        form.save()
+        return super().form_valid(form)
 # ===================   SERVICIOS       ========================
+
+
+
+# CBV CLASES BASADAS EN VISTAS
+
 
 ## Crear
 class ReservaDeServicioFormView(LoginRequiredMixin,FormView):
