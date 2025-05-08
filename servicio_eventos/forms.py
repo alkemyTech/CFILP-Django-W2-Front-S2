@@ -6,11 +6,13 @@ from django import forms
 class ClienteForm(ModelForm):
     class Meta:
         model = Cliente
-        fields = ['nombre', 'apellido']
+        fields = ['nombre', 'apellido', 'telefono', 'email']
 
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control'}),
-            'apellido': forms.TextInput(attrs={'class': 'form-control'}),  # <--- cambio aquí
+            'apellido': forms.TextInput(attrs={'class': 'form-control'}),
+            'telefono': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
         }
 
 

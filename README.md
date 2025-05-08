@@ -52,6 +52,9 @@ source env/bin/activate  # En Windows: env\Scripts\activate
 pip install djangorestframework 
 pip install django-widget-tweaks
 pip install pytz
+pip install drf-spectacular
+pip install drf-spectacular-sidecar
+pip install django-widget-tweaks
 python manage.py migrate
 python manage.py runserver
 ```
