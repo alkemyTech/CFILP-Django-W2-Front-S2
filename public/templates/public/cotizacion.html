@@ -253,27 +253,39 @@
             <div id="form-step-3" class="form-step hidden">
                 <h2 class="text-2xl font-semibold text-gray-700 mb-6 border-b pb-3">Paso 3: Tus Datos de Contacto</h2>
                 <p class="text-sm text-gray-500 mb-6">Casi listo. Necesitamos esta información para enviarte tu cotización personalizada.</p>
-                
-                                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <label for="nombre_completo" class="form-label">Nombre <span class="text-red-500">*</span></label>
-                            <input type="text" name="nombre" id="nombre_completo" class="form-input" placeholder="Tu nombre y apellido" required>
-                        </div>
-                        <div>
-                            <label for="apellido" class="form-label">Apellido <span class="text-red-500">*</span></label>
-                            <input type="text" name="apellido" id="apellido" class="form-input" placeholder="Tu nombre y apellido" required>
-                        </div>
-                        <div>
-                            <label for="email_contacto" class="form-label">Correo Electrónico </label>
-                            <input type="email" name="email_contacto" id="email_contacto" class="form-input" placeholder="tu@email.com" >
-                        </div>
+            
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="nombre" class="form-label">Nombre <span class="text-red-500">*</span></label>
+                        <input type="text" name="nombre" id="nombre" class="form-input" placeholder="Tu nombre" required>
                     </div>
-               
+                    <div>
+                        <label for="apellido" class="form-label">Apellido <span class="text-red-500">*</span></label>
+                        <input type="text" name="apellido" id="apellido" class="form-input" placeholder="Tu apellido" required>
+                    </div>
+                </div>
+            
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="email_contacto" class="form-label">Correo Electrónico </label>
+                        <input type="email" name="email_contacto" id="email_contacto" class="form-input" placeholder="tu@email.com">
+                    </div>
+                    <div>
+                        <label for="telefono_contacto" class="form-label">Teléfono / WhatsApp </label>
+                        <input type="tel" name="telefono_contacto" id="telefono_contacto" class="form-input" placeholder="+54 9 11 XXXX-XXXX">
+                    </div>
+                </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label for="telefono_contacto" class="form-label">Teléfono / WhatsApp </label>
-                        <input type="tel" name="telefono_contacto" id="telefono_contacto" class="form-input" placeholder="+54 9 11 XXXX-XXXX" >
+                        <label for="sexo" class="form-label">Sexo</label>
+                        <select id="sexo" name="sexo" class="form-select">
+                            <option value="" disabled selected>Selecciona una opción...</option>
+                            <option value="femenino">Femenino</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="otro">Otro</option>
+                            <option value="prefiero_no_decir">Prefiero no decirlo</option>
+                        </select>
                     </div>
                     <div>
                         <label for="medio_preferido_contacto" class="form-label">Medio Preferido de Contacto</label>
@@ -296,14 +308,14 @@
                         <option value="otro_medio">Otro Medio</option>
                     </select>
                 </div>
-
+            
                 <div class="mb-8">
                     <label class="flex items-center space-x-2">
                         <input type="checkbox" name="terminos_condiciones" id="terminos_condiciones" class="form-checkbox rounded text-pink-500 focus:ring-pink-500" required>
                         <span>Acepto los <a href="/terminos-y-condiciones" target="_blank" class="text-pink-500 hover:underline">Términos y Condiciones</a> y la <a href="/politica-de-privacidad" target="_blank" class="text-pink-500 hover:underline">Política de Privacidad</a>. <span class="text-red-500">*</span></span>
                     </label>
                 </div>
-
+            
                 <div class="flex justify-between items-center">
                     <button type="button" onclick="prevStep(3)" class="cta-button bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold py-3 px-8 rounded-lg shadow-md">
                         <i class="fas fa-arrow-left mr-2"></i> Anterior
@@ -312,7 +324,7 @@
                         <i class="fas fa-paper-plane mr-2"></i> Enviar Solicitud de Cotización
                     </button>
                 </div>
-            </div>
+            </div>            
         </form>
 
         <div id="successMessage" class="hidden mt-10 max-w-xl mx-auto bg-green-100 border-l-4 border-green-500 text-green-700 p-6 rounded-md shadow-md" role="alert">

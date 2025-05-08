@@ -1,104 +1,214 @@
+{% load static %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Inicio | Sistema de Ventas</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    html, body {
-      height: 100%;
-    }
-    body {
-      display: flex;
-      flex-direction: column;
-    }
-    main {
-      flex: 1;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio | Gestión FiestaPerfecta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilos base y fuentes */
+        body {
+            font-family: 'Lato', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Asegura que el footer quede abajo */
+            background-color: #f9fafb; /* bg-gray-50 */
+        }
+        main {
+            flex-grow: 1; /* Empuja el footer hacia abajo */
+        }
+        .font-display-title {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Estilo Hero Section */
+        .hero-admin-bg {
+            background: linear-gradient(to right, #ec4899, #db2777); /* Gradiente rosa */
+            color: white;
+        }
+        /* Estilo Tarjetas */
+        .admin-card {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%; /* Para igualar altura */
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+        .admin-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+        }
+        .admin-card-icon {
+            font-size: 2.5rem; /* text-4xl */
+            color: #ec4899; /* text-pink-500 */
+            margin-bottom: 1rem; /* mb-4 */
+        }
+        .admin-card-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        /* Botones */
+        .cta-button {
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: inline-block; /* Para que el padding funcione */
+            padding: 0.6rem 1.25rem;
+            border-radius: 0.375rem; /* rounded-md */
+            font-weight: 600;
+            text-decoration: none; /* Quitar subrayado de enlaces */
+        }
+        .cta-button-primary {
+            background-color: #db2777; /* bg-pink-600 */
+            color: white;
+        }
+        .cta-button-primary:hover {
+            background-color: #be185d; /* bg-pink-700 */
+            transform: translateY(-1px);
+        }
+        .cta-button-outline {
+            background-color: transparent;
+            border: 1px solid #db2777; /* border-pink-600 */
+            color: #db2777; /* text-pink-600 */
+        }
+        .cta-button-outline:hover {
+            background-color: #fdf2f8; /* bg-pink-50 */
+            transform: translateY(-1px);
+        }
+         .cta-button-logout {
+            background-color: #f8fafc; /* bg-slate-50 */
+            border: 1px solid #cbd5e1; /* border-slate-300 */
+            color: #475569; /* text-slate-600 */
+            padding: 0.5rem 1rem; /* Más pequeño */
+        }
+        .cta-button-logout:hover {
+            background-color: #e2e8f0; /* bg-slate-200 */
+            transform: translateY(-1px);
+        }
+
+        /* Estilo Navbar */
+        .nav-link-admin {
+            color: #d1d5db; /* text-gray-300 */
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .nav-link-admin:hover {
+            background-color: #4b5563; /* bg-gray-700 */
+            color: white;
+            text-decoration: none;
+        }
+
+    </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="/home/">Two and a half dev</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto d-flex align-items-center gap-2">
-          <li class="nav-item">
-            <a class="btn btn-outline-light" href="/services/">Servicios Existentes</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-outline-light" href="/list_services/">Servicios Pedidos</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-outline-light" href="/register_clients/">Registrar cliente</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-outline-light" href="/load_services/">Cargar servicio</a>
-          </li>
-          <li class="nav-item">
-            <form action="{% url 'cerrar_sesion' %}" method="post" class="d-inline">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-outline-light">Cerrar sesión</button>
-            </form>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    <nav class="bg-gray-800 shadow-md">
+        <div class="container mx-auto px-6 py-3 flex flex-wrap justify-between items-center">
+            <a class="text-2xl font-display-title font-bold text-pink-400" href="{% url 'home' %}">FiestaPerfecta <span class="text-xs font-light text-gray-400">Admin</span></a>
 
-  <!-- HERO -->
-  <header class="bg-primary text-white text-center py-5">
-    <div class="container">
-      <h1 class="display-4">Bienvenido a Two and a half dev</h1>
-      <p class="lead">Gestione servicios, reservas y clientes de forma simple y eficiente.</p>
-      <a href="/list_services/" class="btn btn-light btn-lg mt-3">Explorar Servicios Pedidos</a>
-    </div>
-  </header>
+            <button id="adminMenuToggler" class="md:hidden text-gray-400 hover:text-white focus:outline-none" type="button" aria-controls="adminNavbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
 
-  <!-- SECCIONES DESTACADAS -->
-  <section class="container py-5">
-    <div class="row text-center">
-      <div class="col-md-4">
-        <div class="card border-0 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">Servicios Existentes</h5>
-            <p class="card-text">Visualice y administre todos los servicios ofrecidos.</p>
-            <a href="/services/" class="btn btn-outline-primary">Ver más</a>
-          </div>
+            <div class="hidden md:flex md:items-center md:w-auto w-full" id="adminNavbarContent">
+                <ul class="flex flex-col md:flex-row md:items-center md:ms-auto mt-3 md:mt-0 space-y-2 md:space-y-0 md:space-x-2">
+                    <li>
+                        <a class="nav-link-admin block md:inline-block" href="{% url 'services' %}">Servicios Existentes</a>
+                    </li>
+                    <li>
+                        <a class="nav-link-admin block md:inline-block" href="{% url 'list_services' %}">Servicios Pedidos</a>
+                    </li>
+                    <li>
+                        <a class="nav-link-admin block md:inline-block" href="{% url 'register_clients' %}">Registrar Cliente</a>
+                    </li>
+                    <li>
+                        <a class="nav-link-admin block md:inline-block" href="{% url 'load_services' %}">Cargar Servicio</a>
+                    </li>
+                    <li>
+                        <form action="{% url 'cerrar_sesion' %}" method="post" class="inline-block w-full md:w-auto">
+                            {% csrf_token %}
+                            <button type="submit" class="cta-button cta-button-logout w-full md:w-auto text-sm">
+                                <i class="fas fa-sign-out-alt mr-1 opacity-75"></i> Cerrar sesión
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
-      <div class="col-md-4 mt-4 mt-md-0">
-        <div class="card border-0 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">Cargar servicio</h5>
-            <p class="card-text">Revise y registre las reservas de los clientes.</p>
-            <a href="/load_services/" class="btn btn-outline-primary">Ver más</a>
-          </div>
+    </nav>
+    <header class="hero-admin-bg text-center py-16 md:py-24">
+        <div class="container mx-auto px-6">
+            <h1 class="text-4xl md:text-5xl font-bold font-display-title mb-3">Panel de Gestión FiestaPerfecta</h1>
+            <p class="text-lg md:text-xl font-light opacity-90 mb-6">Administra servicios, clientes y reservas de forma eficiente.</p>
+            <a href="{% url 'list_services' %}" class="cta-button bg-white text-pink-600 hover:bg-pink-50 text-lg mt-3">
+                <i class="fas fa-concierge-bell mr-2"></i> Ver Servicios Pedidos
+            </a>
         </div>
-      </div>
-      <div class="col-md-4 mt-4 mt-md-0">
-        <div class="card border-0 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">Registrar cliente</h5>
-            <p class="card-text">Consulte y edite información de los clientes.</p>
-            <a href="/register_clients/" class="btn btn-outline-primary">Ver más</a>
-          </div>
+    </header>
+
+    <main class="container mx-auto py-12 md:py-16 px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="admin-card">
+                <div class="p-6 admin-card-content">
+                    <div class="admin-card-icon"><i class="fas fa-clipboard-list"></i></div>
+                    <div>
+                        <h5 class="text-xl font-semibold text-gray-700 mb-2">Servicios Existentes</h5>
+                        <p class="text-sm text-gray-500 mb-4">Visualiza y administra todos los servicios ofrecidos por FiestaPerfecta.</p>
+                        <a href="{% url 'services' %}" class="cta-button cta-button-outline text-sm">Ver más</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-card">
+                 <div class="p-6 admin-card-content">
+                    <div class="admin-card-icon"><i class="fas fa-calendar-plus"></i></div>
+                     <div>
+                        <h5 class="text-xl font-semibold text-gray-700 mb-2">Cargar Servicio</h5>
+                        <p class="text-sm text-gray-500 mb-4">Registra nuevos servicios o eventos en el sistema.</p>
+                        <a href="{% url 'load_services' %}" class="cta-button cta-button-outline text-sm">Ver más</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-card">
+                 <div class="p-6 admin-card-content">
+                    <div class="admin-card-icon"><i class="fas fa-user-plus"></i></div>
+                     <div>
+                        <h5 class="text-xl font-semibold text-gray-700 mb-2">Registrar Cliente</h5>
+                        <p class="text-sm text-gray-500 mb-4">Añade nuevos clientes y gestiona la información existente.</p>
+                        <a href="{% url 'register_clients' %}" class="cta-button cta-button-outline text-sm">Ver más</a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </main>
 
-  <!-- FOOTER -->
-  <footer class="bg-dark text-white text-center py-3 mt-auto">
-    <small>&copy; 2025 Two a and half dev. Todos los derechos reservados.</small>
-  </footer>
+    <footer class="bg-gray-800 text-gray-400 text-center py-4 mt-auto">
+        <small>&copy; 2025 FiestaPerfecta Admin Panel. Todos los derechos reservados.</small>
+    </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Script simple para el toggler del menú móvil usando Tailwind
+        const mobileMenuButton = document.getElementById('adminMenuToggler'); // ID del botón
+        const mobileMenu = document.getElementById('adminNavbarContent'); // ID del contenido del menú
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden'); // Alterna la clase 'hidden' de Tailwind
+                // Ajusta aria-expanded si es necesario para accesibilidad
+                 const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                 mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+            });
+        }
+    </script>
 </body>
 </html>
