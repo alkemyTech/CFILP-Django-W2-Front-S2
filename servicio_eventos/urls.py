@@ -26,8 +26,8 @@ urlpatterns = [
     # ===================== COORDINADORES ====================
     path("register_coordinadores/",CoordinadorFormView.as_view(),name="register_coordinadores"),
     # ===================== SERVICIOS ====================
-    path("services/",SerivicioListView.as_view(),name="services"),
     path("load_services/",ReservaDeServicioFormView.as_view(),name="load_services"),
+    path("services/",SerivicioListView.as_view(),name="services"),
       # ===================== SERVICIOS REALIZADOS ====================
     path("list_services/",ReservaDeServicioRealizadosView.as_view(),name="list_services"),
 ]

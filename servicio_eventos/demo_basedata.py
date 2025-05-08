@@ -39,10 +39,10 @@ def create_bd_example():
     # Generamos una lista de Diccionarios para que la creacion sea mas simple:
     # Recorremos el arreglo de diccionarios y creamos los objetos en la base de datos
 
-    clientes = [{"nombre": "Juan", "apellido": "Pérez", "activo": True},
-                {"nombre": "Ana", "apellido": "Gómez", "activo": True},
-               {"nombre": "Luis", "apellido": "Martínez", "activo": False},
-               {"nombre": "María", "apellido": "López", "activo": True}]
+    clientes = [{"nombre": "Juan", "apellido": "Pérez", "activo": True ,"email": "default1@lorem.com", "telefono": 1343456789},
+                {"nombre": "Ana", "apellido": "Gómez", "activo": True ,"email": "default2@lorem.com", "telefono": 123333789},
+                {"nombre": "Luis", "apellido": "Martínez", "activo": False ,"email": "default3@lorem.com", "telefono": 123446789},
+                {"nombre": "María", "apellido": "López", "activo": True ,"email": "default4@lorem.com", "telefono": 123453454}]
     
     empleados = [{"nombre": "Carlos", "apellido": "Fernández", "numero_legajo": 123, "activo": True},
                 {"nombre": "Laura", "apellido": "Ramírez", "numero_legajo": 456, "activo": True},
