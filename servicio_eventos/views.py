@@ -36,6 +36,8 @@ from django.views.generic import FormView, ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import ClienteForm, EmpleadoForm, CoordinadorForm, ReservaDeServicioForm, ServiciosForm
 from .models import Cliente, Empleado, Coordinador, Servicio, ReservaDeServicio
+from django.contrib import messages
+
 
 # ===================   CRUD FORMULARIO      ========================
 # ===================   CRUD : Crear, Leer, Actualizar, Borrar  ========================
@@ -50,6 +52,7 @@ class ClienteFormView(LoginRequiredMixin,FormView):
 
     def form_valid(self, form):
         form.save()
+        messages.success(self.request, "¡Cliente registrado con éxito!")
         return super().form_valid(form)
     
 
@@ -67,6 +70,8 @@ class ClienteUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("list_clients")
 
     def form_valid(self, form):
+        cliente = form.save(commit=False)
+        messages.success(self.request, f"¡Cliente '{cliente.nombre}' actualizado con éxito!")
         form.save()
         return super().form_valid(form)
     
@@ -98,6 +103,7 @@ class EmpleadoFormView(LoginRequiredMixin,FormView):
 
     def form_valid(self,form):
         form.save()
+        messages.success(self.request, "¡Empleado registrado con éxito!")
         return super().form_valid(form)
 
 ## Leer
@@ -114,6 +120,8 @@ class EmpleadoUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("list_employees")
 
     def form_valid(self, form):
+        empleado = form.save(commit=False)
+        messages.success(self.request, f"¡Empleado '{empleado.nombre}' actualizado con éxito!")
         form.save()
         return super().form_valid(form)
 
@@ -144,6 +152,7 @@ class CoordinadorFormView(LoginRequiredMixin,FormView):
 
     def form_valid(self,form):
         form.save()
+        messages.success(self.request, "¡Coordinador creado con éxito!")
         return super().form_valid(form)
     
 ## Leer
@@ -160,6 +169,8 @@ class CoordinadorUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("list_coordinadores")
 
     def form_valid(self, form):
+        coordinador = form.save(commit=False)
+        messages.success(self.request, f"¡Coordinador '{coordinador.nombre}' actualizado con éxito!")
         form.save()
         return super().form_valid(form)
 ## Borrar
@@ -189,6 +200,7 @@ class ReservaDeServicioFormView(LoginRequiredMixin,FormView):
 
     def form_valid(self, form):
         form.save()
+        messages.success(self.request, "¡Reserva creada con éxito!")
         return super().form_valid(form)
     
 ## Leer
@@ -218,10 +230,13 @@ class ReservaServicioUpdateView(LoginRequiredMixin, UpdateView):
     model = ReservaDeServicio
     form_class = ReservaDeServicioForm
     template_name = "servicio_eventos/load_services.html"
-    success_url = reverse_lazy("load_services")
+    success_url = reverse_lazy("services")
 
     def form_valid(self, form):
+        reserva = form.save(commit=False)
+        messages.success(self.request, f"¡Reserva de: '{reserva.cliente.nombre}' para '{reserva.servicio.nombre}' actualizado con éxito!")
         form.save()
+    
         return super().form_valid(form)
 
 ## Borrar
@@ -250,6 +265,7 @@ class ServiciosFormView(LoginRequiredMixin,FormView):
 
     def form_valid(self, form):
         form.save()
+        messages.success(self.request, "¡Servicio creado con éxito!")
         return super().form_valid(form)
 ## Leer 
 class SerivicioListView(LoginRequiredMixin,ListView):
@@ -265,6 +281,8 @@ class ServicioUpateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("services")
 
     def form_valid(self, form):
+        servicio = form.save(commit=False)
+        messages.success(self.request, f"¡ervicio '{servicio.nombre}' actualizado con éxito!")
         form.save()
         return super().form_valid(form)
 

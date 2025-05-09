@@ -70,8 +70,8 @@ ROOT_URLCONF = 'two_and_a_half_dev.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["templates"], # Dirrecciones de donde sacar mis propios templates para 'heredar'
-        'APP_DIRS': True,
+        'DIRS': [BASE_DIR / "two_and_a_half_dev" /"templates"],  # Apunta a la carpeta global de templates
+        'APP_DIRS': True,  # Esto buscará también en los templates de cada app
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
@@ -81,7 +81,6 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = 'two_and_a_half_dev.wsgi.application'
 
 
