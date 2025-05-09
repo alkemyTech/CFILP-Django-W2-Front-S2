@@ -51,11 +51,25 @@ class ClienteFormView(LoginRequiredMixin,FormView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+    
 
 ## Leer
-""" QUEDA IMPLEMENTAR """
+class ClienteListView(LoginRequiredMixin,ListView):
+    queryset = Cliente.objects.filter(activo = True)
+    template_name = "servicio_eventos/list_clients.html"
+    context_object_name = "list_clients"
+
 ## Actualizar
-""" QUEDA IMPLEMENTAR """
+class ClienteUpdateView(LoginRequiredMixin, UpdateView):
+    model = Cliente
+    form_class = ClienteForm
+    template_name = "servicio_eventos/register_clients.html"
+    success_url = reverse_lazy("list_clients")
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+    
 ## Borrar
 """ QUEDA IMPLEMENTAR """
 
@@ -73,7 +87,11 @@ class EmpleadoFormView(LoginRequiredMixin,FormView):
         return super().form_valid(form)
 
 ## Leer
-""" QUEDA IMPLEMENTAR """
+class EmpleadoListView(LoginRequiredMixin,ListView):
+    queryset = Empleado.objects.filter(activo = True)
+    template_name = "servicio_eventos/list_employees.html"
+    context_object_name = "list_employees"
+
 ## Actualizar
 """ QUEDA IMPLEMENTAR """
 ## Borrar
@@ -92,7 +110,12 @@ class CoordinadorFormView(LoginRequiredMixin,FormView):
         return super().form_valid(form)
     
 ## Leer
-""" QUEDA IMPLEMENTAR """
+class CoordinadorListView(LoginRequiredMixin,ListView):
+    queryset = Coordinador.objects.filter(activo = True)
+    template_name = "servicio_eventos/list_coordinadores.html"
+    context_object_name = "list_coordinadores"
+
+
 ## Actualizar
 """ QUEDA IMPLEMENTAR """
 ## Borrar
