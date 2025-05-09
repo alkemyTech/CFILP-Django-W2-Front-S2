@@ -1,17 +1,197 @@
+{% load static %}
+{# Asumiendo que podrías necesitar widget_tweaks, aunque no se usa directamente aquí #}
+{% load widget_tweaks %} 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=
-    , initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrar Coordinador - Gestión FiestaPerfecta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilos base y fuentes */
+        body {
+            font-family: 'Lato', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f9fafb; /* bg-gray-50 */
+        }
+        main {
+            flex-grow: 1;
+        }
+        .font-display-title {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Estilos para la tarjeta del formulario */
+        .form-card {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+            width: 100%;
+            max-width: 42rem; /* max-w-2xl, un poco más ancho para formularios */
+        }
+
+        /* Estilos para los errores y campos generados por Django form.as_p */
+        .errorlist { /* Estilo para la lista de errores de Django */
+            list-style-type: none;
+            padding: 0;
+            margin: 0.25rem 0 0.5rem 0;
+            color: #DC2626; /* text-red-600 */
+            font-size: 0.875rem; /* text-sm */
+        }
+        .errorlist.nonfield { /* Para non_field_errors */
+             margin-bottom: 1rem;
+             padding: 0.75rem;
+             background-color: #FEE2E2; /* bg-red-100 */
+             border-left: 4px solid #EF4444; /* border-red-500 */
+             border-radius: 0.25rem; /* rounded-sm */
+        }
+        .errorlist li {
+            padding: 0.1rem 0;
+        }
+        form p { /* Django form.as_p envuelve los campos en <p> */
+            margin-bottom: 1.5rem; /* Más espacio entre campos */
+        }
+        form label {
+            font-weight: 600;
+            color: #374151; /* text-gray-700 */
+            margin-bottom: 0.5rem;
+            display: block;
+            font-size: 0.875rem; /* text-sm */
+        }
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="password"],
+        form input[type="number"], 
+        form input[type="url"],
+        form input[type="tel"],
+        form select,
+        form textarea { /* Estilos base para inputs de Django */
+            width: 100%;
+            padding: 0.65rem 1rem; 
+            border: 1px solid #D1D5DB; 
+            border-radius: 0.375rem; 
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            font-size: 0.95rem;
+        }
+        form input[type="checkbox"] { 
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+            border-radius: 0.25rem;
+            border-color: #D1D5DB;
+            color: #DB2777; /* Color del check - pink-600 */
+            vertical-align: middle;
+            padding:0;
+        }
+         form input[type="checkbox"] + label { 
+            display: inline;
+            font-weight: normal;
+            font-size: 0.875rem;
+            color: #4B5563; /* text-gray-600 */
+            vertical-align: middle;
+            margin-bottom: 0; /* Evitar margen extra en label de checkbox */
+        }
+        form input:focus,
+        form select:focus,
+        form textarea:focus { /* Estilo de foco */
+            border-color: #DB2777; /* focus:border-pink-600 */
+            box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.2); /* focus:ring-pink-600 focus:ring-opacity-20 */
+            outline: none;
+        }
+        .helptext { /* Estilo para el help_text de Django */
+            font-size: 0.75rem; /* text-xs */
+            color: #6B7280; /* text-gray-500 */
+            margin-top: 0.25rem;
+            display: block;
+        }
+        /* Botones */
+        .cta-button {
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            padding: 0.75rem 1.5rem; /* Más padding para botón principal */
+            border-radius: 0.375rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+        }
+        .cta-button-primary { 
+            background-color: #EC4899; /* bg-pink-500 */
+            color: white;
+        }
+        .cta-button-primary:hover {
+            background-color: #DB2777; /* bg-pink-600 */
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(219, 39, 119, 0.2);
+        }
+        .cta-button-outline-light { /* Estilo similar a btn-outline-light */
+            background-color: transparent;
+            border: 1px solid #d1d5db; 
+            color: #d1d5db; 
+            padding: 0.5rem 1rem; /* Ajustado para navbar */
+        }
+        .cta-button-outline-light:hover {
+            background-color: #4b5563; 
+            color: white;
+            border-color: #4b5563;
+        }
+    </style>
 </head>
 <body>
-    <form action="#" method="post">
-        {% csrf_token %}
-        {{ form.as_p}}
-        <button type="submit"> Agregar coordinador</button>
 
-    </form>
+    <nav class="bg-gray-800 shadow-md">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a class="text-2xl font-display-title font-bold text-pink-400" href="{% url 'home' %}">FiestaPerfecta <span class="text-xs font-light text-gray-400">Admin</span></a>
+
+            <div>
+                <a href="{% url 'home' %}" class="cta-button cta-button-outline-light text-sm">
+                    <i class="fas fa-arrow-left mr-1 opacity-75"></i> Volver al inicio
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto py-10 md:py-16 px-6 flex justify-center">
+        <div class="form-card p-6 md:p-8">
+            <h1 class="text-3xl md:text-4xl font-bold font-display-title text-pink-600 mb-8 text-center">Registrar Nuevo Coordinador</h1>
+
+            <form method="post">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="errorlist nonfield mb-4">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                {{ form.as_p }}
+
+                <div class="mt-8 text-center">
+                    <button type="submit" class="cta-button cta-button-primary">
+                        <i class="fas fa-user-plus mr-2 opacity-75"></i> Agregar Coordinador
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 text-center py-4 mt-auto">
+        <small>&copy; 2025 FiestaPerfecta Admin Panel. Todos los derechos reservados.</small>
+    </footer>
+
+</body>
+</html>
+
+
+
+
+
 </body>
 </html>

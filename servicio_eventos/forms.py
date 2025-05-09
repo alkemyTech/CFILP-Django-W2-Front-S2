@@ -32,6 +32,15 @@ class ReservaDeServicioForm(forms.ModelForm):
             'total_precio': forms.NumberInput(attrs={'class': 'form-control'}),
         }
 
+class ServiciosForm(forms.ModelForm):
+    class Meta:
+        model = Servicio
+        fields = '__all__'
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'descripcion': forms.Textarea(attrs={'class': 'form-control'}),
+            'precio': forms.NumberInput(attrs={'class': 'form-control'}),
+        }
 
 class CoordinadorForm(ModelForm):
     class Meta:
