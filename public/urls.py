@@ -13,7 +13,8 @@ from .views import (view_casa,
                     view_dj,
                     view_foto_artistica,
                     view_galeria_fotos_boda,
-                    view_lugares)
+                    view_lugares,
+                    view_new_proveedor,)
 
 urlpatterns = [
     path('casa/',view_casa,name='casa'),
@@ -30,5 +31,6 @@ urlpatterns = [
     path('dj/',view_dj,name='dj'),
     path('foto_artistica/',view_foto_artistica,name='foto_artistica'),
     path('galeria_fotos_boda/',view_galeria_fotos_boda,name='galeria_fotos_boda'),
-    path('lugares/',view_lugares,name='lugares'), 
+    path('lugares/',view_lugares,name='lugares'),
+    path('new_provider/',view_new_proveedor,name='new_provider'),
 ]

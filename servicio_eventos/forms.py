@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Cliente,Servicio,Coordinador,Empleado,ReservaDeServicio
+from .models import Cliente,Servicio,Coordinador,Empleado,ReservaDeServicio,Proveedor
 from django import forms
 
 
@@ -53,4 +53,12 @@ class EmpleadoForm(ModelForm):
         model = Empleado
         fields = '__all__'
 
+class ProveedorForm(ModelForm):
+    class Meta:
+        model = Proveedor
+        fields = '__all__'
 
+class NuevoProveedorForm(ModelForm):
+    class Meta:
+        model = Proveedor
+        fields = '__all__'

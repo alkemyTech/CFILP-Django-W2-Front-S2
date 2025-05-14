@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from servicio_eventos.models import Cliente, Servicio
+from servicio_eventos.models import Cliente, Servicio, NuevoProveedor
 from django.shortcuts import render, get_object_or_404
 
 def view_casa(request):
@@ -72,3 +72,40 @@ def view_galeria_fotos_boda(request):
 
 def view_lugares(request):
     return render(request, "public/lugares.html")
+
+from django.shortcuts import render, redirect
+
+def view_new_proveedor(request):
+    if request.method == "POST":
+        nombre = request.POST.get("nombre")
+        apellido = request.POST.get("apellido")
+        numero_documento = request.POST.get("numero_documento")
+        rubro = request.POST.get("rubro")
+        direccion = request.POST.get("direccion")
+        ciudad = request.POST.get("ciudad")
+        provincia = request.POST.get("provincia")
+        pais = request.POST.get("pais")
+        codigo_postal = request.POST.get("codigo_postal")
+        email = request.POST.get("email")
+        telefono = request.POST.get("telefono")
+
+        NuevoProveedor.objects.create(
+            nombre=nombre,
+            apellido=apellido,
+            email=email,
+            telefono=telefono,
+            numero_documento=numero_documento,
+            rubro=rubro,
+            direccion=direccion,
+            ciudad=ciudad,
+            provincia=provincia,
+            pais=pais,
+            codigo_postal=codigo_postal,
+            activo=True
+        )
+
+        print("Se hizo un POST")
+        return redirect("/public/new_provider")  # o la URL que corresponda
+
+    return render(request, "public/new_provider.html")
+

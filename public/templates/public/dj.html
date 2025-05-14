@@ -1,154 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Música y DJ para Tu Evento Inolvidable - FiestaPerfecta</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Música y DJ - Fiesta Perfecta</title>
+
+    {# 1. SCRIPT DE TAILWIND CSS (Este DEBE permanecer) #}
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif; /* Fuente moderna y versátil */
-        }
-        .font-elegant-title {
-            font-family: 'Playfair Display', serif; /* Fuente elegante para títulos */
-        }
-        .font-display-title {
-            font-family: 'Playfair Display', serif;
-        }
-        .font-accent-title {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-        }
-        .hero-music-bg {
-            background-image: url('/static/img/dj-party-meaning.webp'); /* Púrpura vibrante */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; 
-        }
-        .section-title-music {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 2.8rem;
-            line-height: 1.3;
-            color: #5B21B6; /* Púrpura oscuro, ej: text-purple-700 */
-        }
-        @media (max-width: 768px) {
-            .section-title-music {
-                font-size: 2.2rem;
-            }
-        }
-        .music-card {
-            background-color: white;
-            border-radius: 0.75rem; /* rounded-xl */
-            box-shadow: 0 10px 22px -6px rgba(0,0,0,0.08), 0 4px 7px -3px rgba(0,0,0,0.04);
-            overflow: hidden;
-            transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
-            display: flex;
-            flex-direction: column;
-        }
-        .music-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px -12px rgba(91, 33, 182, 0.3), 0 8px 18px -5px rgba(0,0,0,0.08); /* Sombra púrpura */
-        }
-        .music-card-image {
-            width: 100%;
-            height: 230px; 
-            object-fit: cover;
-        }
-        .music-card-content {
-            padding: 1.5rem; /* p-6 */
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .music-card-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem; /* text-xl */
-            font-weight: 700;
-            color: #4C1D95; /* text-purple-800 */
-            margin-bottom: 0.75rem; /* mb-3 */
-        }
-        .music-card-description {
-            color: #4B5563; /* text-gray-600 */
-            font-size: 0.9rem; 
-            line-height: 1.65;
-            margin-bottom: 1rem; /* mb-4 */
-            flex-grow: 1;
-        }
-        .music-card-tags {
-            margin-bottom: 1rem;
-        }
-        .music-card-tags .tag {
-            background-color: #EDE9FE; /* bg-purple-50 */
-            color: #5B21B6; /* text-purple-700 */
-            font-size: 0.75rem; /* text-xs */
-            font-weight: 600;
-            padding: 0.25rem 0.75rem; /* py-1 px-3 */
-            border-radius: 9999px; /* rounded-full */
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-            display: inline-block;
-        }
-        .music-card-cta {
-            font-weight: 600;
-            color: #6D28D9; /* text-purple-600 */
-            transition: color 0.3s ease;
-            display: inline-block;
-            padding-top: 0.5rem;
-            margin-top: auto; 
-        }
-        .music-card-cta:hover {
-            color: #7C3AED; /* text-purple-500 */
-        }
-        .filter-button-music {
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #A78BFA; /* border-purple-300 */
-            color: #5B21B6; /* text-purple-700 */
-            background-color: #F5F3FF; /* bg-purple-100/50 */
-            padding: 0.6rem 1.25rem;
-        }
-        .filter-button-music.active, .filter-button-music:hover {
-            background-color: #7C3AED; /* bg-purple-500 */
-            color: white;
-            border-color: #6D28D9; /* border-purple-600 */
-            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.4);
-        }
-        .nav-link-music {
-            position: relative;
-            padding-bottom: 0.25rem;
-            font-weight: 600;
-        }
-        .nav-link-music::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: #7C3AED; /* Color de acento púrpura */
-            transition: width 0.3s ease-in-out;
-        }
-        .nav-link-music:hover::after {
-            width: 100%;
-        }
-        .cta-button {
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        .cta-button:hover {
-            transform: translateY(-2px);
-        }
-        .primary-music-cta-bg { 
-            background-color: #6D28D9; /* Púrpura principal, ej: bg-purple-600 */
-            color: white;
-        }
-        .primary-music-cta-bg:hover {
-            background-color: #5B21B6; /* Púrpura más oscuro */
-        }
-    </style>
+
+    {# 2. TU HOJA DE ESTILOS PERSONALIZADA UNIFICADA #}
+    <link rel="stylesheet" href="/static/css/style.css"> {# Ajusta la ruta si es necesario #}
+
 </head>
 <body class="bg-gray-100 text-gray-800">
 

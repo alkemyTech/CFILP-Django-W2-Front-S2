@@ -2,136 +2,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería de Bodas Inolvidables - FiestaPerfecta</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galeria de Boda - Fiesta Perfecta</title>
+
+    {# 1. SCRIPT DE TAILWIND CSS (Este DEBE permanecer) #}
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Lato', sans-serif;
-        }
-        .font-elegant-title {
-            font-family: 'Playfair Display', serif; /* Fuente elegante para títulos */
-        }
-        .font-display-title {
-            font-family: 'Playfair Display', serif;
-        }
-        .hero-gallery-bg {
-            background-image: url('/static/img/como-encontrar-al-mejor-fotógrafo-de-bodas.webp'); /* Rosa muy suave, con acento fucsia */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; 
-        }
-        .section-title-gallery {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 2.8rem;
-            line-height: 1.3;
-            color: #A9A9A9; /* Gris oscuro elegante, ej: text-gray-600 */
-        }
-        @media (max-width: 768px) {
-            .section-title-gallery {
-                font-size: 2.2rem;
-            }
-        }
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .gallery-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 15px 30px -8px rgba(0,0,0,0.15), 0 6px 12px -3px rgba(0,0,0,0.07);
-        }
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-        .gallery-item-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
-            color: white;
-            padding: 1.5rem 1rem 1rem; /* p-6 pb-4 */
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            text-align: center;
-        }
-        .gallery-item:hover .gallery-item-overlay {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .gallery-item-caption {
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-        .gallery-item-description {
-            font-size: 0.75rem;
-            margin-top: 0.25rem;
-        }
-        .nav-link-gallery {
-            position: relative;
-            padding-bottom: 0.25rem;
-            font-weight: 600;
-        }
-        .nav-link-gallery::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: #DB2777; /* Color de acento fucsia */
-            transition: width 0.3s ease-in-out;
-        }
-        .nav-link-gallery:hover::after {
-            width: 100%;
-        }
-        .cta-button {
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        .cta-button:hover {
-            transform: translateY(-2px);
-        }
-        .primary-gallery-cta-bg { 
-            background-color: #DB2777; /* Fucsia principal, ej: bg-pink-600 */
-            color: white;
-        }
-        .primary-gallery-cta-bg:hover {
-            background-color: #BE185D; /* Fucsia más oscuro */
-        }
-        /* Masonry-like grid for larger screens */
-        @media (min-width: 768px) {
-            #gallery-grid {
-                column-count: 2;
-                column-gap: 1.5rem; /* gap-6 */
-            }
-            .gallery-item {
-                display: inline-block;
-                width: 100%;
-                margin-bottom: 1.5rem; /* gap-6 */
-                break-inside: avoid; /* Evita que los ítems se corten entre columnas */
-            }
-        }
-        @media (min-width: 1024px) {
-            #gallery-grid {
-                column-count: 3;
-            }
-        }
-    </style>
+
+    {# 2. TU HOJA DE ESTILOS PERSONALIZADA UNIFICADA #}
+    <link rel="stylesheet" href="/static/css/style.css"> {# Ajusta la ruta si es necesario #}
+
 </head>
 <body class="bg-gray-100 text-gray-800">
 

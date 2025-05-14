@@ -34,8 +34,8 @@ def cerrar_sesion(request):
 
 from django.views.generic import FormView, ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .forms import ClienteForm, EmpleadoForm, CoordinadorForm, ReservaDeServicioForm, ServiciosForm
-from .models import Cliente, Empleado, Coordinador, Servicio, ReservaDeServicio
+from .forms import ClienteForm, EmpleadoForm, CoordinadorForm, ReservaDeServicioForm, ServiciosForm, ProveedorForm, NuevoProveedorForm
+from .models import Cliente, Empleado, Coordinador, Servicio, ReservaDeServicio, Proveedor, NuevoProveedor
 from django.contrib import messages
 
 
@@ -303,7 +303,62 @@ class ServicioDeleteView(LoginRequiredMixin, DeleteView):
         self.object.save()
         return redirect(self.success_url)
 
-#endregion
+# ===================   Proveedores       ========================
+
+## Nuevo proveedor public
+class NuevoProveedorFormView(LoginRequiredMixin, FormView):
+    form_class = NuevoProveedorForm
+    template_name = "public/new_provider.html"
+    success_url = reverse_lazy("new_provider.html")
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, "¡Solicitud de proveedor creada con éxito!")
+        return super().form_valid(form)
 
 
+## Crear
+class ProveedorFormView(LoginRequiredMixin, FormView):
+    form_class = ProveedorForm
+    template_name = "servicio_eventos/register_providers.html"
+    success_url = reverse_lazy("list_providers")
 
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, "¡Proveedor creado con éxito!")
+        return super().form_valid(form)
+
+## Leer
+class ProveedorListView(LoginRequiredMixin, ListView):
+    queryset = Proveedor.objects.all()
+    template_name = "servicio_eventos/list_providers.html"
+    context_object_name = "list_providers"
+
+## Actualizar
+class ProveedorUpdateView(LoginRequiredMixin, UpdateView):
+    model = Proveedor
+    form_class = ProveedorForm
+    template_name = "servicio_eventos/register_providers.html"
+    success_url = reverse_lazy("list_providers")
+
+    def form_valid(self, form):
+        proveedor = form.save(commit=False)
+        messages.success(self.request, f"¡Proveedor '{proveedor.nombre}' actualizado con éxito!")
+        form.save()
+        return super().form_valid(form)
+
+## Borrar
+class ProveedorDeleteView(LoginRequiredMixin, DeleteView):
+    model = Proveedor
+    template_name = "servicio_eventos/delete_providers.html"
+    success_url = reverse_lazy("list_providers")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['list_providers'] = Proveedor.objects.all()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        return redirect(self.success_url)

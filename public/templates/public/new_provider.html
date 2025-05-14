@@ -1,0 +1,161 @@
+{% load static %}
+{# Asumiendo que podrías necesitar widget_tweaks para otros formularios, aunque este usa inputs manuales #}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrar Nuevo Proveedor - FiestaPerfecta</title>
+
+    {# Script de Tailwind CSS (Este DEBE permanecer) #}
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {# TU HOJA DE ESTILOS PERSONALIZADA UNIFICADA #}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body class="body-public-bg">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="/public/casa/" class="text-4xl font-elegant-title text-pink-500">FiestaPerfecta</a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="/public/casa/#inicio" class="text-gray-600 hover:text-pink-500">Inicio</a>
+                <a href="/public/casa/#servicios" class="text-gray-600 hover:text-pink-500">Servicios</a>
+                <a href="/public/casa/#paquetes" class="text-gray-600 hover:text-pink-500">Paquetes</a>
+                <a href="/public/casa/#testimonios" class="text-gray-600 hover:text-pink-500">Testimonios</a>
+                <a href="/public/casa/#contacto" class="text-gray-600 hover:text-pink-500">Contacto</a>
+                <a href="/public/cotizacion/" class="cta-button dopamine-bg text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:shadow-lg">
+                    Cotizar Ahora
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <a href="/public/casa/#inicio" class="block py-2 px-6 text-gray-600 hover:bg-pink-50 hover:text-pink-500">Inicio</a>
+            <a href="/public/casa/#servicios" class="block py-2 px-6 text-gray-600 hover:bg-pink-50 hover:text-pink-500">Servicios</a>
+            <a href="/public/casa/#paquetes" class="text-gray-600 hover:text-pink-500">Paquetes</a>
+            <a href="/public/casa/#testimonios" class="block py-2 px-6 text-gray-600 hover:bg-pink-50 hover:text-pink-500">Testimonios</a>
+            <a href="/public/casa/#contacto" class="block py-2 px-6 text-gray-600 hover:bg-pink-50 hover:text-pink-500">Contacto</a>
+            <a href="/public/cotizacion/" class="block py-3 px-6 text-center cta-button dopamine-bg text-white font-semibold rounded-lg m-4">
+                Cotizar Ahora
+            </a>
+        </div>
+    </nav>
+
+    <main class="container mx-auto py-12 md:py-20 px-6 flex justify-center">
+        <div class="form-card-public p-6 md:p-10">
+            {# Usar .font-elegant-title que está en style.css global #}
+            <h1 class="text-3xl md:text-4xl font-bold font-elegant-title text-pink-600 mb-8 text-center">Registrar Nuevo Proveedor</h1>
+            <p class="text-center text-gray-600 mb-8 -mt-4">
+                Completa los datos para añadir un nuevo colaborador a la red de FiestaPerfecta.
+            </p>
+
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        {# Usar .form-label-public y .form-input-public #}
+                        <label for="nombre" class="form-label-public">Nombre del Proveedor <span class="text-red-500">*</span></label>
+                        <input type="text" name="nombre" id="nombre" placeholder="Nombre de la empresa o persona" required class="form-input-public">
+                    </div>
+                    <div>
+                        <label for="apellido" class="form-label-public">Contacto Principal (Apellido, Nombre) <span class="text-red-500">*</span></label>
+                        <input type="text" name="apellido" id="apellido" placeholder="Apellido y Nombre del contacto" required class="form-input-public">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="numero_documento" class="form-label-public">Nº de Documento (CUIT/CUIL) <span class="text-red-500">*</span></label>
+                        <input type="text" name="numero_documento" id="numero_documento" placeholder="Ej: 20-12345678-9" required class="form-input-public">
+                    </div>
+                    <div>
+                        <label for="rubro" class="form-label-public">Rubro Principal</label>
+                        <input type="text" name="rubro" id="rubro" placeholder="Ej: Catering, Decoración, Fotografía" class="form-input-public">
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="direccion" class="form-label-public">Dirección Comercial</label>
+                    <input type="text" name="direccion" id="direccion" placeholder="Calle, Número, Piso, Depto." class="form-input-public">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div>
+                        <label for="ciudad" class="form-label-public">Ciudad</label>
+                        <input type="text" name="ciudad" id="ciudad" placeholder="Ej: Buenos Aires" class="form-input-public">
+                    </div>
+                    <div>
+                        <label for="provincia" class="form-label-public">Provincia</label>
+                        <input type="text" name="provincia" id="provincia" placeholder="Ej: CABA, Buenos Aires" class="form-input-public">
+                    </div>
+                    <div>
+                        <label for="codigo_postal" class="form-label-public">Código Postal</label>
+                        <input type="text" name="codigo_postal" id="codigo_postal" placeholder="Ej: C1425" class="form-input-public">
+                    </div>
+                </div>
+                <div>
+                    <label for="pais" class="form-label-public">País</label>
+                    <input type="text" name="pais" id="pais" placeholder="Ej: Argentina" value="Argentina" class="form-input-public">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="email" class="form-label-public">Email de Contacto</label>
+                        <input type="email" name="email" id="email" placeholder="contacto@proveedor.com" class="form-input-public">
+                    </div>
+                    <div>
+                        <label for="telefono" class="form-label-public">Teléfono de Contacto</label>
+                        <input type="text" name="telefono" id="telefono" placeholder="+54 9 11 XXXX-XXXX" class="form-input-public">
+                    </div>
+                </div>
+
+                <div class="mt-10 pt-6 text-center border-t border-pink-100">
+                    {# .cta-button es la base para transición y display. .cta-button-pink-primary para el estilo. #}
+                    <button type="submit" class="cta-button cta-button-pink-primary text-lg">
+                        <i class="fas fa-user-plus mr-2 opacity-75"></i> Guardar Proveedor
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="bg-pink-700 text-pink-100 py-12 mt-auto">
+        <div class="container mx-auto px-6 text-center">
+             {# Usar .font-elegant-title que está en style.css global #}
+            <a href="/public/casa/" class="text-3xl font-elegant-title font-bold text-white mb-4 inline-block">FiestaPerfecta</a>
+            <p class="mb-6 text-sm">Transformando tus sueños en celebraciones inolvidables.</p>
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="#" aria-label="Facebook de FiestaPerfecta" class="hover:text-white transition-colors duration-300"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#" aria-label="Instagram de FiestaPerfecta" class="hover:text-white transition-colors duration-300"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" aria-label="WhatsApp de FiestaPerfecta" class="hover:text-white transition-colors duration-300"><i class="fab fa-whatsapp fa-lg"></i></a>
+            </div>
+            <p class="text-xs">&copy; {% now "Y" %} FiestaPerfecta. Todos los derechos reservados.</p> {# Actualizado el año #}
+            <p class="text-xs mt-1">
+                <a href="/public/politicas/" class="hover:text-white underline">Política de Privacidad</a> |
+                <a href="/public/terminos/" class="hover:text-white underline">Términos y Condiciones</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Script para menú móvil (si es necesario para el público)
+        const publicMenuToggler = document.getElementById('publicMenuToggler');
+        const publicMobileMenu = document.getElementById('publicMobileMenu');
+
+        if (publicMenuToggler && publicMobileMenu) {
+            publicMenuToggler.addEventListener('click', () => {
+                publicMobileMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+
+</body>
+</html>

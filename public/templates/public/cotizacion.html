@@ -280,17 +280,10 @@
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                        <label for="sexo" class="form-label">Sexo</label>
-                        <select id="sexo" name="sexo" class="form-select">
-                            <option value="" disabled selected>Selecciona una opción...</option>
-                            <option value="femenino">Femenino</option>
-                            <option value="masculino">Masculino</option>
-                            <option value="otro">Otro</option>
-                            <option value="prefiero_no_decir">Prefiero no decirlo</option>
-                        </select>
-                    </div>
-                    <div>
+                    {# El div del campo "Sexo" ha sido eliminado #}
+
+                    {# El div de "Medio Preferido de Contacto" ahora ocupa ambas columnas en pantallas md y superiores #}
+                    <div class="md:col-span-2">
                         <label for="medio_preferido_contacto" class="form-label">Medio Preferido de Contacto</label>
                         <select id="medio_preferido_contacto" name="medio_preferido_contacto" class="form-select">
                             <option value="email">Email</option>

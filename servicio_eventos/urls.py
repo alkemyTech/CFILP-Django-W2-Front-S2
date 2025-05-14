@@ -19,7 +19,11 @@ from .views import (ClienteFormView,
                     ServiciosFormView,
                     SerivicioListView,
                     ServicioUpateView,
-                    ServicioDeleteView,)
+                    ServicioDeleteView,
+                    ProveedorFormView,
+                    ProveedorListView,
+                    ProveedorUpdateView,
+                    ProveedorDeleteView)
 
 from .login import signup_view, login_view, logout_view
 from . import views
@@ -35,16 +39,16 @@ urlpatterns = [
 
     # ===================== URLS CRUD ====================
     # ===================== CLIENTES ====================
-    path("register_clients/",ClienteFormView.as_view(),name="register_clients"),                #CREAR
-    path("list_clients/",ClienteListView.as_view(),name="list_clients"),                        #LEER 
-    path("update_clients/<int:pk>/",ClienteUpdateView.as_view(),name="update_clients"),         #ACTUALIZAR
-    path("delete_clients/<int:pk>/",ClienteDeleteView.as_view(),name="delete_clients"),         #BORRAR
+    path("register_clients/",ClienteFormView.as_view(),name="register_clients"),                        #CREAR
+    path("list_clients/",ClienteListView.as_view(),name="list_clients"),                                #LEER 
+    path("update_clients/<int:pk>/",ClienteUpdateView.as_view(),name="update_clients"),                 #ACTUALIZAR
+    path("delete_clients/<int:pk>/",ClienteDeleteView.as_view(),name="delete_clients"),                 #BORRAR
 
     # ===================== EMPLEADOS ====================
-    path("register_employees/",EmpleadoFormView.as_view(),name="register_employees"),           #CREAR
-    path("list_employees/",EmpleadoListView.as_view(),name="list_employees"),                   #LEER
-    path("update_employees/<int:pk>/",EmpleadoUpdateView.as_view(),name="update_employees"),    #ACTUALIZAR
-    path("delete_employees/<int:pk>/",EmpleadoDeleteView.as_view(),name="delete_employees"),    #BORRAR
+    path("register_employees/",EmpleadoFormView.as_view(),name="register_employees"),                   #CREAR
+    path("list_employees/",EmpleadoListView.as_view(),name="list_employees"),                           #LEER
+    path("update_employees/<int:pk>/",EmpleadoUpdateView.as_view(),name="update_employees"),            #ACTUALIZAR
+    path("delete_employees/<int:pk>/",EmpleadoDeleteView.as_view(),name="delete_employees"),            #BORRAR
 
     # ===================== COORDINADORES ====================
     path("register_coordinadores/",CoordinadorFormView.as_view(),name="register_coordinadores"),            #CREAR
@@ -63,6 +67,12 @@ urlpatterns = [
     path("services/",SerivicioListView.as_view(),name="services"),                                      #LEER  
     path("actualizar_services/<int:pk>/",ServicioUpateView.as_view(),name="actualizar_services"),       #ACTUALIZAR
     path("borrar_services/<int:pk>/",ServicioDeleteView.as_view(),name="borrar_services"),              #BORRAR
+
+    # ===================== PROVEEDORES ====================
+    path("register_providers/",ProveedorFormView.as_view(),name="register_providers"),                  #CREAR
+    path("list_providers/",ProveedorListView.as_view(),name="list_providers"),                          #LEER
+    path("update_providers/<int:pk>/",ProveedorUpdateView.as_view(),name="update_providers"),           #ACTUALIZAR
+    path("delete_providers/<int:pk>/",ProveedorDeleteView.as_view(),name="delete_providers"),           #BORRAR
 ]
 
 

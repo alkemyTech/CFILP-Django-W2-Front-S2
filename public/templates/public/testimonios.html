@@ -1,92 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testimonios de Clientes Satisfechos - FiestaPerfecta</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Testimonios - Fiesta Perfecta</title>
+
+    {# 1. SCRIPT DE TAILWIND CSS (Este DEBE permanecer) #}
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Lato', sans-serif;
-        }
-        .font-elegant-title {
-            font-family: 'Playfair Display', serif; /* Fuente elegante para títulos */
-        }
-        .font-display-title {
-            font-family: 'Playfair Display', serif;
-        }
-        .testimonial-card {
-            background-color: white;
-            border-radius: 0.75rem; /* rounded-xl */
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.03); /* Sombra sutil */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            height: 100%; /* Para que todas las tarjetas tengan la misma altura en un grid */
-        }
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 8px 15px -4px rgba(0, 0, 0, 0.05);
-        }
-        .testimonial-quote {
-            font-style: italic;
-            color: #4A5568; /* text-gray-700 */
-            line-height: 1.7;
-            flex-grow: 1; /* Para que el texto ocupe el espacio disponible */
-        }
-        .testimonial-author {
-            font-weight: 700;
-            color: #C5309B; /* text-pink-600 */
-        }
-        .testimonial-event {
-            font-size: 0.875rem; /* text-sm */
-            color: #718096; /* text-gray-500 */
-        }
-        .filter-button {
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-            border: 1px solid #D1D5DB; /* border-gray-300 */
-        }
-        .filter-button.active, .filter-button:hover {
-            background-color: #EC4899; /* bg-pink-500 */
-            color: white;
-            border-color: #EC4899; /* border-pink-500 */
-        }
-        .nav-link-testimonial {
-            position: relative;
-            padding-bottom: 0.25rem;
-            font-weight: 600;
-        }
-        .nav-link-testimonial::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: #EC4899; /* Color de acento rosa */
-            transition: width 0.3s ease-in-out;
-        }
-        .nav-link-testimonial:hover::after {
-            width: 100%;
-        }
-        .cta-button {
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        .cta-button:hover {
-            transform: translateY(-2px);
-        }
-        .primary-cta-bg { 
-            background-color: #EC4899; /* Rosa principal */
-            color: white;
-        }
-        .primary-cta-bg:hover {
-            background-color: #DB2777; /* Rosa más oscuro */
-        }
-    </style>
+
+    {# 2. TU HOJA DE ESTILOS PERSONALIZADA UNIFICADA #}
+    <link rel="stylesheet" href="/static/css/style.css"> {# Ajusta la ruta si es necesario #}
+
 </head>
 <body class="bg-gray-100 text-gray-800">
 

@@ -75,3 +75,36 @@ class ReservaDeServicio(models.Model):
     def __str__(self):
         return f"Reserva: {self.servicio} Coordinado por: {self.coordinador}"
     """
+class Proveedor(models.Model,ISwitchActivate):
+    nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
+    numero_documento = models.IntegerField()
+    rubro = models.CharField(max_length=100)
+    direccion = models.CharField(max_length=255)
+    ciudad = models.CharField(max_length=100)
+    provincia = models.CharField(max_length=100)
+    pais = models.CharField(max_length=100)
+    codigo_postal = models.CharField(max_length=10)
+    email = models.EmailField()
+    telefono = models.CharField(max_length=15)
+    activo = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.nombre} {self.apellido}"
+    
+class NuevoProveedor(models.Model,ISwitchActivate):
+    nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
+    numero_documento = models.IntegerField()
+    rubro = models.CharField(max_length=100)
+    direccion = models.CharField(max_length=255)
+    ciudad = models.CharField(max_length=100)
+    provincia = models.CharField(max_length=100)
+    pais = models.CharField(max_length=100)
+    codigo_postal = models.CharField(max_length=10)
+    email = models.EmailField()
+    telefono = models.CharField(max_length=15)
+    activo = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.nombre} {self.apellido}"

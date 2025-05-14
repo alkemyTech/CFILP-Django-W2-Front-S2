@@ -1,76 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cumpleaños Infantiles Mágicos - FiestaPerfecta</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cumples Infantiles - Fiesta Perfecta</title>
+
+    {# 1. SCRIPT DE TAILWIND CSS (Este DEBE permanecer) #}
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .font-elegant-title {
-            font-family: 'Playfair Display', serif; /* Fuente elegante para títulos */
-        }
-        .font-kid-friendly {
-            font-family: 'Baloo 2', cursive;
-        }
-        .hero-kids-bg {
-            background-image: url("/static/img/slider_camioncito1920x1080.webp"); /* Placeholder verde claro */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* Efecto parallax sutil */
-        }
-        .section-title-kids {
-            font-family: 'Baloo 2', cursive;
-            font-weight: 700;
-            font-size: 2.8rem;
-            line-height: 1.2;
-            color: #F472B6; /* Rosa más intenso */
-        }
-        @media (max-width: 768px) {
-            .section-title-kids {
-                font-size: 2.2rem;
-            }
-        }
-        .card-kids {
-            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-            border-radius: 1.5rem; /* rounded-3xl */
-        }
-        .card-kids:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-        .cta-button {
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        .cta-button:hover {
-            transform: translateY(-2px);
-        }
-        .dopamine-bg { 
-            background-color: #FF69B4; 
-        }
-        .dopamine-bg:hover {
-            background-color: #FF1493; 
-        }
-        .theme-bubble {
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-        .theme-bubble:hover {
-            transform: scale(1.1);
-            background-color: #FBCFE8; /* Rosa claro */
-        }
-        .gallery-img {
-            transition: transform 0.3s ease, filter 0.3s ease;
-        }
-        .gallery-img:hover {
-            transform: scale(1.05);
-            filter: brightness(1.1);
-        }
-    </style>
+
+    {# 2. TU HOJA DE ESTILOS PERSONALIZADA UNIFICADA #}
+    <link rel="stylesheet" href="/static/css/style.css"> {# Ajusta la ruta si es necesario #}
+
 </head>
 <body class="bg-pink-50 text-gray-800">
 
