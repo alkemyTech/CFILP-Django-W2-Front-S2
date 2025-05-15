@@ -11,7 +11,6 @@ def view_casa(request):
     return render(request, "public/casa.html")
 
 def view_cotizacion(request):
-    servicios_obj = Servicio.objects.filter(activo=True).order_by('nombre')
 
     if request.method == 'POST':
         form = SolicitudCotizacionForm(request.POST)
@@ -32,6 +31,7 @@ def view_cotizacion(request):
                 messages.warning(request, 'El servicio seleccionado para cotizar no fue encontrado.')
         form = SolicitudCotizacionForm(initial=initial_data)
 
+    servicios_obj = Servicio.objects.filter(activo=True).order_by('nombre')
     context = {
         'form': form,
         'servicios': servicios_obj
