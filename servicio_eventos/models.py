@@ -2,7 +2,7 @@ from django.db import models
 
 # Crate interfaces for implementing the switch activate method
 class ISwitchActivate():
-    def delete(self, using = None, keep_parents=False):
+    def switch_activo(self, using = None, keep_parents=False):
         self.activo = not self.activo
         self.save()
 

@@ -1,4 +1,4 @@
-D:.
+D:CFILP-Django-W2-Front-S2
 |   .gitignore
 |   db.sqlite3
 |   estructura_proyecto.txt
