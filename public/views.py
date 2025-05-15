@@ -1,38 +1,43 @@
-from django.shortcuts import render
-from servicio_eventos.models import Cliente, Servicio, NuevoProveedor
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages # Para mostrar mensajes al usuario (opcional)
+
+# Asumo que el modelo Servicio está en la app 'servicio_eventos'
+from servicio_eventos.models import Servicio, NuevoProveedor # Asegúrate que estos modelos existan en servicio_eventos/models.py
+# Asumo que SolicitudCotizacion y SolicitudCotizacionForm están en la app 'public'
+from .models import SolicitudCotizacion # ¡Asegúrate que este modelo exista en public/models.py!
+from .forms import SolicitudCotizacionForm # ¡Asegúrate que este form exista en public/forms.py!
 
 def view_casa(request):
     return render(request, "public/casa.html")
 
 def view_cotizacion(request):
-    evento = None
+    servicios_obj = Servicio.objects.filter(activo=True).order_by('nombre')
 
-    # Verificar si la solicitud es GET y si existe el parámetro 'evento_id'
-    if request.method == "GET":
-        evento_id = request.GET.get("evento_id")
-        if evento_id:
-            evento = get_object_or_404(Servicio, id=evento_id)  # Obtener evento por su ID
-        servicios = Servicio.objects.all()  # Obtener los servicios desde la base de datos
+    if request.method == 'POST':
+        form = SolicitudCotizacionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '¡Tu solicitud de cotización ha sido enviada con éxito! Te contactaremos pronto.')
+            return redirect('casa')
+        else:
+            messages.error(request, 'Hubo un error en el formulario. Por favor, revisa los campos marcados.')
+    else:  # Método GET
+        initial_data = {}
+        evento_id_get = request.GET.get('evento_id')
+        if evento_id_get:
+            try:
+                evento_obj = get_object_or_404(Servicio, id=evento_id_get)
+                initial_data['servicio'] = evento_obj
+            except Servicio.DoesNotExist:
+                messages.warning(request, 'El servicio seleccionado para cotizar no fue encontrado.')
+        form = SolicitudCotizacionForm(initial=initial_data)
 
-        return render(request, "public/cotizacion.html", {
-            "evento": evento,
-            "servicios": servicios
-        })
+    context = {
+        'form': form,
+        'servicios': servicios_obj
+    }
+    return render(request, "public/cotizacion.html", context)
 
-    # Verificar si la solicitud es POST
-    if request.method == "POST":
-        nombre = request.POST.get("nombre")
-        apellido = request.POST.get("apellido")
-        email = request.POST.get("email") or request.data.get('email')
-        telefono = request.POST.get("telefono")
-        Cliente.objects.create(nombre=nombre, apellido=apellido, email=email, telefono=telefono, activo=True)
-
-        print("Se hizo un POST")
-        # Aquí puedes agregar la lógica para guardar los datos o enviar un correo
-
-    return render(request, "public/cotizacion.html")
-    
 
 def view_cumple(request):
     return render(request, "public/cumple.html")

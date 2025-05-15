@@ -129,85 +129,126 @@
     </nav>
 
     <main class="container mx-auto px-4 md:px-6 py-12 md:py-16">
-        <header class="text-center mb-10 md:mb-16">
-            <h1 class="text-4xl md:text-5xl font-bold text-pink-600 mb-4">Cotiza Tu Evento Soñado</h1>
+        <header class="text-center mb-10 md:mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold font-playfair text-pink-600 mb-4">Cotiza Tu Evento Soñado</h1>
             <p class="text-lg text-gray-600 max-w-2xl mx-auto">
                 Completa el siguiente formulario con los detalles de tu celebración y te enviaremos una propuesta personalizada lo antes posible. ¡Estamos emocionados de ayudarte a crear un momento inolvidable!
             </p>
         </header>
 
-        <div class="step-indicator mb-12">
+        {% if messages %}
+            <div class="max-w-3xl mx-auto mb-6">
+                {% for message in messages %}
+                    <div class="p-4 rounded-md {% if message.tags == 'success' %}bg-green-100 border-green-500 text-green-700{% elif message.tags == 'error' %}bg-red-100 border-red-500 text-red-700{% elif message.tags == 'warning' %}bg-yellow-100 border-yellow-500 text-yellow-700{% else %}bg-blue-100 border-blue-500 text-blue-700{% endif %} border-l-4" role="alert">
+                        <p>{{ message }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="step-indicator mb-10 md:mb-12">
             <div class="step active" id="step-indicator-1">
                 <div class="step-circle">1</div>
                 <div class="step-label">Info del Evento</div>
             </div>
             <div class="step" id="step-indicator-2">
                 <div class="step-circle">2</div>
-                <div class="step-label">Servicios Requeridos</div>
+                <div class="step-label">Servicios</div>
             </div>
             <div class="step" id="step-indicator-3">
                 <div class="step-circle">3</div>
                 <div class="step-label">Tus Datos</div>
             </div>
         </div>
-        <form id="cotizacionForm" action="/public/cotizacion/" method="POST" class="bg-white p-6 md:p-10 rounded-xl shadow-2xl max-w-3xl mx-auto">
+
+        <form id="cotizacionForm" action="{% url 'cotizacion' %}" method="POST" class="bg-white p-6 md:p-10 rounded-xl shadow-2xl max-w-3xl mx-auto">
             {% csrf_token %}
-    
-            <input type="hidden" name="evento_id" value="{{ evento.id }}">
+            
+            {% if form.non_field_errors %}
+                <div class="mb-6 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {# #}
 
             <div id="form-step-1" class="form-step">
                 <h2 class="text-2xl font-semibold text-gray-700 mb-6 border-b pb-3">Paso 1: Detalles de Tu Celebración</h2>
         
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label for="tipo_evento" class="form-label">Tipo de Evento <span class="text-red-500">*</span></label>
-                        <select id="tipo_evento" name="servicios" class="form-select" required>
-                            <option value="" disabled selected>Selecciona el tipo...</option>
-                            {% for servicio in servicios %}
-                                <option value="{{ servicio.id }}" {% if servicio.id == evento.id %}selected{% endif %}>{{ servicio.nombre }}</option>
-                            {% endfor %}
-                        </select>
+                        <label for="{{ form.servicio.id_for_label }}" class="form-label">
+                            {{ form.servicio.label }}
+                            {% if form.servicio.field.required %}<span class="text-red-500">*</span>{% endif %}
+                        </label>
+                        {{ form.servicio }} {# Este campo usa la clase 'form-input-public' desde el widget en forms.py #}
+                        {% if form.servicio.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.servicio.errors|striptags }}</div>
+                        {% endif %}
                     </div>
                     <div>
-                        <label for="otro_tipo_evento" class="form-label">Si es "Otro", especifica:</label>
-                        <input type="text" name="otro_tipo_evento" id="otro_tipo_evento" class="form-input" placeholder="Ej: Fiesta de compromiso">
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                        <label for="fecha_evento" class="form-label">Fecha Estimada del Evento <span class="text-red-500">*</span></label>
-                        <input type="date" name="fecha_evento" id="fecha_evento" class="form-input" required>
-                    </div>
-                    <div>
-                        <label for="hora_evento" class="form-label">Hora Estimada</label>
-                        <input type="time" name="hora_evento" id="hora_evento" class="form-input">
+                        <label for="{{ form.otro_tipo_evento.id_for_label }}" class="form-label">{{ form.otro_tipo_evento.label }}</label>
+                        {{ form.otro_tipo_evento }}
+                        {% if form.otro_tipo_evento.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.otro_tipo_evento.errors|striptags }}</div>
+                        {% endif %}
+                         {% if form.otro_tipo_evento.help_text %}
+                            <p class="text-xs text-gray-500 mt-1">{{ form.otro_tipo_evento.help_text }}</p>
+                        {% endif %}
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label for="cantidad_invitados" class="form-label">Número Estimado de Invitados <span class="text-red-500">*</span></label>
-                        <input type="number" name="cantidad_invitados" id="cantidad_invitados" class="form-input" placeholder="Ej: 50" min="1" required>
+                        <label for="{{ form.fecha_evento.id_for_label }}" class="form-label">
+                            {{ form.fecha_evento.label }}
+                            {% if form.fecha_evento.field.required %}<span class="text-red-500">*</span>{% endif %}
+                        </label>
+                        {{ form.fecha_evento }}
+                        {% if form.fecha_evento.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.fecha_evento.errors|striptags }}</div>
+                        {% endif %}
                     </div>
                     <div>
-                        <label for="locacion_evento" class="form-label">Lugar del Evento</label>
-                        <select id="locacion_evento" name="locacion_evento" class="form-select">
-                            <option value="" disabled selected>¿Ya tienes lugar?</option>
-                            <option value="salon_propio">Tengo salón/lugar propio</option>
-                            <option value="necesito_salon">Necesito ayuda para encontrar salón</option>
-                            <option value="domicilio_particular">Domicilio particular</option>
-                            <option value="aire_libre">Espacio al aire libre</option>
-                        </select>
+                        <label for="{{ form.hora_evento.id_for_label }}" class="form-label">{{ form.hora_evento.label }}</label>
+                        {{ form.hora_evento }}
+                        {% if form.hora_evento.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.hora_evento.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="{{ form.cantidad_invitados.id_for_label }}" class="form-label">
+                            {{ form.cantidad_invitados.label }}
+                            {% if form.cantidad_invitados.field.required %}<span class="text-red-500">*</span>{% endif %}
+                        </label>
+                        {{ form.cantidad_invitados }}
+                        {% if form.cantidad_invitados.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.cantidad_invitados.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <label for="{{ form.locacion_evento.id_for_label }}" class="form-label">{{ form.locacion_evento.label }}</label>
+                        {{ form.locacion_evento }}
+                        {% if form.locacion_evento.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.locacion_evento.errors|striptags }}</div>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="mb-6">
-                    <label for="direccion_evento" class="form-label">Dirección (si ya la tienes)</label>
-                    <input type="text" name="direccion_evento" id="direccion_evento" class="form-input" placeholder="Calle, Número, Ciudad">
+                    <label for="{{ form.direccion_evento.id_for_label }}" class="form-label">{{ form.direccion_evento.label }}</label>
+                    {{ form.direccion_evento }}
+                    {% if form.direccion_evento.errors %}
+                        <div class="text-red-500 text-xs mt-1">{{ form.direccion_evento.errors|striptags }}</div>
+                    {% endif %}
                 </div>
 
                 <div class="flex justify-end">
-                    <button type="button" onclick="nextStep(1)" class="cta-button dopamine-bg text-white font-semibold py-3 px-8 rounded-lg shadow-md">
+                    <button type="button" onclick="nextStep(1)" class="cta-button bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition-transform hover:scale-105">
                         Siguiente <i class="fas fa-arrow-right ml-2"></i>
                     </button>
                 </div>
@@ -217,37 +258,45 @@
                 <h2 class="text-2xl font-semibold text-gray-700 mb-6 border-b pb-3">Paso 2: ¿Qué Servicios Necesitas?</h2>
                 <p class="text-sm text-gray-500 mb-6">Selecciona todos los servicios que te interesan. Podemos adaptarnos a tus necesidades.</p>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4 mb-6">
-                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="planificacion_integral" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Planificación Integral</span></label></div>
-                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="decoracion_tematica" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Decoración Temática</span></label></div>
-                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="catering_menu" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Catering / Menú</span></label></div>
-                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="barra_bebidas" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Barra de Bebidas</span></label></div>
-                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="dj_musica" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>DJ y Música</span></label></div>
-                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="fotografia_video" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Fotografía y Video</span></label></div>
-                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="animacion_shows" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Animación / Shows</span></label></div>
-                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="mobiliario" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Alquiler de Mobiliario</span></label></div>
-                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="iluminacion_sonido" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Iluminación y Sonido</span></label></div>
-                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="souvenirs" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Souvenirs / Recuerdos</span></label></div>
-                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="mesa_dulce_torta" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Mesa Dulce / Torta</span></label></div>
-                    <div><label class="flex items-center space-x-2"><input type="checkbox" name="servicios[]" value="personal_asistencia" class="form-checkbox rounded text-pink-500 focus:ring-pink-500"> <span>Personal de Asistencia</span></label></div>
+                {# Estos checkboxes no están en SolicitudCotizacionForm. Se enviarán como request.POST.getlist('servicios_necesitados[]') #}
+                {# Si necesitas guardarlos, debes modificar el modelo y el formulario. #}
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4 mb-6">
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="planificacion_integral" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Planificación Integral</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="decoracion_tematica" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Decoración Temática</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="catering_menu" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Catering / Menú</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="barra_bebidas" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Barra de Bebidas</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="dj_musica" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>DJ y Música</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="fotografia_video" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Fotografía y Video</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="animacion_shows" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Animación / Shows</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="mobiliario" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Alquiler de Mobiliario</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="iluminacion_sonido" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Iluminación y Sonido</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="souvenirs" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Souvenirs / Recuerdos</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="mesa_dulce_torta" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Mesa Dulce / Torta</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="personal_asistencia" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Personal de Asistencia</span></label></div>
                 </div>
 
                 <div class="mb-6">
-                    <label for="presupuesto_estimado" class="form-label">Presupuesto Estimado (Opcional)</label>
-                    <input type="text" name="presupuesto_estimado" id="presupuesto_estimado" class="form-input" placeholder="Ej: $50.000 - $100.000 ARS">
+                    <label for="{{ form.presupuesto_estimado.id_for_label }}" class="form-label">{{ form.presupuesto_estimado.label }}</label>
+                    {{ form.presupuesto_estimado }}
+                    {% if form.presupuesto_estimado.errors %}
+                        <div class="text-red-500 text-xs mt-1">{{ form.presupuesto_estimado.errors|striptags }}</div>
+                    {% endif %}
                     <p class="text-xs text-gray-500 mt-1">Saber tu rango de presupuesto nos ayuda a ofrecerte las mejores opciones.</p>
                 </div>
 
                 <div class="mb-6">
-                    <label for="comentarios_adicionales_servicios" class="form-label">Comentarios Adicionales sobre Servicios</label>
-                    <textarea name="comentarios_adicionales_servicios" id="comentarios_adicionales_servicios" rows="4" class="form-textarea" placeholder="Describe cualquier idea específica, tema, colores, o algo que debamos saber..."></textarea>
+                    <label for="{{ form.comentarios_adicionales_servicios.id_for_label }}" class="form-label">{{ form.comentarios_adicionales_servicios.label }}</label>
+                    {{ form.comentarios_adicionales_servicios }}
+                    {% if form.comentarios_adicionales_servicios.errors %}
+                        <div class="text-red-500 text-xs mt-1">{{ form.comentarios_adicionales_servicios.errors|striptags }}</div>
+                    {% endif %}
                 </div>
 
                 <div class="flex justify-between">
-                    <button type="button" onclick="prevStep(2)" class="cta-button bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold py-3 px-8 rounded-lg shadow-md">
+                    <button type="button" onclick="prevStep(2)" class="cta-button bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold py-3 px-8 rounded-lg shadow-md transition-transform hover:scale-105">
                         <i class="fas fa-arrow-left mr-2"></i> Anterior
                     </button>
-                    <button type="button" onclick="nextStep(2)" class="cta-button dopamine-bg text-white font-semibold py-3 px-8 rounded-lg shadow-md">
+                    <button type="button" onclick="nextStep(2)" class="cta-button bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition-transform hover:scale-105">
                         Siguiente <i class="fas fa-arrow-right ml-2"></i>
                     </button>
                 </div>
@@ -259,70 +308,91 @@
             
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label for="nombre" class="form-label">Nombre <span class="text-red-500">*</span></label>
-                        <input type="text" name="nombre" id="nombre" class="form-input" placeholder="Tu nombre" required>
+                        <label for="{{ form.nombre.id_for_label }}" class="form-label">
+                            {{ form.nombre.label }}
+                            {% if form.nombre.field.required %}<span class="text-red-500">*</span>{% endif %}
+                        </label>
+                        {{ form.nombre }}
+                        {% if form.nombre.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.nombre.errors|striptags }}</div>
+                        {% endif %}
                     </div>
                     <div>
-                        <label for="apellido" class="form-label">Apellido <span class="text-red-500">*</span></label>
-                        <input type="text" name="apellido" id="apellido" class="form-input" placeholder="Tu apellido" required>
+                        <label for="{{ form.apellido.id_for_label }}" class="form-label">
+                            {{ form.apellido.label }}
+                            {% if form.apellido.field.required %}<span class="text-red-500">*</span>{% endif %}
+                        </label>
+                        {{ form.apellido }}
+                        {% if form.apellido.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.apellido.errors|striptags }}</div>
+                        {% endif %}
                     </div>
                 </div>
             
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label for="email" class="form-label">Correo Electrónico <span class="text-red-500">*</span></label>
-                        <input type="email" name="email" id="email" class="form-input" placeholder="tu@email.com" required>
+                        <label for="{{ form.email.id_for_label }}" class="form-label">
+                            {{ form.email.label }}
+                            {% if form.email.field.required %}<span class="text-red-500">*</span>{% endif %}
+                        </label>
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.email.errors|striptags }}</div>
+                        {% endif %}
                     </div>
                     <div>
-                        <label for="telefono" class="form-label">Teléfono / WhatsApp <span class="text-red-500">*</span></label>
-                        <input type="tel" name="telefono" id="telefono" class="form-input" placeholder="+54 9 11 XXXX-XXXX" required>
+                        <label for="{{ form.telefono.id_for_label }}" class="form-label">
+                            {{ form.telefono.label }}
+                            {% if form.telefono.field.required %}<span class="text-red-500">*</span>{% endif %}
+                        </label>
+                        {{ form.telefono }}
+                        {% if form.telefono.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.telefono.errors|striptags }}</div>
+                        {% endif %}
                     </div>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    {# El div del campo "Sexo" ha sido eliminado #}
-
-                    {# El div de "Medio Preferido de Contacto" ahora ocupa ambas columnas en pantallas md y superiores #}
                     <div class="md:col-span-2">
-                        <label for="medio_preferido_contacto" class="form-label">Medio Preferido de Contacto</label>
-                        <select id="medio_preferido_contacto" name="medio_preferido_contacto" class="form-select">
-                            <option value="email">Email</option>
-                            <option value="whatsapp" selected>WhatsApp</option>
-                            <option value="llamada">Llamada Telefónica</option>
-                        </select>
+                        <label for="{{ form.medio_preferido_contacto.id_for_label }}" class="form-label">{{ form.medio_preferido_contacto.label }}</label>
+                        {{ form.medio_preferido_contacto }}
+                        {% if form.medio_preferido_contacto.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.medio_preferido_contacto.errors|striptags }}</div>
+                        {% endif %}
                     </div>
                 </div>
                 
                 <div class="mb-6">
-                    <label for="como_nos_conocio" class="form-label">¿Cómo nos conociste?</label>
-                    <select id="como_nos_conocio" name="como_nos_conocio" class="form-select">
-                        <option value="">Selecciona una opción...</option>
-                        <option value="redes_sociales">Redes Sociales (Instagram, Facebook, etc.)</option>
-                        <option value="google">Búsqueda en Google</option>
-                        <option value="recomendacion">Recomendación de un amigo/familiar</option>
-                        <option value="publicidad_online">Publicidad Online</option>
-                        <option value="otro_medio">Otro Medio</option>
-                    </select>
+                    <label for="{{ form.como_nos_conocio.id_for_label }}" class="form-label">{{ form.como_nos_conocio.label }}</label>
+                    {{ form.como_nos_conocio }}
+                    {% if form.como_nos_conocio.errors %}
+                        <div class="text-red-500 text-xs mt-1">{{ form.como_nos_conocio.errors|striptags }}</div>
+                    {% endif %}
                 </div>
             
                 <div class="mb-8">
-                    <label class="flex items-center space-x-2">
-                        <input type="checkbox" name="terminos_condiciones" id="terminos_condiciones" class="form-checkbox rounded text-pink-500 focus:ring-pink-500" required>
-                        <span>Acepto los <a href="/terminos-y-condiciones" target="_blank" class="text-pink-500 hover:underline">Términos y Condiciones</a> y la <a href="/politica-de-privacidad" target="_blank" class="text-pink-500 hover:underline">Política de Privacidad</a>. <span class="text-red-500">*</span></span>
+                    <label for="{{ form.terminos_condiciones.id_for_label }}" class="flex items-center space-x-2 text-sm text-gray-700 cursor-pointer">
+                        {{ form.terminos_condiciones }}
+                        <span>Acepto los <a href="{% url 'terminos' %}" target="_blank" class="text-pink-500 hover:underline font-semibold">Términos y Condiciones</a> y la <a href="{% url 'politicas' %}" target="_blank" class="text-pink-500 hover:underline font-semibold">Política de Privacidad</a>.{% if form.terminos_condiciones.field.required %}<span class="text-red-500">*</span>{% endif %}</span>
                     </label>
+                    {% if form.terminos_condiciones.errors %}
+                        <div class="text-red-500 text-xs mt-1 pl-6">{{ form.terminos_condiciones.errors|striptags }}</div>
+                    {% endif %}
                 </div>
             
                 <div class="flex justify-between items-center">
-                    <button type="button" onclick="prevStep(3)" class="cta-button bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold py-3 px-8 rounded-lg shadow-md">
+                    <button type="button" onclick="prevStep(3)" class="cta-button bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold py-3 px-8 rounded-lg shadow-md transition-transform hover:scale-105">
                         <i class="fas fa-arrow-left mr-2"></i> Anterior
                     </button>
-                    <button type="submit" class="cta-button dopamine-bg text-white font-bold py-3 px-10 text-lg rounded-lg shadow-xl hover:shadow-2xl">
-                        <i class="fas fa-paper-plane mr-2"></i> Enviar Solicitud de Cotización
+                    <button type="submit" class="cta-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-10 text-lg rounded-lg shadow-xl transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-105">
+                        <i class="fas fa-paper-plane mr-2"></i> Enviar Solicitud
                     </button>
                 </div>
-            </div>            
+            </div>
         </form>
 
+        {# Mensajes de éxito/error del script original. Serán reemplazados por los mensajes de Django si el formulario se envía y recarga la página. #}
+        {# Si usas AJAX para enviar el formulario, estos mensajes podrían seguir siendo útiles. #}
         <div id="successMessage" class="hidden mt-10 max-w-xl mx-auto bg-green-100 border-l-4 border-green-500 text-green-700 p-6 rounded-md shadow-md" role="alert">
             <div class="flex">
                 <div class="py-1"><svg class="fill-current h-6 w-6 text-green-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
@@ -344,17 +414,20 @@
 
     </main>
 
-    <footer class="bg-gray-800 text-gray-300 py-12 mt-16">
+    <footer class="bg-gray-800 text-gray-300 py-12 mt-10 md:mt-16">
         <div class="container mx-auto px-6 text-center">
-            <p class="text-xl font-semibold text-white mb-4">FiestaPerfecta</p>
-            <p class="text-sm mb-4">Transformando tus sueños en celebraciones inolvidables.</p>
-            <div class="flex justify-center space-x-4 mb-6">
-                <a href="#" class="text-gray-300 hover:text-pink-400"><i class="fab fa-facebook-f fa-lg"></i></a>
-                <a href="#" class="text-gray-300 hover:text-pink-400"><i class="fab fa-instagram fa-lg"></i></a>
-                <a href="#" class="text-gray-300 hover:text-pink-400"><i class="fab fa-whatsapp fa-lg"></i></a>
+            <h4 class="text-xl font-semibold font-playfair text-white mb-3">FiestaPerfecta</h4>
+            <p class="text-sm mb-4 max-w-md mx-auto">Transformando tus sueños en celebraciones inolvidables. Expertos en crear momentos mágicos.</p>
+            <div class="flex justify-center space-x-5 mb-6">
+                <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors"><i class="fab fa-whatsapp fa-lg"></i></a>
             </div>
-            <p class="text-xs">&copy; 2025 FiestaPerfecta. Todos los derechos reservados.</p>
-            <p class="text-xs mt-1"><a href="/politica-privacidad.html" class="hover:text-pink-400">Política de Privacidad</a> | <a href="/terminos-condiciones.html" class="hover:text-pink-400">Términos y Condiciones</a></p>
+            <p class="text-xs text-gray-500">&copy; {% now "Y" %} FiestaPerfecta. Todos los derechos reservados.</p>
+            <p class="text-xs mt-1 text-gray-500">
+                <a href="{% url 'politicas' %}" class="hover:text-pink-400 transition-colors">Política de Privacidad</a> | 
+                <a href="{% url 'terminos' %}" class="hover:text-pink-400 transition-colors">Términos y Condiciones</a>
+            </p>
         </div>
     </footer>
 
@@ -365,7 +438,11 @@
 
         function showStep(stepNumber) {
             formSteps.forEach(step => step.classList.add('hidden'));
-            document.getElementById(`form-step-${stepNumber}`).classList.remove('hidden');
+            const currentFormStep = document.getElementById(`form-step-${stepNumber}`);
+            if (currentFormStep) {
+                currentFormStep.classList.remove('hidden');
+            }
+
 
             stepIndicators.forEach(indicator => {
                 indicator.classList.remove('active', 'completed');
@@ -373,95 +450,92 @@
 
             for (let i = 1; i <= stepIndicators.length; i++) {
                 const indicator = document.getElementById(`step-indicator-${i}`);
-                if (i < stepNumber) {
-                    indicator.classList.add('completed');
-                } else if (i === stepNumber) {
-                    indicator.classList.add('active');
+                if (indicator) {
+                    if (i < stepNumber) {
+                        indicator.classList.add('completed');
+                    } else if (i === stepNumber) {
+                        indicator.classList.add('active');
+                    }
                 }
             }
-            window.scrollTo(0, 0); // Scroll al inicio de la página al cambiar de paso
+            // Scroll al inicio del formulario o del paso actual para mejor UX en móviles
+            const formElement = document.getElementById('cotizacionForm');
+            if (formElement) {
+                 // formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                 // O un scroll más suave a la parte superior de la ventana:
+                 window.scrollTo({ top: formElement.offsetTop - 100, behavior: 'smooth' }); // 100px offset for nav
+            }
+        }
+        
+        // Modificación en validateStep para que no dependa de los IDs hardcodeados si es posible
+        // O simplemente, confiar en la validación de Django que se mostrará al intentar enviar.
+        // La validación de Django es más robusta. Esta función de JS puede ser una UX adicional.
+        function validateStepJS(stepNumber) {
+            const currentFormStepDiv = document.getElementById(`form-step-${stepNumber}`);
+            if (!currentFormStepDiv) return true; // Si no se encuentra el div del paso, no validar
+
+            const requiredInputs = currentFormStepDiv.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredInputs.forEach(input => {
+                input.classList.remove('border-red-500'); // Limpiar borde rojo
+                const djangoErrorSibling = input.nextElementSibling;
+                if (djangoErrorSibling && djangoErrorSibling.classList.contains('text-red-500')) {
+                    // No hacer nada si ya hay un error de Django
+                }
+
+                if (!input.value.trim() && input.type !== 'checkbox') {
+                    isValid = false;
+                    input.classList.add('border-red-500');
+                } else if (input.type === 'checkbox' && !input.checked) {
+                    isValid = false;
+                    // Podrías añadir un borde al label o un mensaje específico para checkboxes
+                    input.closest('label').classList.add('text-red-500'); // Ejemplo
+                } else {
+                     if (input.type === 'checkbox') input.closest('label').classList.remove('text-red-500');
+                }
+            });
+            // Si esta validación JS falla, idealmente no se debería pasar al siguiente paso
+            // Pero la validación principal será la de Django al hacer submit
+            return isValid; 
         }
 
+
         function nextStep(step) {
-            if (validateStep(step)) {
-                currentStep++;
-                if (currentStep > formSteps.length) {
-                    currentStep = formSteps.length; // No exceder el número de pasos
-                }
-                showStep(currentStep);
+            // Opcional: Ejecutar validación JS antes de pasar de paso.
+            // if (!validateStepJS(step)) {
+            //     alert('Por favor, completa los campos obligatorios marcados con * en este paso.');
+            //     return; 
+            // }
+            currentStep++;
+            if (currentStep > formSteps.length) {
+                currentStep = formSteps.length; 
             }
+            showStep(currentStep);
         }
 
         function prevStep(step) {
             currentStep--;
             if (currentStep < 1) {
-                currentStep = 1; // No ir antes del primer paso
+                currentStep = 1; 
             }
             showStep(currentStep);
         }
         
-        function validateStep(stepNumber) {
-            // Validación simple para campos requeridos en el paso actual
-            const currentFormStep = document.getElementById(`form-step-${stepNumber}`);
-            const requiredInputs = currentFormStep.querySelectorAll('[required]');
-            let isValid = true;
-            
-            requiredInputs.forEach(input => {
-                // Restablecer estilos de error
-                input.classList.remove('border-red-500', 'focus:border-red-500');
-                const errorMsgId = `error-${input.id}`;
-                const existingErrorMsg = document.getElementById(errorMsgId);
-                if (existingErrorMsg) {
-                    existingErrorMsg.remove();
-                }
+        // El evento submit ya no necesita hacer la simulación de éxito/error aquí si Django maneja la recarga de página.
+        // El form se enviará normalmente, y la vista de Django procesará y redirigirá o mostrará errores.
+        // document.getElementById('cotizacionForm').addEventListener('submit', function(event) {
+        //     // La validación final la hará Django.
+        //     // Si quieres una última validación JS antes del submit:
+        //     // if (!validateStepJS(currentStep)) { // Validar el paso actual antes de enviar
+        //     //    event.preventDefault(); // Detener el envío del formulario
+        //     //    alert('Por favor, completa todos los campos obligatorios (*) antes de enviar.');
+        //     //    return;
+        //     // }
+        //     // No es necesario ocultar el form y mostrar mensajes aquí si la vista de Django lo hace.
+        // });
 
-                if (!input.value.trim() || (input.type === 'checkbox' && !input.checked)) {
-                    isValid = false;
-                    input.classList.add('border-red-500', 'focus:border-red-500');
-                    // Añadir mensaje de error específico (opcional pero recomendado)
-                    const errorMsg = document.createElement('p');
-                    errorMsg.id = errorMsgId;
-                    errorMsg.className = 'text-red-500 text-xs mt-1';
-                    errorMsg.textContent = 'Este campo es obligatorio.';
-                    if(input.type === 'checkbox'){
-                         input.parentElement.insertAdjacentElement('afterend', errorMsg);
-                    } else {
-                         input.insertAdjacentElement('afterend', errorMsg);
-                    }
-                }
-            });
-            if (!isValid) {
-                // Opcional: Mostrar un mensaje general de error para el paso
-                // alert('Por favor, completa todos los campos obligatorios (*) antes de continuar.');
-            }
-            return isValid;
-        }
-
-
-        document.getElementById('cotizacionForm').addEventListener('submit', function(event) {
-    
-
-            if (!validateStep(currentStep)) {
-                 // alert('Por favor, completa todos los campos obligatorios (*) en el último paso.');
-                 return;
-            }
-
-            // Aquí iría la lógica para enviar los datos del formulario (por ejemplo, usando fetch o XMLHttpRequest)
-            // Simulamos un envío exitoso:
-            console.log('Formulario enviado (simulación)');
-            // Ocultar formulario y mostrar mensaje de éxito
-            this.classList.add('hidden');
-            document.getElementById('successMessage').classList.remove('hidden');
-            document.querySelector('.step-indicator').classList.add('hidden'); // Ocultar indicadores de paso
-            window.scrollTo(0, 0);
-
-            // Para simular un error:
-            // this.classList.add('hidden');
-            // document.getElementById('errorMessage').classList.remove('hidden');
-            // document.querySelector('.step-indicator').classList.add('hidden');
-        });
-
-        // Inicializar el primer paso
+        // Inicializar el primer paso al cargar la página
         showStep(currentStep);
     </script>
 
