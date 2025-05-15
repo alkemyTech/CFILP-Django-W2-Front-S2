@@ -49,12 +49,8 @@ git clone https://github.com/alkemyTech/CFILP-Django-W2-Front-S2
 cd repositorio
 python -m venv env
 source env/bin/activate  # En Windows: env\Scripts\activate
-pip install djangorestframework 
-pip install django-widget-tweaks
-pip install pytz
-pip install drf-spectacular
-pip install drf-spectacular-sidecar
-pip install django-widget-tweaks
+pip install -r requirements.txt 
+pip list --outdated --format=json | ConvertFrom-Json | ForEach-Object { pip install --upgrade $_.name }
 python manage.py migrate
 python manage.py runserver
 ```
