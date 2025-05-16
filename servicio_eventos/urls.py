@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import view_home
+from .views import view_home,listar_solicitudes_publicas
 from .views import (ClienteFormView,
                     ClienteListView,
                     ClienteUpdateView,
@@ -36,6 +36,8 @@ urlpatterns = [
 
     path('home/',view_home,name='home'), 
     path('cerrar-sesion/', views.cerrar_sesion, name='cerrar_sesion'),
+
+    path('solicitudes_publicas/', views.listar_solicitudes_publicas, name='solicitudes_publicas'),
 
     # ===================== URLS CRUD ====================
     # ===================== CLIENTES ====================

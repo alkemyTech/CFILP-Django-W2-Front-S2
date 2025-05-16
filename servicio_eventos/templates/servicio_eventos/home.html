@@ -106,13 +106,43 @@
             color: white;
             text-decoration: none;
         }
+        .nav-link-admin { /* Estilo base para tus links de admin */
+            padding: 0.5rem 0.75rem; /* O el padding que uses */
+            border-radius: 0.375rem; /* rounded-md */
+            color: #D1D5DB; /* text-gray-300 */
+            transition: background-color 0.2s ease, color 0.2s ease;
+            text-decoration: none; /* Por si acaso */
+        }
+        .nav-link-admin:hover {
+            background-color: #374151; /* bg-gray-700 */
+            color: white;
+        }
+
+        .nav-link-notification { /* Estilos específicos para el botón de campana */
+            position: relative; /* Para el contador de notificaciones si lo usas */
+            padding: 0.5rem; /* Un poco menos de padding horizontal si es solo un ícono */
+        }
+        .nav-link-notification i {
+            font-size: 1.25rem; /* fa-lg ya es grande, pero puedes ajustar */
+        }
+
+        /* Estilo para el botón de logout (ejemplo) */
+        .cta-button-logout {
+            background-color: #4B5563; /* bg-gray-600 */
+            color: #D1D5DB; /* text-gray-300 */
+            border: 1px solid #6B7280; /* border-gray-500 */
+        }
+        .cta-button-logout:hover {
+            background-color: #374151; /* bg-gray-700 */
+            color: white;
+        }
 
     </style>
 </head>
 <body>
 
     <nav class="bg-gray-800 shadow-md">
-        <div class="container mx-auto px-6 py-3 flex flex-wrap justify-between items-center">
+        <div class="container mx-auto px-4 sm:px-6 py-3 flex flex-wrap justify-between items-center">
             <a class="text-2xl font-display-title font-bold text-pink-400" href="{% url 'home' %}">FiestaPerfecta <span class="text-xs font-light text-gray-400">Admin</span></a>
 
             <button id="adminMenuToggler" class="md:hidden text-gray-400 hover:text-white focus:outline-none" type="button" aria-controls="adminNavbarContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -120,7 +150,7 @@
             </button>
 
             <div class="hidden md:flex md:items-center md:w-auto w-full" id="adminNavbarContent">
-                <ul class="flex flex-col md:flex-row md:items-center md:ms-auto mt-3 md:mt-0 space-y-2 md:space-y-0 md:space-x-2">
+                <ul class="flex flex-col md:flex-row md:items-center md:ms-auto mt-3 md:mt-0 md:space-x-2">
                     <li>
                         <a class="nav-link-admin block md:inline-block" href="{% url 'services' %}">Servicios Existentes</a>
                     </li>
@@ -143,6 +173,13 @@
                                 <i class="fas fa-sign-out-alt mr-1 opacity-75"></i> Cerrar sesión
                             </button>
                         </form>
+                    </li>
+                                        <li>
+                        <a href="{% url 'solicitudes_publicas' %}" class="nav-link-admin nav-link-notification block md:inline-block text-gray-300 hover:text-white px-3 py-2 rounded-md" title="Ver Solicitudes de Cotización">
+                            <i class="fas fa-bell fa-lg"></i>
+                            {# Opcional: Contador de notificaciones (requiere lógica en la vista) #}
+                            {# <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full transform translate-x-1/2 -translate-y-1/2">3</span> #}
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -210,6 +247,18 @@
                 // Ajusta aria-expanded si es necesario para accesibilidad
                  const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
                  mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+            });
+        }
+    </script>
+    <script>
+        const menuToggler = document.getElementById('adminMenuToggler');
+        const navbarContent = document.getElementById('adminNavbarContent');
+
+        if (menuToggler && navbarContent) {
+            menuToggler.addEventListener('click', function() {
+                const isExpanded = menuToggler.getAttribute('aria-expanded') === 'true' || false;
+                menuToggler.setAttribute('aria-expanded', !isExpanded);
+                navbarContent.classList.toggle('hidden');
             });
         }
     </script>

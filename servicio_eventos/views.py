@@ -362,3 +362,33 @@ class ProveedorDeleteView(LoginRequiredMixin, DeleteView):
         self.object = self.get_object()
         self.object.delete()
         return redirect(self.success_url)
+
+
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required # Si esta vista requiere login
+
+# Importar el modelo desde la app 'public'
+from public.models import SolicitudCotizacion 
+# O cualquier otro modelo de 'public' que necesites, ej: from public.models import OtroModeloPublico
+
+# (Aquí van tus otras importaciones y vistas de servicio_eventos)
+# ...
+
+@login_required # Ejemplo: asegurar que solo usuarios logueados vean esto
+def listar_solicitudes_publicas(request):
+    # 1. Obtener los datos del modelo 'SolicitudCotizacion' de la app 'public'
+    # Puedes filtrar, ordenar, etc., según necesites.
+    solicitudes = SolicitudCotizacion.objects.all().order_by('-fecha_evento') 
+    
+    # También podrías obtener datos de otro modelo de 'public' si fuera necesario
+    # otros_datos_publicos = OtroModeloPublico.objects.filter(algun_criterio=True)
+
+    # 2. Preparar el contexto para la plantilla
+    context = {
+        'lista_de_solicitudes': solicitudes,
+        'titulo_pagina': "Listado de Solicitudes de Cotización (Públicas)",
+        # 'otros_datos': otros_datos_publicos, # Si tuvieras más datos
+    }
+
+    # 3. Renderizar la plantilla HTML que estará en servicio_eventos/templates/servicio_eventos/
+    return render(request, 'servicio_eventos/solicitudes_publicas.html', context)

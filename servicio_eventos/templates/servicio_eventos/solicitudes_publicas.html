@@ -1,0 +1,201 @@
+{% load static %}
+{# {% load widget_tweaks %} #}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solicitudes de Cotización - Gestión FiestaPerfecta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f9fafb; /* bg-gray-50 */
+        }
+        main {
+            flex-grow: 1;
+        }
+        .font-display-title { /* Para el logo en navbar admin */
+            font-family: 'Playfair Display', serif;
+        }
+        .font-elegant-title { /* Para títulos de página en admin */
+            font-family: 'Playfair Display', serif;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem; 
+        }
+        .styled-table thead {
+            background-color: #4B5563; /* bg-gray-600 */
+            color: white;
+        }
+        .styled-table th, .styled-table td {
+            padding: 0.85rem 1rem; 
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb; /* border-gray-200 */
+            vertical-align: top; 
+        }
+        .styled-table tbody tr:hover {
+            background-color: #FDF2F8; /* rosa muy pálido para hover, ej: bg-pink-50 */
+        }
+        .styled-table th {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .styled-table td.actions-cell {
+            font-weight: normal; 
+            color: #374151; 
+            white-space: nowrap;
+        }
+        .styled-table td.actions-cell a {
+            margin-right: 0.75rem; /* Aumentar un poco el espacio entre iconos */
+            transition: color 0.3s ease;
+        }
+        .styled-table td.actions-cell a.view-action { /* Estilo para "Ver Detalles" */
+            color: #EC4899; /* text-pink-500 */
+        }
+        .styled-table td.actions-cell a.view-action:hover {
+            color: #DB2777; /* text-pink-600 */
+        }
+        .styled-table td.actions-cell a.edit-action {
+             color: #3B82F6; /* text-blue-500 */
+        }
+        .styled-table td.actions-cell a.edit-action:hover {
+            color: #1D4ED8; /* text-blue-700 */
+        }
+        .styled-table td.actions-cell a.delete-action {
+            color: #EF4444; /* text-red-500 */
+        }
+        .styled-table td.actions-cell a.delete-action:hover {
+            color: #DC2626; /* text-red-600 */
+        }
+
+        .info-message { /* Mensaje para "No hay solicitudes" */
+            background-color: #FEFCE8; /* bg-yellow-50 */
+            border-left: 4px solid #FACC15; /* border-yellow-400 */
+            color: #A16207; /* text-yellow-700 */
+            padding: 1rem; 
+            border-radius: 0.375rem;
+        }
+        .info-message p {
+            margin-bottom: 0.25rem;
+        }
+
+        /* Botones de Navbar Admin */
+        .cta-button {
+            transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            display: inline-block;
+            padding: 0.5rem 1rem; 
+            border-radius: 0.375rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .cta-button-outline-light { 
+            background-color: transparent;
+            border: 1px solid #9ca3af; /* border-gray-400 o un gris más visible */
+            color: #e5e7eb; /* text-gray-200 o un gris claro */
+        }
+        .cta-button-outline-light:hover {
+            background-color: #374151; /* bg-gray-700 */
+            color: white;
+            border-color: #374151;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="bg-gray-800 shadow-md">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a class="text-2xl font-display-title font-bold text-pink-400 hover:text-pink-300 transition-colors" href="{% url 'home' %}">FiestaPerfecta <span class="text-xs font-light text-gray-400">Admin</span></a>
+            <div>
+                <a href="{% url 'home' %}" class="cta-button cta-button-outline-light text-sm">
+                    <i class="fas fa-arrow-left mr-1 opacity-75"></i> Volver al Panel Principal
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto py-10 md:py-16 px-4 md:px-6">
+       <div class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold font-elegant-title text-pink-600">
+                <i class="fas fa-clipboard-list mr-3 text-pink-500"></i>Listado de Solicitudes de Cotización
+            </h1>
+        </div>
+
+        {% if messages %}
+            <div class="mb-6">
+                {% for message in messages %}
+                    <div class="p-4 rounded-md {% if message.tags == 'success' %}bg-green-100 border-green-500 text-green-700{% elif message.tags == 'error' %}bg-red-100 border-red-500 text-red-700{% elif message.tags == 'warning' %}bg-yellow-100 border-yellow-500 text-yellow-700{% else %}bg-blue-100 border-blue-500 text-blue-700{% endif %} border-l-4" role="alert">
+                        <p>{{ message }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if lista_de_solicitudes %}
+            <div class="bg-white p-4 sm:p-6 rounded-lg shadow-xl">
+                <div class="table-container">
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Email</th>
+                                <th>Teléfono</th>
+                                <th>Medio Contacto</th>
+                                <th>Tipo de Evento</th>
+                                <th>Fecha Evento</th>
+                                <th class="text-right">Invitados</th>
+                                <th class="text-right">Presupuesto Est.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for solicitud in lista_de_solicitudes %}
+                                <tr>
+                                    <td class="font-medium text-gray-800">{{ solicitud.nombre }}</td>
+                                    <td class="font-medium text-gray-800">{{ solicitud.apellido }}</td>
+                                    <td class="text-gray-600">{{ solicitud.email }}</td>
+                                    <td class="text-gray-600">{{ solicitud.telefono|default:"N/A" }}</td>
+                                    <td class="text-gray-600">{{ solicitud.get_medio_preferido_contacto_display|default:solicitud.medio_preferido_contacto|capfirst }}</td>
+                                    <td>
+                                        <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-pink-100 text-pink-700">
+                                            {{ solicitud.servicio }}
+                                        </span>
+                                        {% if solicitud.otro_tipo_evento %}
+                                            <em class="block text-xs text-gray-500 mt-1">(Otro: {{ solicitud.otro_tipo_evento }})</em>
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-gray-600">{{ solicitud.fecha_evento|date:"d M, Y" }}</td>
+                                    <td class="text-gray-600 text-right">{{ solicitud.cantidad_invitados }}</td>
+                                    <td class="text-gray-600 text-right">{{ solicitud.presupuesto_estimado|default:"N/A" }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% else %}
+            <div class="info-message" role="alert">
+                <p class="font-medium"><i class="fas fa-info-circle mr-2"></i>No hay solicitudes de cotización disponibles para mostrar en este momento.</p>
+            </div>
+        {% endif %}
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 text-center py-4 mt-auto">
+        <small>&copy; {% now "Y" %} FiestaPerfecta Admin Panel. Todos los derechos reservados.</small>
+    </footer>
+
+</body>
+</html>
