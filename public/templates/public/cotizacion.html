@@ -219,6 +219,8 @@
         <form id="cotizacionForm" action="#" method="POST" class="bg-white p-6 md:p-10 rounded-xl shadow-2xl max-w-3xl mx-auto">
             {% csrf_token %}
             
+            <input type="hidden" name="evento_id" value="{{ evento.id }}">
+
             {% if form.non_field_errors %}
                 <div class="mb-6 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md">
                     {% for error in form.non_field_errors %}
@@ -240,6 +242,7 @@
                         </label>
                         {{ form.servicio }} {# Este campo usa la clase 'form-input-public' desde el widget en forms.py #}
                         {% if form.servicio.errors %}
+                            <option value="{{ servicio.id }}" {% if servicio.id == evento.id %}selected{% endif %}>{{ servicio.nombre }}</option>
                             <div class="text-red-500 text-xs mt-1">{{ form.servicio.errors|striptags }}</div>
                         {% endif %}
                     </div>
