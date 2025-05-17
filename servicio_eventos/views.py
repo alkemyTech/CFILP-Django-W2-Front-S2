@@ -1,46 +1,37 @@
-from django.shortcuts import render
-
-""" views.py 
-
-Toda la logica como intermediario entre el modelo y la vista se encuentra en este archivo.
-
-
-"""
-def view_home(request):
-    # Ales comento 
-    return render(request, "servicio_eventos/home.html")
-
-#==================================================================================
-# Para proteger la pagina, importo el decorador login_required
-from django.contrib.auth.decorators import login_required
-# method_decorator es para usar decoradores en CBV (Class Based Views)
+from django.utils import timezone
+from django.contrib import messages
+from django.urls import reverse_lazy
+from django.contrib.auth import logout
+from pytz import timezone as pytz_timezone
+from public.models import SolicitudCotizacion 
+from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from django.views.generic import FormView, ListView, UpdateView, DeleteView
+from .models import Cliente, Empleado, Coordinador, Servicio, ReservaDeServicio, Proveedor
+from .forms import ClienteForm, EmpleadoForm, CoordinadorForm, ReservaDeServicioForm, ServiciosForm, ProveedorForm, NuevoProveedorForm
 
-# Mixin base para requerir login
+
+@login_required
+def listar_solicitudes_publicas(request):
+    solicitudes = SolicitudCotizacion.objects.all().order_by('-fecha_evento') 
+    context = {
+        'lista_de_solicitudes': solicitudes,
+        'titulo_pagina': "Listado de Solicitudes de Cotización (Públicas)",
+    }
+    return render(request, 'servicio_eventos/solicitudes_publicas.html', context)
+
 class LoginRequiredMixin:
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
-    
-from django.shortcuts import render, redirect
-from django.contrib.auth import logout
+
+def view_home(request):
+    return render(request, "servicio_eventos/home.html")
 
 def cerrar_sesion(request):
-    logout(request)  # Cierra la sesión del usuario
-    return redirect('login')  # Redirige al login (asegúrate de que 'login' sea el nombre de tu URL de login)
-#==================================================================================
-
-#region de funciones para CRUD de clientes, empleados, coordinadores y servicios
-
-from django.views.generic import FormView, ListView, UpdateView, DeleteView
-from django.urls import reverse_lazy
-from .forms import ClienteForm, EmpleadoForm, CoordinadorForm, ReservaDeServicioForm, ServiciosForm, ProveedorForm, NuevoProveedorForm
-from .models import Cliente, Empleado, Coordinador, Servicio, ReservaDeServicio, Proveedor, NuevoProveedor
-from django.contrib import messages
-
-
-# ===================   CRUD FORMULARIO      ========================
-# ===================   CRUD : Crear, Leer, Actualizar, Borrar  ========================
+    logout(request)
+    return redirect('login')
 
 # ===================   CLIENTES        ========================
 
@@ -55,7 +46,6 @@ class ClienteFormView(LoginRequiredMixin,FormView):
         messages.success(self.request, "¡Cliente registrado con éxito!")
         return super().form_valid(form)
     
-
 ## Leer
 class ClienteListView(LoginRequiredMixin,ListView):
     queryset = Cliente.objects.filter(activo = True)
@@ -163,6 +153,7 @@ class CoordinadorListView(LoginRequiredMixin,ListView):
 
 ## Actualizar
 class CoordinadorUpdateView(LoginRequiredMixin, UpdateView):
+
     model = Coordinador
     form_class = CoordinadorForm
     template_name = "servicio_eventos/register_coordinador.html"
@@ -173,6 +164,7 @@ class CoordinadorUpdateView(LoginRequiredMixin, UpdateView):
         messages.success(self.request, f"¡Coordinador '{coordinador.nombre}' actualizado con éxito!")
         form.save()
         return super().form_valid(form)
+
 ## Borrar
 class CoordinadorDeleteView(LoginRequiredMixin, DeleteView):
     model = Coordinador
@@ -191,7 +183,8 @@ class CoordinadorDeleteView(LoginRequiredMixin, DeleteView):
         return redirect(self.success_url)
 
 
-# ===================   RESERVA SERVICIOS       ========================
+# ===================   RESERVA SERVICIOS       ================
+
 ## Crear
 class ReservaDeServicioFormView(LoginRequiredMixin,FormView):
     template_name = "servicio_eventos/load_services.html"
@@ -204,9 +197,6 @@ class ReservaDeServicioFormView(LoginRequiredMixin,FormView):
         return super().form_valid(form)
     
 ## Leer
-from pytz import timezone as pytz_timezone
-from django.utils import timezone
-
 class ReservaDeServicioRealizadosView(LoginRequiredMixin,ListView):
     queryset = ReservaDeServicio.objects.all()
     template_name = "servicio_eventos/list_services.html"
@@ -255,6 +245,7 @@ class ReservaServicioDeleteView(LoginRequiredMixin, DeleteView):
         self.object.delete()
         return redirect(self.success_url)
 
+
 # ===================   SERVICIOS DISPONIBLES      ========================
 
 ## Crear
@@ -267,6 +258,7 @@ class ServiciosFormView(LoginRequiredMixin,FormView):
         form.save()
         messages.success(self.request, "¡Servicio creado con éxito!")
         return super().form_valid(form)
+    
 ## Leer 
 class SerivicioListView(LoginRequiredMixin,ListView):
     queryset = Servicio.objects.filter(activo = True)
@@ -303,6 +295,7 @@ class ServicioDeleteView(LoginRequiredMixin, DeleteView):
         self.object.save()
         return redirect(self.success_url)
 
+
 # ===================   Proveedores       ========================
 
 ## Nuevo proveedor public
@@ -315,7 +308,6 @@ class NuevoProveedorFormView(LoginRequiredMixin, FormView):
         form.save()
         messages.success(self.request, "¡Solicitud de proveedor creada con éxito!")
         return super().form_valid(form)
-
 
 ## Crear
 class ProveedorFormView(LoginRequiredMixin, FormView):
@@ -362,33 +354,3 @@ class ProveedorDeleteView(LoginRequiredMixin, DeleteView):
         self.object = self.get_object()
         self.object.delete()
         return redirect(self.success_url)
-
-
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required # Si esta vista requiere login
-
-# Importar el modelo desde la app 'public'
-from public.models import SolicitudCotizacion 
-# O cualquier otro modelo de 'public' que necesites, ej: from public.models import OtroModeloPublico
-
-# (Aquí van tus otras importaciones y vistas de servicio_eventos)
-# ...
-
-@login_required # Ejemplo: asegurar que solo usuarios logueados vean esto
-def listar_solicitudes_publicas(request):
-    # 1. Obtener los datos del modelo 'SolicitudCotizacion' de la app 'public'
-    # Puedes filtrar, ordenar, etc., según necesites.
-    solicitudes = SolicitudCotizacion.objects.all().order_by('-fecha_evento') 
-    
-    # También podrías obtener datos de otro modelo de 'public' si fuera necesario
-    # otros_datos_publicos = OtroModeloPublico.objects.filter(algun_criterio=True)
-
-    # 2. Preparar el contexto para la plantilla
-    context = {
-        'lista_de_solicitudes': solicitudes,
-        'titulo_pagina': "Listado de Solicitudes de Cotización (Públicas)",
-        # 'otros_datos': otros_datos_publicos, # Si tuvieras más datos
-    }
-
-    # 3. Renderizar la plantilla HTML que estará en servicio_eventos/templates/servicio_eventos/
-    return render(request, 'servicio_eventos/solicitudes_publicas.html', context)

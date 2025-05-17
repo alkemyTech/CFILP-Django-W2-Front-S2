@@ -10,7 +10,6 @@ class SolicitudCotizacion(models.Model):
 
     # Campos del Paso 1: Detalles de Tu Celebración
     servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
-    # tipo_evento_choice = models.CharField(max_length=255, verbose_name="Nombre del Tipo de Evento Seleccionado") # Para guardar el nombre del tipo de evento
     otro_tipo_evento = models.CharField(max_length=255, blank=True, null=True, verbose_name="Otro Tipo de Evento (si aplica)")
     fecha_evento = models.DateField(verbose_name="Fecha Estimada del Evento")
     hora_evento = models.TimeField(blank=True, null=True, verbose_name="Hora Estimada del Evento")

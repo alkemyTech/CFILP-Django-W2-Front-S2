@@ -1,35 +1,32 @@
 from django import forms
 from .models import SolicitudCotizacion 
-from servicio_eventos.models import Servicio # Asegúrate que este modelo exista en servicio_eventos/models.py
-# Si el modelo Servicio está en otra app, ajústalo. Ej: from servicio_eventos.models import Servicio
+from servicio_eventos.models import Servicio
 
 class SolicitudCotizacionForm(forms.ModelForm):
     terminos_condiciones = forms.BooleanField(
         label="Acepto los Términos y Condiciones y la Política de Privacidad.",
         required=True,
-        # Para checkboxes, las clases de Tailwind se aplican directamente para estilizar el check en sí
         widget=forms.CheckboxInput(attrs={'class': 'form-checkbox h-5 w-5 rounded text-pink-500 focus:ring-pink-400 border-gray-300 shadow-sm'})
     )
     OPCIONES_COMO_NOS_CONOCIO = [
-        ('', 'Selecciona una opción...'), # Opción vacía como placeholder
+        ('', 'Selecciona una opción...'),
         ('redes_sociales', 'Redes Sociales (Facebook, Instagram, etc.)'),
         ('busqueda_google', 'Búsqueda en Google'),
         ('recomendacion_amigo_familiar', 'Recomendación de amigo/familiar'),
         ('publicidad_online', 'Publicidad Online'),
         ('evento_anterior', 'Asistí a un evento organizado por ustedes'),
-        ('otro_medio', 'Otro Medio') # Quinto ítem + "Selecciona" y "Otro"
+        ('otro_medio', 'Otro Medio')
     ]
     como_nos_conocio = forms.ChoiceField(
         label="¿Cómo nos conociste?",
         choices=OPCIONES_COMO_NOS_CONOCIO,
-        required=False, # Ajusta si es obligatorio
+        required=False,
         widget=forms.Select(attrs={'class': 'form-input-public'})
     )
 
     class Meta:
         model = SolicitudCotizacion
-        fields = '__all__' # O una lista explícita, excluyendo 'procesada', 'fecha_creacion'
-        # exclude = ['procesada', 'fecha_creacion'] # Mejor que fields = '__all__' si hay campos que no van
+        fields = '__all__'
 
         widgets = {
             'servicio': forms.Select(attrs={'class': 'form-input-public'}),
@@ -46,13 +43,11 @@ class SolicitudCotizacionForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-input-public', 'placeholder': 'tu@email.com'}),
             'telefono': forms.TextInput(attrs={'class': 'form-input-public', 'placeholder': '+54 9 11 XXXX-XXXX', 'type': 'tel'}),
             'medio_preferido_contacto': forms.Select(attrs={'class': 'form-input-public'}),
-            'como_nos_conocio': forms.Select(attrs={'class': 'form-input-public'}), # Asume choices definidas
+            'como_nos_conocio': forms.Select(attrs={'class': 'form-input-public'}),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Configurar el queryset y empty_label para el campo 'servicio'
-        # (que es una ForeignKey al modelo Servicio)
         if 'servicio' in self.fields:
             self.fields['servicio'].queryset = Servicio.objects.filter(activo=True).order_by('nombre')
             self.fields['servicio'].empty_label = "Selecciona el tipo de evento..."

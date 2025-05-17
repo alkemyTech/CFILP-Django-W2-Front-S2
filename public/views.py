@@ -1,11 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages # Para mostrar mensajes al usuario (opcional)
-
-# Asumo que el modelo Servicio está en la app 'servicio_eventos'
-from servicio_eventos.models import Servicio, NuevoProveedor # Asegúrate que estos modelos existan en servicio_eventos/models.py
-# Asumo que SolicitudCotizacion y SolicitudCotizacionForm están en la app 'public'
-from .models import SolicitudCotizacion # ¡Asegúrate que este modelo exista en public/models.py!
-from .forms import SolicitudCotizacionForm # ¡Asegúrate que este form exista en public/forms.py!
+from django.contrib import messages
+from servicio_eventos.models import Servicio, NuevoProveedor
+from .models import SolicitudCotizacion
+from .forms import SolicitudCotizacionForm
 
 def view_casa(request):
     return render(request, "public/casa.html")
@@ -20,7 +17,7 @@ def view_cotizacion(request):
             return redirect('casa')
         else:
             messages.error(request, 'Hubo un error en el formulario. Por favor, revisa los campos marcados.')
-    else:  # Método GET
+    else:
         initial_data = {}
         evento_id_get = request.GET.get('evento_id')
         if evento_id_get:
@@ -110,7 +107,7 @@ def view_new_proveedor(request):
         )
 
         print("Se hizo un POST")
-        return redirect("/public/new_provider")  # o la URL que corresponda
+        return redirect("/public/new_provider")
 
     return render(request, "public/new_provider.html")
 
