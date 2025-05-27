@@ -56,4 +56,4 @@ python manage.py runserver
 ```
 
 ## 🏛️ Autor
-Proyecto desarrollado como caso de negocio académico. Responsables: Alesandro Maldonado, Joaquin Hernandez, Romina Isaia, Nicolas Lobos.
+Proyecto desarrollado como caso de negocio académico. Responsables: Alesandro Maldonado, Joaquin Hernandez, Martin Pino
