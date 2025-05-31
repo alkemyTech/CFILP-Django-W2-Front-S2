@@ -8,6 +8,14 @@ Para utilizar debe ejecutarse el siguiente comando en la terminal estando a la a
 # => python manage.py shell
 # => from servicio_eventos.demo_basedata import create_bd_example
 # => create_bd_example()
+# => exit()
+# => python manage.py makemigrations
+# => 1
+# => "test@test.com"
+# => 1
+# => "0000000001"
+# => python manage.py migrate
+# => python manage.py runserver
 """
 
 """
