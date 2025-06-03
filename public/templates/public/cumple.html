@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cumples Infantiles - Fiesta Perfecta</title>
+
+    {# 1. SCRIPT DE TAILWIND CSS (Este DEBE permanecer) #}
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {# 2. TU HOJA DE ESTILOS PERSONALIZADA UNIFICADA #}
+    <link rel="stylesheet" href="/static/css/style.css"> {# Ajusta la ruta si es necesario #}
+
+</head>
+<body class="bg-pink-50 text-gray-800">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/public/casa/" class="text-4xl font-elegant-title text-green-300">FiestaPerfecta</a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="/public/casa/#inicio" class="text-gray-600 hover:text-pink-500">Inicio</a>
+                <a href="/public/casa/#servicios" class="text-gray-600 hover:text-pink-500">Otros Servicios</a>
+                <a href="/public/cotizacion/" class="text-gray-600 hover:text-pink-500">Cotizar</a>
+                <a href="/public/casa/#contacto" class="text-gray-600 hover:text-pink-500">Contacto</a>
+                <a href="/public/cotizacion/?evento_id={{ 7 }}" class="cta-button dopamine-bg text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:shadow-lg">
+                    ¡Cotiza su Cumple!
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <a href="/public/casa/#inicio" class="block py-2 px-6 text-gray-600 hover:bg-pink-50 hover:text-pink-500">Inicio</a>
+            <a href="/public/casa/#servicios" class="block py-2 px-6 text-gray-600 hover:bg-pink-50 hover:text-pink-500">Otros Servicios</a>
+            <a href="/public/cotizacion/" class="block py-2 px-6 text-gray-600 hover:bg-pink-50 hover:text-pink-500">Cotizar</a>
+            <a href="/public/casa/#contacto" class="block py-2 px-6 text-gray-600 hover:bg-pink-50 hover:text-pink-500">Contacto</a>
+            <a href="/public/cotizacion/" class="block py-3 px-6 text-center cta-button dopamine-bg text-white font-semibold rounded-lg m-4">
+                ¡Cotiza su Cumple!
+            </a>
+        </div>
+    </nav>
+
+    <header class="hero-kids-bg text-white min-h-[70vh] md:min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute top-10 left-10 w-20 h-20 bg-yellow-300 rounded-full opacity-70 animate-pulse"></div>
+        <div class="absolute bottom-20 right-10 w-24 h-24 bg-blue-300 rounded-full opacity-70 animate-bounce"></div>
+        <div class="absolute top-1/3 right-1/4 w-16 h-16 bg-red-300 rounded-full opacity-70 animate-ping"></div>
+
+        <div class="bg-black bg-opacity-40 w-full h-full flex items-center">
+            <div class="container mx-auto px-6 text-center py-20 z-10">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight font-kid-friendly text-shadow-lg">
+                    ¡La Fiesta de Cumpleaños <span class="text-yellow-300">Más Divertida</span> para tu Peque!
+                </h1>
+                <p class="text-xl md:text-2xl mb-10 max-w-2xl mx-auto font-semibold">
+                    Creamos mundos mágicos llenos de alegría, juegos y sorpresas inolvidables. ¡Hacemos realidad sus sueños!
+                </p>
+                <a href="/public/cotizacion/" class="cta-button bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-4 px-10 text-lg rounded-full shadow-xl hover:shadow-2xl text-xl font-kid-friendly">
+                    <i class="fas fa-birthday-cake mr-2"></i> Planear su Aventura
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title-kids text-center mb-4">¿Por Qué Festejar con <span class="text-blue-500">FiestaPerfecta</span>?</h2>
+            <p class="text-center text-gray-600 mb-12 md:mb-16 max-w-xl mx-auto text-lg">
+                Entendemos lo especial que es cada cumpleaños. Por eso, nos dedicamos a crear experiencias únicas, seguras y llenas de magia.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-pink-100 p-8 rounded-2xl shadow-lg text-center hover-lift">
+                    <div class="text-pink-500 mb-5 text-5xl"><i class="fas fa-magic"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-800 font-kid-friendly">Temáticas de Ensueño</h3>
+                    <p class="text-gray-600">Superhéroes, princesas, piratas, ¡y mucho más! Hacemos realidad su mundo favorito.</p>
+                </div>
+                <div class="bg-blue-100 p-8 rounded-2xl shadow-lg text-center hover-lift">
+                    <div class="text-blue-500 mb-5 text-5xl"><i class="fas fa-gamepad"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-800 font-kid-friendly">Animación Interactiva</h3>
+                    <p class="text-gray-600">Juegos, shows y animadores profesionales que garantizan risas y diversión sin parar.</p>
+                </div>
+                <div class="bg-green-100 p-8 rounded-2xl shadow-lg text-center hover-lift">
+                    <div class="text-green-500 mb-5 text-5xl"><i class="fas fa-shield-alt"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-800 font-kid-friendly">Seguridad Primero</h3>
+                    <p class="text-gray-600">Personal capacitado y entornos seguros para que los niños jueguen con tranquilidad.</p>
+                </div>
+                <div class="bg-yellow-100 p-8 rounded-2xl shadow-lg text-center hover-lift">
+                    <div class="text-yellow-500 mb-5 text-5xl"><i class="fas fa-utensils"></i></div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-800 font-kid-friendly">Delicias para Peques</h3>
+                    <p class="text-gray-600">Menús coloridos, divertidos y nutritivos, adaptados a los gustos de los niños.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-pink-50">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title-kids text-center mb-12 md:mb-16">Todo para un Cumple <span class="text-yellow-500">¡Increíble!</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="card-kids bg-white shadow-xl overflow-hidden">
+                    <img src="/static/img/deco_01.webp" alt="[Imagen de decoración temática infantil]" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3 text-pink-600 font-kid-friendly">Decoración y Ambientación</h3>
+                        <p class="text-gray-600 mb-4">Globos, guirnaldas, centros de mesa y todos los detalles para transformar el espacio en un mundo de fantasía.</p>
+                    </div>
+                </div>
+                <div class="card-kids bg-white shadow-xl overflow-hidden">
+                    <img src="/static/img/Animación-fiestas-cumpleaños-niños.webp" alt="[Imagen de niños jugando con animadores]" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3 text-green-600 font-kid-friendly">Animación y Entretenimiento</h3>
+                        <p class="text-gray-600 mb-4">Payasos, magos, personajes, castillos inflables, pintacaritas, juegos grupales y mucho más.</p>
+                    </div>
+                </div>
+                <div class="card-kids bg-white shadow-xl overflow-hidden">
+                    <img src="/static/img/como-hacer-un-catering-marino-delicioso-y-divertido-catering-playero-1.webp" alt="[Imagen de comida divertida para niños]" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3 text-yellow-600 font-kid-friendly">Catering Delicioso y Divertido</h3>
+                        <p class="text-gray-600 mb-4">Mini pizzas, sándwiches, brochetas de frutas, cupcakes, tortas temáticas y mesas de dulces.</p>
+                    </div>
+                </div>
+                <div class="card-kids bg-white shadow-xl overflow-hidden">
+                    <img src="/static/img/show-infantil-de-frozen.webp" alt="[Imagen de un show de magia o títeres]" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3 text-indigo-600 font-kid-friendly">Shows y Personajes</h3>
+                        <p class="text-gray-600 mb-4">¡Invita a su personaje favorito! Shows de magia, títeres, burbujas gigantes y más sorpresas.</p>
+                    </div>
+                </div>
+                 <div class="card-kids bg-white shadow-xl overflow-hidden">
+                    <img src="/static/img/480911062_964777975767092_1180139412048516258_n.webp" alt="[Imagen de souvenirs para niños]" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3 text-purple-600 font-kid-friendly">Souvenirs y Bolsitas</h3>
+                        <p class="text-gray-600 mb-4">Recuerdos originales y bolsitas sorpresa para que cada invitado se lleve un pedacito de la magia.</p>
+                    </div>
+                </div>
+                 <div class="card-kids bg-white shadow-xl overflow-hidden">
+                    <img src="/static/img/Imán-cumpleaños-foto-1.webp" alt="[Imagen de fotógrafo en fiesta infantil]" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3 text-sky-600 font-kid-friendly">Recuerdos Fotográficos</h3>
+                        <p class="text-gray-600 mb-4">Capturamos cada sonrisa y momento especial para que atesores estos recuerdos para siempre.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title-kids text-center mb-12 md:mb-16">¡Elige su <span class="text-purple-500">Aventura Favorita!</span></h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8">
+                <div class="theme-bubble bg-gray-100 p-6 rounded-full shadow-md text-center aspect-square flex flex-col justify-center items-center">
+                    <div class="text-4xl text-red-500 mb-2"><i class="fas fa-mask"></i></div>
+                    <p class="font-semibold text-gray-700 font-kid-friendly text-lg">Superhéroes</p>
+                </div>
+                <div class="theme-bubble bg-gray-100 p-6 rounded-full shadow-md text-center aspect-square flex flex-col justify-center items-center">
+                    <div class="text-4xl text-pink-400 mb-2"><i class="fas fa-crown"></i></div>
+                    <p class="font-semibold text-gray-700 font-kid-friendly text-lg">Princesas</p>
+                </div>
+                <div class="theme-bubble bg-gray-100 p-6 rounded-full shadow-md text-center aspect-square flex flex-col justify-center items-center">
+                    <div class="text-4xl text-yellow-600 mb-2"><i class="fas fa-hat-cowboy-side"></i></div>
+                    <p class="font-semibold text-gray-700 font-kid-friendly text-lg">Vaqueros</p>
+                </div>
+                <div class="theme-bubble bg-gray-100 p-6 rounded-full shadow-md text-center aspect-square flex flex-col justify-center items-center">
+                    <div class="text-4xl text-blue-500 mb-2"><i class="fas fa-rocket"></i></div>
+                    <p class="font-semibold text-gray-700 font-kid-friendly text-lg">Espacio</p>
+                </div>
+                <div class="theme-bubble bg-gray-100 p-6 rounded-full shadow-md text-center aspect-square flex flex-col justify-center items-center">
+                    <div class="text-4xl text-green-500 mb-2"><i class="fas fa-paw"></i></div>
+                    <p class="font-semibold text-gray-700 font-kid-friendly text-lg">Animales</p>
+                </div>
+                 <div class="theme-bubble bg-gray-100 p-6 rounded-full shadow-md text-center aspect-square flex flex-col justify-center items-center">
+                    <div class="text-4xl text-teal-500 mb-2"><i class="fas fa-paint-brush"></i></div>
+                    <p class="font-semibold text-gray-700 font-kid-friendly text-lg">Arte</p>
+                </div>
+                <div class="theme-bubble bg-gray-100 p-6 rounded-full shadow-md text-center aspect-square flex flex-col justify-center items-center">
+                    <div class="text-4xl text-orange-500 mb-2"><i class="fas fa-futbol"></i></div>
+                    <p class="font-semibold text-gray-700 font-kid-friendly text-lg">Deportes</p>
+                </div>
+                 <div class="theme-bubble bg-gray-100 p-6 rounded-full shadow-md text-center aspect-square flex flex-col justify-center items-center">
+                    <div class="text-4xl text-gray-700 mb-2"><i class="fas fa-ghost"></i></div>
+                    <p class="font-semibold text-gray-700 font-kid-friendly text-lg">Piratas</p>
+                </div>
+                <div class="theme-bubble bg-gray-100 p-6 rounded-full shadow-md text-center aspect-square flex flex-col justify-center items-center">
+                    <div class="text-4xl text-lime-500 mb-2"><i class="fas fa-dragon"></i></div>
+                    <p class="font-semibold text-gray-700 font-kid-friendly text-lg">Dinosaurios</p>
+                </div>
+                <div class="theme-bubble bg-gray-100 p-6 rounded-full shadow-md text-center aspect-square flex flex-col justify-center items-center">
+                    <div class="text-4xl text-cyan-500 mb-2"><i class="fas fa-palette"></i></div>
+                    <p class="font-semibold text-gray-700 font-kid-friendly text-lg">¡Y más!</p>
+                </div>
+            </div>
+            <p class="text-center text-gray-600 mt-10 text-lg">¿No ves su tema favorito? ¡No te preocupes! <a href="/public/casa/#contacto" class="text-pink-500 hover:underline font-semibold">Contáctanos</a> y lo creamos juntos.</p>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-pink-100">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title-kids text-center mb-12 md:mb-16">Galería de <span class="text-green-500">Sonrisas</span></h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                <img src="/static/img/Decoracion-para-fiesta-infantil-de-nino-de-Paw-Patrol.jpg.webp" alt="[Imagen de fiesta infantil temática 1]" class="gallery-img rounded-xl shadow-lg w-full h-full object-cover">
+                <img src="/static/img/jugar-cumples-g.webp" alt="[Imagen de niños jugando en fiesta]" class="gallery-img rounded-xl shadow-lg w-full h-full object-cover">
+                <img src="/static/img/tarta-star-wars-1.webp" alt="[Imagen de torta de cumpleaños infantil]" class="gallery-img rounded-xl shadow-lg w-full h-full object-cover">
+                <img src="/static/img/decoracion-candy-bar-cumpleanos-tematica-coches-ciudades.webp" alt="[Imagen de decoración con globos]" class="gallery-img rounded-xl shadow-lg w-full h-full object-cover">
+                <img src="/static/img/animadores-fiestas-infantiles-domicilio-1.webp" alt="[Imagen de animador con niños]" class="gallery-img rounded-xl shadow-lg w-full h-full object-cover md:col-span-2 lg:col-span-2">
+                <img src="/static/img/mesa-dulce-colorida-con-golosinas-y-decoraciones.webp" alt="[Imagen de mesa de dulces infantil]" class="gallery-img rounded-xl shadow-lg w-full h-full object-cover md:col-span-2 lg:col-span-2">
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonios-kids" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title-kids text-center mb-4 text-pink-600">Padres Felices, <span class="text-blue-500">Niños Radiantes</span></h2>
+            <p class="text-center text-gray-600 mb-12 md:mb-16 max-w-xl mx-auto text-lg">
+                Nada nos hace más felices que ver las sonrisas de los pequeños y la tranquilidad de sus padres.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-50 p-8 rounded-xl shadow-lg">
+                    <p class="text-gray-600 mb-6 italic text-lg">"¡El cumple de mi hija fue un sueño hecho realidad gracias a FiestaPerfecta! La temática de princesas fue espectacular y los animadores mantuvieron a todos los niños entretenidos. ¡Súper recomendados!"</p>
+                    <div class="flex items-center">
+                        <img src="https://placehold.co/50x50/FFC0CB/333333?text=MV" alt="[Foto de mamá de Valentina]" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <p class="font-semibold text-gray-800">Mariana V. (Mamá de Valentina, 5 años)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl shadow-lg">
+                    <p class="text-gray-600 mb-6 italic text-lg">"Excelente servicio. Se encargaron de todo, desde la decoración hasta el catering. Los chicos se divirtieron muchísimo con los juegos y el show de magia. ¡Nosotros pudimos relajarnos y disfrutar!"</p>
+                    <div class="flex items-center">
+                        <img src="https://placehold.co/50x50/A0DEFF/333333?text=JP" alt="[Foto de papá de Lucas]" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <p class="font-semibold text-gray-800">Juan Pablo R. (Papá de Lucas, 7 años)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-gradient-to-r from-pink-500 to-purple-600 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 font-kid-friendly">¿Listos para la <span class="text-yellow-300">Mejor Fiesta</span> de su Vida?</h2>
+            <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+                Permítenos crear un cumpleaños mágico e inolvidable para tu hijo/a. Contáctanos hoy mismo y cuéntanos tus ideas.
+            </p>
+            <a href="/public/cotizacion/" class="cta-button bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-4 px-12 text-xl rounded-full shadow-xl hover:shadow-2xl font-kid-friendly">
+                <i class="fas fa-paper-plane mr-2"></i> ¡Quiero Cotizar Ahora!
+            </a>
+            <p class="mt-8 text-pink-200">O llámanos al <a href="tel:+5491112345678" class="font-bold hover:underline">+54 9 11 1234-5678</a> para una atención personalizada.</p>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-gray-300 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-2xl font-bold text-pink-400 mb-4 font-kid-friendly">FiestaPerfecta</p>
+            <div class="flex justify-center space-x-4 mb-6">
+                <a href="#" aria-label="Facebook de FiestaPerfecta" class="text-gray-300 hover:text-pink-400"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#" aria-label="Instagram de FiestaPerfecta" class="text-gray-300 hover:text-pink-400"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" aria-label="WhatsApp de FiestaPerfecta" class="text-gray-300 hover:text-pink-400"><i class="fab fa-whatsapp fa-lg"></i></a>
+            </div>
+            <p class="text-xs">&copy; 2025 FiestaPerfecta. Todos los derechos reservados.</p>
+            <p class="text-xs mt-1">
+                <a href="/public/politicas/" class="hover:text-pink-400">Política de Privacidad</a> | 
+                <a href="/public/terminos/" class="hover:text-pink-400">Términos y Condiciones</a>
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        // Script para menú móvil
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Cerrar menú móvil al hacer clic en un enlace
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+    </script>
+
+</body>
+</html>

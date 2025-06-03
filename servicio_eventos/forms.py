@@ -1,16 +1,18 @@
 from django.forms import ModelForm
-from .models import Cliente,Servicio,Coordinador,Empleado,ReservaDeServicio
+from .models import Cliente,Servicio,Coordinador,Empleado,ReservaDeServicio,Proveedor
 from django import forms
 
 
 class ClienteForm(ModelForm):
     class Meta:
         model = Cliente
-        fields = ['nombre', 'apellido']
+        fields = ['nombre', 'apellido', 'telefono', 'email']
 
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control'}),
-            'apellido': forms.TextInput(attrs={'class': 'form-control'}),  # <--- cambio aquí
+            'apellido': forms.TextInput(attrs={'class': 'form-control'}),
+            'telefono': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
         }
 
 
@@ -30,6 +32,15 @@ class ReservaDeServicioForm(forms.ModelForm):
             'total_precio': forms.NumberInput(attrs={'class': 'form-control'}),
         }
 
+class ServiciosForm(forms.ModelForm):
+    class Meta:
+        model = Servicio
+        fields = '__all__'
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'descripcion': forms.Textarea(attrs={'class': 'form-control'}),
+            'precio': forms.NumberInput(attrs={'class': 'form-control'}),
+        }
 
 class CoordinadorForm(ModelForm):
     class Meta:
@@ -42,4 +53,13 @@ class EmpleadoForm(ModelForm):
         model = Empleado
         fields = '__all__'
 
+class ProveedorForm(ModelForm):
+    class Meta:
+        model = Proveedor
+        fields = '__all__'
+
+class NuevoProveedorForm(ModelForm):
+    class Meta:
+        model = Proveedor
+        fields = '__all__'
 

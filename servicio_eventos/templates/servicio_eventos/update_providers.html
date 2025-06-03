@@ -1,0 +1,147 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Actualizar Proveedor - Gestión FiestaPerfecta</title>
+
+    {# Script de Tailwind CSS (Este DEBE permanecer) #}
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {# TU HOJA DE ESTILOS PERSONALIZADA UNIFICADA #}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body class="font-lato flex flex-col min-h-screen bg-gray-50"> {/* Asumiendo estilos de admin */}
+
+    <nav class="bg-gray-800 shadow-md">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            {# Asegúrate que .font-elegant-title esté en tu style.css global si es diferente a .font-display-title #}
+            <a class="text-2xl font-elegant-title font-bold text-pink-400" href="{% url 'home' %}">FiestaPerfecta <span class="text-xs font-light text-gray-400">Admin</span></a>
+            <div>
+                <a href="{% url 'list_providers' %}" class="cta-button cta-button-outline-light text-sm">
+                    <i class="fas fa-arrow-left mr-1 opacity-75"></i> Volver al listado
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto py-10 md:py-16 px-6 flex-grow">
+        <div class="form-container">
+            {# El objeto se pasa como 'object' o el nombre del modelo en minúsculas 'proveedor' #}
+            <h1 class="text-2xl md:text-3xl font-bold font-elegant-title text-pink-600 mb-8 text-center">
+                Actualizar Proveedor: {{ object.nombre|default_if_none:'' }} {{ object.apellido|default_if_none:'' }}
+            </h1>
+            
+            <form method="POST">
+                {% csrf_token %}
+                
+                {# Renderizar errores generales del formulario si los hay #}
+                {% if form.non_field_errors %}
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="form-group">
+                        <label for="{{ form.nombre.id_for_label }}" class="form-label">{{ form.nombre.label_tag }}</label>
+                        {% render_field form.nombre class+="form-input" placeholder="Nombre del proveedor" %}
+                        {% if form.nombre.errors %}<div class="text-red-500 text-xs mt-1">{{ form.nombre.errors }}</div>{% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.apellido.id_for_label }}" class="form-label">{{ form.apellido.label_tag }}</label>
+                        {% render_field form.apellido class+="form-input" placeholder="Apellido del contacto" %}
+                        {% if form.apellido.errors %}<div class="text-red-500 text-xs mt-1">{{ form.apellido.errors }}</div>{% endif %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.numero_documento.id_for_label }}" class="form-label">{{ form.numero_documento.label_tag }}</label>
+                    {% render_field form.numero_documento class+="form-input" placeholder="Ej: 20123456789" %}
+                    {% if form.numero_documento.errors %}<div class="text-red-500 text-xs mt-1">{{ form.numero_documento.errors }}</div>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.rubro.id_for_label }}" class="form-label">{{ form.rubro.label_tag }}</label>
+                    {# Asumiendo que rubro puede ser un select o un input normal. Si es select, class+="form-select" #}
+                    {% render_field form.rubro class+="form-input" placeholder="Ej: Catering, Fotografía" %}
+                    {% if form.rubro.errors %}<div class="text-red-500 text-xs mt-1">{{ form.rubro.errors }}</div>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.direccion.id_for_label }}" class="form-label">{{ form.direccion.label_tag }}</label>
+                    {% render_field form.direccion class+="form-input" placeholder="Calle, Número, Piso, Depto." %}
+                    {% if form.direccion.errors %}<div class="text-red-500 text-xs mt-1">{{ form.direccion.errors }}</div>{% endif %}
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="form-group">
+                        <label for="{{ form.ciudad.id_for_label }}" class="form-label">{{ form.ciudad.label_tag }}</label>
+                        {% render_field form.ciudad class+="form-input" placeholder="Ciudad" %}
+                        {% if form.ciudad.errors %}<div class="text-red-500 text-xs mt-1">{{ form.ciudad.errors }}</div>{% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.provincia.id_for_label }}" class="form-label">{{ form.provincia.label_tag }}</label>
+                        {% render_field form.provincia class+="form-input" placeholder="Provincia" %}
+                        {% if form.provincia.errors %}<div class="text-red-500 text-xs mt-1">{{ form.provincia.errors }}</div>{% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.codigo_postal.id_for_label }}" class="form-label">{{ form.codigo_postal.label_tag }}</label>
+                        {% render_field form.codigo_postal class+="form-input" placeholder="Código Postal" %}
+                        {% if form.codigo_postal.errors %}<div class="text-red-500 text-xs mt-1">{{ form.codigo_postal.errors }}</div>{% endif %}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.pais.id_for_label }}" class="form-label">{{ form.pais.label_tag }}</label>
+                    {% render_field form.pais class+="form-input" placeholder="País" %}
+                    {% if form.pais.errors %}<div class="text-red-500 text-xs mt-1">{{ form.pais.errors }}</div>{% endif %}
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="form-group">
+                        <label for="{{ form.email.id_for_label }}" class="form-label">{{ form.email.label_tag }}</label>
+                        {% render_field form.email class+="form-input" type="email" placeholder="contacto@proveedor.com" %}
+                        {% if form.email.errors %}<div class="text-red-500 text-xs mt-1">{{ form.email.errors }}</div>{% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.telefono.id_for_label }}" class="form-label">{{ form.telefono.label_tag }}</label>
+                        {% render_field form.telefono class+="form-input" placeholder="+54 9 11 XXXX-XXXX" %}
+                        {% if form.telefono.errors %}<div class="text-red-500 text-xs mt-1">{{ form.telefono.errors }}</div>{% endif %}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.activo.id_for_label }}" class="form-label flex items-center">
+                        {% render_field form.activo class+="h-5 w-5 text-pink-600 border-gray-300 rounded focus:ring-pink-500 mr-2" %}
+                        <span>{{ form.activo.label }}</span>
+                    </label>
+                    {% if form.activo.errors %}<div class="text-red-500 text-xs mt-1">{{ form.activo.errors }}</div>{% endif %}
+                </div>
+            
+                <div class="button-group">
+                    <a href="{% url 'list_providers' %}" class="cta-button cta-button-secondary">Cancelar</a>
+                    <button type="submit" class="cta-button cta-button-primary">
+                        <i class="fas fa-save mr-2"></i> Actualizar Proveedor
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 text-center py-4 mt-auto">
+        <small>&copy; {% now "Y" %} FiestaPerfecta Admin Panel. Todos los derechos reservados.</small>
+    </footer>
+
+    {% if POPUP_MODAL_INCLUDED %}
+        {% include "pop_up_modal.html" %}
+    {% endif %}
+</body>
+</html>

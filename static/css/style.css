@@ -1,0 +1,1261 @@
+/* -------------------------------------------------------------------------- */
+/* IMPORTACIONES DE FUENTES Y LIBRERÍAS CSS                                   */
+/* -------------------------------------------------------------------------- */
+
+/* Unificación de todas las Google Fonts necesarias y Font Awesome */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Dancing+Script:wght@400;700&family=Inter:wght@400;600;700;900&family=Lato:wght@300;400;700&family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600;700&family=Roboto:wght@400;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css'); /* Para los iconos */
+
+/* -------------------------------------------------------------------------- */
+/* ESTILOS BASE Y GENERALES                                                   */
+/* -------------------------------------------------------------------------- */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Lato', sans-serif; /* Fuente base general. */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f9fafb; /* bg-gray-50 */
+    color: #333;
+}
+
+/* Clases opcionales para cambiar la fuente base del body en páginas específicas */
+.font-inter-body {
+    font-family: 'Inter', sans-serif;
+}
+.font-poppins-body {
+    font-family: 'Poppins', sans-serif;
+}
+.font-roboto-body { /* Añadido por si se necesita Roboto como base */
+    font-family: 'Roboto', sans-serif;
+}
+
+
+main {
+    flex-grow: 1;
+}
+
+/* Título elegante común (Playfair Display) */
+.font-elegant-title { /* Usada en casa, boda, cumple, etc. y reemplaza a .font-display-title del admin */
+    font-family: 'Playfair Display', serif;
+}
+
+/* Fuentes específicas adicionales (si se usan como clases de utilidad) */
+.font-corporate-title { /* Para ejecutivo.html */
+    font-family: 'Montserrat', sans-serif;
+}
+.font-kid-friendly { /* Para cumple.html */
+    font-family: 'Baloo 2', cursive;
+}
+.font-script-elegant { /* Para deco.html */
+    font-family: 'Dancing Script', cursive;
+}
+.font-accent-title { /* Para dj.html */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700; /* Ya incluido en la fuente Montserrat, pero explícito aquí */
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* ESTILOS DE PÁGINAS PÚBLICAS (casa, boda, cumple, ejecutivo, etc.)          */
+/* -------------------------------------------------------------------------- */
+
+/* --- Comunes a varias páginas públicas --- */
+.cta-button {
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Añadido box-shadow a la transición base */
+    display: inline-block; /* Asegurar que se comporte como bloque para padding/transform */
+    text-decoration: none; /* Por si se usa en etiquetas <a> */
+    /* Otros estilos base para .cta-button (padding, border-radius, font-weight) están en la sección de Admin,
+       pero podrían moverse aquí si son realmente globales para todos los cta-button.
+       Por ahora, se asume que las clases de color como .dopamine-bg o .primary-*-cta-bg
+       también definirán el padding y otros aspectos visuales o se aplicarán clases de Tailwind. */
+}
+.cta-button:hover {
+    transform: translateY(-2px); /* Efecto hover base */
+    /* El box-shadow en hover se manejará por clases específicas si es necesario */
+}
+
+.hover-lift { /* De casa.html y catering.html */
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Estilos para enlaces de navegación con animación de subrayado */
+.nav-link-animated {
+    position: relative;
+    padding-bottom: 0.25rem;
+    font-weight: 600; /* Común a la mayoría */
+    text-decoration: none;
+}
+.nav-link-animated::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    transition: width 0.3s ease-in-out;
+    /* El background-color se define en la clase específica (ej. .nav-link-corporate::after) */
+}
+.nav-link-animated:hover::after {
+    width: 100%;
+}
+
+/* Colores para los ::after de los nav-links animados */
+.nav-link-corporate::after    { background-color: #2563EB; } /* Azul brillante */
+.nav-link-catering::after     { background-color: #DC2626; } /* Rojo */
+.nav-link-deco::after         { background-color: #38B2AC; } /* Turquesa */
+.nav-link-music::after        { background-color: #7C3AED; } /* Púrpura */
+.nav-link-photovideo::after   { background-color: #7E22CE; } /* Púrpura */
+.nav-link-gallery::after      { background-color: #DB2777; } /* Fucsia */
+.nav-link-testimonial::after  { background-color: #EC4899; } /* Rosa */
+.nav-link-wedding::after      { background-color: #805AD5; } /* Púrpura (de boda.html) */
+.nav-link-lugares::after      { background-color: #059669; } /* Verde */
+
+
+/* --- Estilos específicos de casa.html --- */
+.hero-bg {
+    background-image: url('/static/img/ibiza.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.section-title { /* Título principal de sección en casa.html */
+    font-weight: 900;
+    font-size: 2.5rem;
+    line-height: 1.2;
+}
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+    }
+}
+.dopamine-bg { /* Usado en casa.html, cumple.html, politicas.html, terminos.html */
+    background-color: #FF69B4; /* Rosa vibrante */
+    color: white; /* Asumiendo texto blanco para contraste */
+}
+.dopamine-bg:hover {
+    background-color: #FF1493; /* Rosa más intenso */
+}
+.secondary-cta-bg { /* De casa.html */
+    background-color: #4A90E2; /* Azul amigable */
+    color: white; /* Asumiendo texto blanco */
+}
+.secondary-cta-bg:hover {
+    background-color: #357ABD; /* Azul más intenso */
+}
+
+/* --- Estilos específicos de boda.html --- */
+.hero-wedding-bg {
+    background-image: url('/static/img/SJUPR_San_Juan_Marriott_Wedding_1920x1080.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.section-title-elegant { /* Usado en boda.html */
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 2.8rem;
+    line-height: 1.3;
+    color: #6B46C1; /* Púrpura profundo */
+}
+@media (max-width: 768px) {
+    .section-title-elegant {
+        font-size: 2.2rem;
+    }
+}
+.card-wedding {
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-radius: 0.75rem; /* rounded-xl */
+    overflow: hidden;
+    background-color: white; /* Añadido para consistencia */
+}
+.card-wedding:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+.primary-wedding-cta-bg {
+    background-color: #805AD5; /* Púrpura principal */
+    color: white;
+}
+.primary-wedding-cta-bg:hover {
+    background-color: #6B46C1; /* Púrpura más oscuro */
+}
+.secondary-wedding-cta-bg {
+    background-color: transparent;
+    border: 2px solid #805AD5;
+    color: #805AD5;
+}
+.secondary-wedding-cta-bg:hover {
+    background-color: #805AD5;
+    color: white;
+}
+.gallery-img-wedding { /* Específico para galería de bodas */
+    transition: transform 0.5s ease, filter 0.5s ease, box-shadow 0.5s ease;
+    border-radius: 0.5rem; /* rounded-lg */
+}
+.gallery-img-wedding:hover {
+    transform: scale(1.03);
+    filter: saturate(1.2);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+/* .testimonial-card de boda.html era más simple, se usará la versión de testimonios.html */
+
+/* --- Estilos específicos de cumple.html --- */
+.hero-kids-bg {
+    background-image: url("/static/img/slider_camioncito1920x1080.webp");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.section-title-kids {
+    font-family: 'Baloo 2', cursive;
+    font-weight: 700;
+    font-size: 2.8rem;
+    line-height: 1.2;
+    color: #F472B6; /* Rosa más intenso */
+}
+@media (max-width: 768px) {
+    .section-title-kids {
+        font-size: 2.2rem;
+    }
+}
+.card-kids {
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    border-radius: 1.5rem; /* rounded-3xl */
+    background-color: white; /* Añadido para consistencia */
+}
+.card-kids:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+.theme-bubble {
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.theme-bubble:hover {
+    transform: scale(1.1);
+    background-color: #FBCFE8; /* Rosa claro */
+}
+.gallery-img { /* Galería genérica, diferente de .gallery-img-wedding */
+    transition: transform 0.3s ease, filter 0.3s ease;
+    border-radius: 0.5rem; /* Añadido para consistencia */
+}
+.gallery-img:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* --- Estilos específicos de ejecutivo.html --- */
+.hero-corporate-bg {
+    background-image: url('/static/img/KPCC_DAN_A_121-HF-2.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.section-title-corporate {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2.6rem;
+    line-height: 1.3;
+    color: #1E3A8A; /* Azul oscuro principal */
+}
+@media (max-width: 768px) {
+    .section-title-corporate {
+        font-size: 2rem;
+    }
+}
+.card-corporate {
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    border-radius: 0.75rem; /* rounded-xl */
+    border: 1px solid #DBEAFE; /* border-blue-100 */
+    background-color: white; /* Añadido */
+}
+.card-corporate:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(30, 64, 175, 0.15); /* Sombra azulada */
+}
+.primary-corporate-cta-bg {
+    background-color: #2563EB; /* Azul brillante */
+    color: white;
+}
+.primary-corporate-cta-bg:hover {
+    background-color: #1D4ED8; /* Azul más oscuro */
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15); /* Añadido el shadow del .cta-button:hover de ejecutivo.html */
+}
+.secondary-corporate-cta-bg {
+    background-color: transparent;
+    border: 2px solid #2563EB;
+    color: #2563EB;
+}
+.secondary-corporate-cta-bg:hover {
+    background-color: #2563EB;
+    color: white;
+}
+.benefit-icon {
+    background-color: #EFF6FF; /* bg-blue-50 */
+    color: #2563EB; /* text-blue-600 */
+    padding: 1rem;
+    border-radius: 9999px; /* rounded-full */
+    display: inline-flex;
+    margin-bottom: 1rem;
+}
+
+/* --- Estilos específicos de catering.html --- */
+.hero-catering-bg {
+    background-image: url('/static/img/gcmgc-catering-0102-hor-wide.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.section-title-catering {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 2.8rem;
+    line-height: 1.3;
+    color: #B91C1C; /* Rojo oscuro */
+}
+@media (max-width: 768px) {
+    .section-title-catering {
+        font-size: 2.2rem;
+    }
+}
+.catering-card {
+    background-color: white;
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 10px 20px -5px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+.catering-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 30px -10px rgba(185, 28, 28, 0.2), 0 8px 15px -4px rgba(0,0,0,0.06); /* Sombra rojiza */
+}
+.catering-card-image {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+}
+.catering-card-content {
+    padding: 1.5rem; /* p-6 */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.catering-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem; /* text-2xl */
+    font-weight: 700;
+    color: #991B1B; /* text-red-800 */
+    margin-bottom: 0.75rem; /* mb-3 */
+}
+.catering-card-description {
+    color: #4B5563; /* text-gray-600 */
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1rem; /* mb-4 */
+    flex-grow: 1;
+}
+.catering-card-cta {
+    font-weight: 600;
+    color: #B91C1C; /* text-red-700 */
+    transition: color 0.3s ease;
+    display: inline-block;
+    padding-top: 0.5rem;
+    margin-top: auto; /* Empuja al final */
+}
+.catering-card-cta:hover {
+    color: #EF4444; /* text-red-500 */
+}
+.primary-catering-cta-bg {
+    background-color: #DC2626; /* Rojo principal */
+    color: white;
+}
+.primary-catering-cta-bg:hover {
+    background-color: #B91C1C; /* Rojo más oscuro */
+}
+.highlight-section { /* De catering.html */
+    background-color: #FEF2F2; /* bg-red-50 */
+}
+
+
+/* --- Estilos específicos de deco.html --- */
+.hero-deco-bg {
+    background-image: url('/static/img/Centro-de-mesa-ecologico.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.section-title-deco {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 2.8rem;
+    line-height: 1.3;
+    color: #2C7A7B; /* Turquesa oscuro */
+}
+@media (max-width: 768px) {
+    .section-title-deco {
+        font-size: 2.2rem;
+    }
+}
+.deco-card {
+    background-color: white;
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 10px 20px -5px rgba(0,0,0,0.06), 0 4px 6px -2px rgba(0,0,0,0.03);
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+}
+.deco-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 35px -10px rgba(44, 122, 123, 0.25), 0 8px 15px -4px rgba(0,0,0,0.08); /* Sombra turquesa */
+}
+.deco-card-image {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+}
+.deco-card-content {
+    padding: 1.5rem; /* p-6 */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.deco-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #285E61; /* text-teal-800 */
+    margin-bottom: 0.75rem; /* mb-3 */
+}
+.deco-card-description {
+    color: #4A5568; /* text-gray-700 */
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin-bottom: 1rem; /* mb-4 */
+    flex-grow: 1;
+}
+.deco-card-tags {
+    margin-bottom: 1rem;
+}
+.deco-card-tags .tag {
+    background-color: #E6FFFA; /* bg-teal-50 */
+    color: #2C7A7B; /* text-teal-700 */
+    font-size: 0.75rem; /* text-xs */
+    font-weight: 600;
+    padding: 0.25rem 0.75rem; /* py-1 px-3 */
+    border-radius: 9999px; /* rounded-full */
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}
+.deco-card-cta {
+    font-weight: 700;
+    color: #2D9596; /* text-teal-600 */
+    transition: color 0.3s ease;
+    display: inline-block;
+    padding-top: 0.5rem;
+    margin-top: auto;
+}
+.deco-card-cta:hover {
+    color: #38B2AC; /* text-teal-500 */
+}
+.filter-button-deco {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #81E6D9; /* border-teal-300 */
+    color: #2C7A7B; /* text-teal-700 */
+    background-color: #F0FFFF; /* azure o blanco azulado */
+    padding: 0.6rem 1.25rem;
+}
+.filter-button-deco.active, .filter-button-deco:hover {
+    background-color: #38B2AC; /* bg-teal-500 */
+    color: white;
+    border-color: #2C7A7B; /* border-teal-700 */
+    box-shadow: 0 2px 8px rgba(56, 178, 172, 0.4);
+}
+.primary-deco-cta-bg {
+    background-color: #319795; /* Turquesa principal */
+    color: white;
+}
+.primary-deco-cta-bg:hover {
+    background-color: #2C7A7B; /* Turquesa más oscuro */
+}
+
+/* --- Estilos específicos de dj.html --- */
+.hero-music-bg {
+    background-image: url('/static/img/dj-party-meaning.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.section-title-music {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2.8rem;
+    line-height: 1.3;
+    color: #5B21B6; /* Púrpura oscuro */
+}
+@media (max-width: 768px) {
+    .section-title-music {
+        font-size: 2.2rem;
+    }
+}
+.music-card {
+    background-color: white;
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 10px 22px -6px rgba(0,0,0,0.08), 0 4px 7px -3px rgba(0,0,0,0.04);
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+}
+.music-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px -12px rgba(91, 33, 182, 0.3), 0 8px 18px -5px rgba(0,0,0,0.08); /* Sombra púrpura */
+}
+.music-card-image {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+}
+.music-card-content {
+    padding: 1.5rem; /* p-6 */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.music-card-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem; /* text-xl */
+    font-weight: 700;
+    color: #4C1D95; /* text-purple-800 */
+    margin-bottom: 0.75rem; /* mb-3 */
+}
+.music-card-description {
+    color: #4B5563; /* text-gray-600 */
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin-bottom: 1rem; /* mb-4 */
+    flex-grow: 1;
+}
+.music-card-tags {
+    margin-bottom: 1rem;
+}
+.music-card-tags .tag {
+    background-color: #EDE9FE; /* bg-purple-50 */
+    color: #5B21B6; /* text-purple-700 */
+    font-size: 0.75rem; /* text-xs */
+    font-weight: 600;
+    padding: 0.25rem 0.75rem; /* py-1 px-3 */
+    border-radius: 9999px; /* rounded-full */
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}
+.music-card-cta {
+    font-weight: 600;
+    color: #6D28D9; /* text-purple-600 */
+    transition: color 0.3s ease;
+    display: inline-block;
+    padding-top: 0.5rem;
+    margin-top: auto;
+}
+.music-card-cta:hover {
+    color: #7C3AED; /* text-purple-500 */
+}
+.filter-button-music {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #A78BFA; /* border-purple-300 */
+    color: #5B21B6; /* text-purple-700 */
+    background-color: #F5F3FF; /* bg-purple-100/50 */
+    padding: 0.6rem 1.25rem;
+}
+.filter-button-music.active, .filter-button-music:hover {
+    background-color: #7C3AED; /* bg-purple-500 */
+    color: white;
+    border-color: #6D28D9; /* border-purple-600 */
+    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.4);
+}
+.primary-music-cta-bg {
+    background-color: #6D28D9; /* Púrpura principal */
+    color: white;
+}
+.primary-music-cta-bg:hover {
+    background-color: #5B21B6; /* Púrpura más oscuro */
+}
+
+/* --- Estilos específicos de foto_artistica.html --- */
+.hero-photovideo-bg {
+    background-image: url('/static/img/foto-parejas-shooting.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.section-title-photovideo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 2.8rem;
+    line-height: 1.3;
+    color: #581C87; /* Púrpura oscuro */
+}
+@media (max-width: 768px) {
+    .section-title-photovideo {
+        font-size: 2.2rem;
+    }
+}
+.service-card-photovideo {
+    background-color: white;
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 8px 16px -4px rgba(0,0,0,0.08), 0 3px 7px -2px rgba(0,0,0,0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.service-card-photovideo:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 25px -8px rgba(88, 28, 135, 0.2), 0 6px 12px -3px rgba(0,0,0,0.06); /* Sombra púrpura */
+}
+.service-card-icon {
+    font-size: 2.5rem; /* text-4xl */
+    color: #7E22CE; /* text-purple-600 */
+    margin-bottom: 1rem; /* mb-4 */
+}
+.gallery-photovideo-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 6px 12px -3px rgba(0,0,0,0.1);
+}
+.gallery-photovideo-item img,
+.gallery-photovideo-item .video-placeholder {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    background-size: cover; /* Para .video-placeholder */
+    background-position: center; /* Para .video-placeholder */
+}
+.gallery-photovideo-item:hover img,
+.gallery-photovideo-item:hover .video-placeholder {
+    transform: scale(1.05);
+}
+.video-placeholder { /* Estilos base para div que simula video */
+    background-color: #374151; /* Fallback */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.video-placeholder a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.video-placeholder .fa-play-circle {
+    font-size: 3.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.6);
+    transition: transform 0.2s ease, color 0.2s ease;
+    z-index: 1;
+}
+.video-placeholder:hover .fa-play-circle {
+    color: white;
+    transform: scale(1.1);
+}
+/* Fondos específicos para placeholders de video, si se usan IDs */
+#video-boda-1 {
+    background-image: url('/static/img/photo_4963064886871567788_w.webp');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#video-boda-2 {
+    background-image: url('/static/img/photo_4963064886871567789_w.webp');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.primary-photovideo-cta-bg {
+    background-color: #7E22CE; /* Púrpura principal */
+    color: white;
+}
+.primary-photovideo-cta-bg:hover {
+    background-color: #6B21A8; /* Púrpura más oscuro */
+}
+
+
+/* --- Estilos específicos de galeria_fotos_boda.html --- */
+.hero-gallery-bg {
+    background-image: url('/static/img/como-encontrar-al-mejor-fotógrafo-de-bodas.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.section-title-gallery {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 2.8rem;
+    line-height: 1.3;
+    color: #A9A9A9; /* Gris oscuro elegante */
+}
+@media (max-width: 768px) {
+    .section-title-gallery {
+        font-size: 2.2rem;
+    }
+}
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Para Masonry, display y width se ajustan en @media query */
+    margin-bottom: 1.5rem; /* Espacio base para Masonry */
+    break-inside: avoid; /* Para Masonry */
+}
+.gallery-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 15px 30px -8px rgba(0,0,0,0.15), 0 6px 12px -3px rgba(0,0,0,0.07);
+}
+.gallery-item img {
+    width: 100%;
+    height: 100%; /* O una altura específica si no es para Masonry puro */
+    object-fit: cover;
+    display: block; /* Para quitar espacio extra debajo de la imagen */
+    transition: transform 0.5s ease;
+}
+.gallery-item:hover img {
+    transform: scale(1.1); /* Efecto de zoom en la imagen interna */
+}
+.gallery-item-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+    color: white;
+    padding: 1.5rem 1rem 1rem; /* p-6 pb-4 */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    text-align: center;
+}
+.gallery-item:hover .gallery-item-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+.gallery-item-caption {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+.gallery-item-description {
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+}
+.primary-gallery-cta-bg {
+    background-color: #DB2777; /* Fucsia principal */
+    color: white;
+}
+.primary-gallery-cta-bg:hover {
+    background-color: #BE185D; /* Fucsia más oscuro */
+}
+/* Masonry-like grid for gallery */
+@media (min-width: 768px) { /* md */
+    #gallery-grid {
+        column-count: 2;
+        column-gap: 1.5rem; /* gap-6 */
+    }
+    .gallery-item { /* En Masonry, los items deben ser inline-block para que column-count funcione */
+        display: inline-block;
+        width: 100%;
+        /* margin-bottom y break-inside ya están definidos arriba */
+    }
+}
+@media (min-width: 1024px) { /* lg */
+    #gallery-grid {
+        column-count: 3;
+    }
+}
+
+
+/* --- Estilos específicos de lugares.html --- */
+.hero-lugares-bg {
+    background-image: url('/static/img/7ed66735a166-gettyimages-1394439307.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.section-title-lugares {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 2.8rem;
+    line-height: 1.3;
+    color: #065F46; /* Verde oscuro */
+}
+@media (max-width: 768px) {
+    .section-title-lugares {
+        font-size: 2.2rem;
+    }
+}
+.lugar-card {
+    background-color: white;
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 8px 16px -3px rgba(0,0,0,0.07), 0 3px 6px -2px rgba(0,0,0,0.04); /* Corregido 'Spx' a '6px' */
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+.lugar-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 25px -8px rgba(6, 95, 70, 0.2), 0 6px 12px -3px rgba(0,0,0,0.06); /* Sombra verdosa */
+}
+.lugar-card-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+.lugar-card-content {
+    padding: 1.25rem; /* p-5 */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.lugar-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; /* text-xl */
+    font-weight: 700;
+    color: #047857; /* text-green-700 */
+    margin-bottom: 0.5rem; /* mb-2 */
+}
+.lugar-card-description {
+    color: #4B5563; /* text-gray-600 */
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 0.75rem; /* mb-3 */
+    flex-grow: 1;
+}
+.lugar-card-features {
+    font-size: 0.8rem;
+    color: #52525B; /* text-zinc-600 */
+    margin-bottom: 1rem; /* mb-4 */
+}
+.lugar-card-features .feature-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.25rem; /* mb-1 */
+}
+.lugar-card-features .feature-item i { /* Estilo para iconos de FontAwesome dentro de features */
+    margin-right: 0.5rem; /* mr-2 */
+    color: #10B981; /* text-emerald-500 */
+    width: 1em; /* Para alinear mejor si los iconos varían de ancho */
+    text-align: center;
+}
+.lugar-card-cta {
+    font-weight: 600;
+    color: #059669; /* text-green-600 */
+    transition: color 0.3s ease;
+    display: inline-block;
+    padding-top: 0.5rem;
+    margin-top: auto;
+}
+.lugar-card-cta:hover {
+    color: #10B981; /* text-emerald-500 */
+}
+.filter-button-lugares {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #A3E635; /* border-lime-400 */
+    color: #4D7C0F; /* text-lime-700 */
+    background-color: #F7FEE7; /* bg-lime-50 */
+    padding: 0.6rem 1.25rem;
+}
+.filter-button-lugares.active, .filter-button-lugares:hover {
+    background-color: #84CC16; /* bg-lime-500 */
+    color: white;
+    border-color: #65A30D; /* border-lime-600 */
+    box-shadow: 0 2px 8px rgba(132, 204, 22, 0.4);
+}
+.primary-lugares-cta-bg {
+    background-color: #10B981; /* Verde esmeralda */
+    color: white;
+}
+.primary-lugares-cta-bg:hover {
+    background-color: #059669; /* Verde más oscuro */
+}
+
+/* --- Estilos para politicas.html y terminos.html --- */
+.content-section h2 {
+    font-family: 'Playfair Display', serif; /* Para mantener consistencia con otros títulos de sección */
+    font-size: 1.75rem; /* text-2xl or a bit larger */
+    font-weight: 700; /* font-bold */
+    color: #EC4899; /* text-pink-600 */
+    margin-top: 2rem; /* mt-8 para separar secciones */
+    margin-bottom: 1rem; /* mb-4 */
+    padding-bottom: 0.5rem; /* pb-2 */
+    border-bottom: 2px solid #FBCFE8; /* border-pink-200 */
+}
+.content-section h3 {
+    font-family: 'Montserrat', sans-serif; /* O 'Inter' si se prefiere para subtítulos */
+    font-size: 1.25rem; /* text-xl */
+    font-weight: 600; /* font-semibold */
+    color: #374151; /* text-gray-700 */
+    margin-top: 1.5rem; /* mt-6 */
+    margin-bottom: 0.75rem; /* mb-3 */
+}
+.content-section p,
+.content-section ul,
+.content-section ol {
+    color: #4B5563; /* text-gray-600 */
+    line-height: 1.7; /* Ajustado para mejor legibilidad */
+    margin-bottom: 1rem; /* mb-4 */
+    font-size: 1rem; /* text-base o md:text-lg de Tailwind para mejor lectura */
+}
+.content-section ul {
+    list-style-type: disc;
+    padding-left: 1.5rem; /* pl-6 */
+}
+.content-section ol {
+    list-style-type: decimal;
+    padding-left: 1.5rem; /* pl-6 */
+}
+.content-section a {
+    color: #DB2777; /* text-pink-700 */
+    text-decoration: underline;
+    font-weight: 600; /* Para destacar enlaces */
+}
+.content-section a:hover {
+    color: #EC4899; /* text-pink-500 */
+    text-decoration: none; /* Opcional: quitar subrayado en hover */
+}
+
+/* --- Estilos específicos de testimonios.html --- */
+/* .testimonial-card ya definido en boda.html, aquí se refina/unifica */
+.testimonial-card { /* Versión más completa de testimonios.html */
+    background-color: white;
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.03); /* Sombra sutil */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Para que todas las tarjetas tengan la misma altura en un grid */
+    padding: 1.5rem; /* p-6, añadido padding general a la tarjeta */
+}
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 8px 15px -4px rgba(0, 0, 0, 0.05);
+}
+.testimonial-quote {
+    font-style: italic;
+    color: #4A5568; /* text-gray-700 */
+    line-height: 1.7;
+    margin-bottom: 1rem; /* mb-4, espacio antes del autor */
+    flex-grow: 1; /* Para que el texto ocupe el espacio disponible */
+}
+.testimonial-author {
+    font-weight: 700;
+    font-family: 'Playfair Display', serif; /* Fuente elegante para el autor */
+    color: #C5309B; /* text-pink-600, ajustado para más consistencia */
+    margin-top: auto; /* Empuja el autor hacia abajo si la cita es corta */
+}
+.testimonial-event {
+    font-size: 0.875rem; /* text-sm */
+    color: #718096; /* text-gray-500 */
+    margin-top: 0.25rem; /* mt-1 */
+}
+.filter-button { /* Botón de filtro genérico para testimonios */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    border: 1px solid #D1D5DB; /* border-gray-300 */
+    padding: 0.5rem 1rem; /* py-2 px-4 */
+    border-radius: 0.375rem; /* rounded-md */
+    font-weight: 600;
+}
+.filter-button.active, .filter-button:hover {
+    background-color: #EC4899; /* bg-pink-500 */
+    color: white;
+    border-color: #EC4899; /* border-pink-500 */
+}
+.primary-cta-bg { /* Botón CTA primario general (usado en testimonios.html) */
+    background-color: #EC4899; /* Rosa principal */
+    color: white;
+}
+.primary-cta-bg:hover {
+    background-color: #DB2777; /* Rosa más oscuro */
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* ESTILOS DE LA INTERFAZ DE ADMINISTRACIÓN (list_proveedor, register_provider) */
+/* (Se mantienen los estilos de la versión anterior)                          */
+/* -------------------------------------------------------------------------- */
+.table-container {
+    overflow-x: auto;
+}
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem; /* text-sm */
+}
+.styled-table thead {
+    background-color: #4B5563; /* bg-gray-600 */
+    color: white;
+}
+.styled-table th, .styled-table td {
+    padding: 0.85rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb; /* border-gray-200 */
+    vertical-align: top;
+}
+.styled-table tbody tr:hover {
+    background-color: #f3f4f6; /* bg-gray-100 */
+}
+.styled-table th {
+    font-weight: 600; /* font-semibold */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.styled-table td.actions-cell {
+    font-weight: normal;
+    color: #374151; /* text-gray-700 */
+    white-space: nowrap;
+}
+.styled-table td.actions-cell a {
+    margin-right: 0.5rem;
+    color: #3B82F6; /* text-blue-500 */
+    transition: color 0.3s ease;
+}
+.styled-table td.actions-cell a:hover {
+    color: #1D4ED8; /* text-blue-700 */
+}
+.styled-table td.actions-cell a.delete-action:hover {
+    color: #DC2626; /* text-red-600 */
+}
+
+/* --- Formularios de Admin --- */
+.form-container { /* Usado en register_providers */
+    background-color: #fff;
+    padding: 2rem; /* p-8 */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); /* shadow-md */
+    max-width: 768px; /* md:max-w-3xl */
+    margin-left: auto;
+    margin-right: auto;
+}
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem; /* mb-2 */
+    font-weight: 600; /* font-semibold */
+    color: #374151; /* text-gray-700 */
+}
+.form-input, .form-textarea, .form-select {
+    width: 100%;
+    padding: 0.75rem 1rem; /* py-3 px-4 */
+    border: 1px solid #D1D5DB; /* border-gray-300 */
+    border-radius: 0.375rem; /* rounded-md */
+    box-shadow: inset 0 1px 2px 0 rgba(0,0,0,0.05); /* shadow-sm */
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+    outline: none;
+    border-color: #EC4899; /* border-pink-500 (del admin) */
+    box-shadow: 0 0 0 0.2rem rgba(236, 72, 153, 0.25);
+}
+.form-textarea {
+    min-height: 120px;
+}
+.form-group {
+    margin-bottom: 1.5rem; /* mb-6 */
+}
+
+/* --- Botones de Admin --- */
+/* Nota: .cta-button (base) ya está definido en la sección de páginas públicas.
+   Las clases .cta-button-primary y .cta-button-secondary del admin son específicas
+   para los colores de fondo y texto de los botones del admin.
+   Se aplican junto con .cta-button: <button class="cta-button cta-button-primary">...</button> */
+
+.cta-button-primary { /* Botón rosa del admin */
+    background-color: #EC4899;
+    color: white;
+    border: 1px solid transparent; /* Para consistencia con otros .cta-button */
+    padding: 0.75rem 1.5rem; /* Padding base para botones de admin */
+    font-weight: 600; /* font-semibold */
+    border-radius: 0.375rem; /* rounded-md */
+}
+.cta-button-primary:hover {
+    background-color: #D93782;
+}
+
+.cta-button-secondary { /* Botón gris del admin */
+    background-color: #6B7280;
+    color: white;
+    border: 1px solid transparent;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 0.375rem;
+}
+.cta-button-secondary:hover {
+    background-color: #4B5563;
+}
+
+.cta-button-outline-light { /* Botón outline para navbar del admin */
+    background-color: transparent;
+    border: 1px solid #d1d5db;
+    color: #d1d5db;
+    padding: 0.5rem 1rem; /* Padding específico para navbar */
+    font-weight: 600;
+    border-radius: 0.375rem;
+}
+.cta-button-outline-light:hover {
+    background-color: #4b5563;
+    color: white;
+    border-color: #4b5563;
+}
+
+.button-group { /* Para agrupar botones en formularios de admin */
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    justify-content: flex-end;
+}
+
+/* --- Mensaje de Información de Admin --- */
+.info-message {
+    background-color: #EFF6FF; /* bg-blue-50 */
+    border-left: 4px solid #3B82F6; /* border-blue-500 */
+    color: #1E40AF; /* text-blue-700 */
+    padding: 1rem; /* p-4 */
+    border-radius: 0.375rem; /* rounded-md */
+}
+
+/* ... (Todo tu style.css existente antes de esto) ... */
+
+/* -------------------------------------------------------------------------- */
+/* ESTILOS ESPECÍFICOS PARA PÁGINAS PÚBLICAS (ej. new_provider, casa, etc.)   */
+/* -------------------------------------------------------------------------- */
+
+.body-public-bg {
+    background-color: #FFF7F9; /* Fondo rosa muy pálido, típico de FiestaPerfecta público */
+}
+
+/* --- Estilos de Navbar Pública --- */
+.nav-link-public {
+    color: #4B5563; /* text-gray-700 */
+    font-weight: 600;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem; /* rounded-md */
+    transition: color 0.3s ease, background-color 0.3s ease;
+    position: relative;
+    text-decoration: none; /* Asegurar que no haya subrayado por defecto */
+}
+.nav-link-public:hover {
+    color: #EC4899; /* text-pink-500 */
+}
+.nav-link-public::after { /* Efecto subrayado sutil */
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px; /* Ajusta para que no solape el texto */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #EC4899;
+    transition: width 0.3s ease-in-out;
+}
+.nav-link-public:hover::after {
+    width: 70%; /* O 100% si prefieres subrayado completo */
+}
+
+.cta-button-nav-public { /* Botón específico para la navbar pública */
+    background-color: #FCE7F3; /* bg-pink-100 */
+    color: #DB2777; /* text-pink-600 */
+    padding: 0.5rem 1rem; /* Hereda otros estilos de .cta-button si se usa junto */
+    border-radius: 0.5rem; /* rounded-lg, anulando el de .cta-button si fuera diferente */
+}
+.cta-button-nav-public:hover {
+    background-color: #FBCFE8; /* bg-pink-200 */
+    /* transform: translateY(-1px); /* Esto ya está en .cta-button:hover, podría ser redundante */
+    box-shadow: 0 2px 6px rgba(219, 39, 119, 0.15);
+}
+
+
+/* --- Estilos para Formularios Públicos (ej. new_provider) --- */
+.form-card-public {
+    background-color: white;
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 10px 25px -5px rgba(219, 39, 119, 0.1), 0 4px 6px -2px rgba(219, 39, 119, 0.05); /* Sombra rosa sutil */
+    width: 100%;
+    max-width: 48rem; /* max-w-3xl */
+}
+
+.form-label-public { /* Renombrada para evitar conflicto con .form-label de admin */
+    font-weight: 600;
+    color: #4B5563; /* text-gray-700 */
+    margin-bottom: 0.5rem;
+    display: block;
+    font-size: 0.875rem; /* text-sm */
+}
+
+.form-input-public { /* Renombrada para evitar conflicto con .form-input de admin */
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #FBCFE8; /* border-pink-200 */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    font-size: 0.95rem;
+    background-color: white; /* Asegurar fondo blanco */
+    color: #374151; /* Color de texto del input */
+}
+.form-input-public::placeholder {
+    color: #9CA3AF; /* text-gray-400 */
+}
+.form-input-public:focus {
+    border-color: #EC4899; /* focus:border-pink-500 */
+    box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2);
+    outline: none;
+}
+
+/* Botón Primario Rosa para Formularios Públicos */
+.cta-button-pink-primary {
+    background-color: #EC4899; /* bg-pink-500 */
+    color: white;
+    /* Hereda padding, font-weight, border-radius de .cta-button si se aplica esa clase también */
+    /* Si .cta-button no define padding, etc., añadirlos aquí: */
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem; /* rounded-lg */
+    font-weight: 600;
+    border: none; /* Asegurar que no haya borde por defecto */
+    cursor: pointer;
+}
+.cta-button-pink-primary:hover {
+    background-color: #DB2777; /* bg-pink-600 */
+    /* transform: translateY(-2px); Ya cubierto por la clase .cta-button:hover */
+    box-shadow: 0 6px 12px rgba(219, 39, 119, 0.25);
+}
+
+/* ... (dentro de tu style.css global, preferiblemente en la sección de botones) ... */
+
+.cta-button-danger {
+    background-color: #DC2626; /* bg-red-600 */
+    color: white;
+    border: 1px solid transparent; /* Para consistencia con otros .cta-button */
+    /* Hereda padding, font-weight, border-radius de .cta-button si se aplica esa clase también */
+    /* Si .cta-button no define estos, añadirlos aquí: */
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+}
+.cta-button-danger:hover {
+    background-color: #B91C1C; /* bg-red-700 o un rojo más oscuro */
+    /* transform: translateY(-2px); Ya cubierto por la clase .cta-button:hover si está presente */
+}
+/* ... (El resto de tu style.css global sigue aquí) ... */

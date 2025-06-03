@@ -49,12 +49,11 @@ git clone https://github.com/alkemyTech/CFILP-Django-W2-Front-S2
 cd repositorio
 python -m venv env
 source env/bin/activate  # En Windows: env\Scripts\activate
-pip install djangorestframework 
-pip install django-widget-tweaks
-pip install pytz
+pip install -r requirements.txt 
+pip list --outdated --format=json | ConvertFrom-Json | ForEach-Object { pip install --upgrade $_.name }
 python manage.py migrate
 python manage.py runserver
 ```
 
 ## 🏛️ Autor
-Proyecto desarrollado como caso de negocio académico. Responsables: Alesandro Maldonado, Joaquin Hernandez, Romina Isaia, Nicolas Lobos.
+Proyecto desarrollado como caso de negocio académico. Responsables: Alesandro Maldonado, Joaquin Hernandez, Martin Pino

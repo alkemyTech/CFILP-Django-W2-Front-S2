@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizar Evento - FiestaPerfecta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-elegant-title {
+            font-family: 'Playfair Display', serif; /* Fuente elegante para títulos */
+        }
+        .form-label {
+            font-weight: 600;
+            color: #374151; /* text-gray-700 */
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #D1D5DB; /* border-gray-300 */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: #EC4899; /* focus:border-pink-500 */
+            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.3); /* focus:ring-pink-500 focus:ring-opacity-50 */
+            outline: none;
+        }
+        .cta-button {
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        .dopamine-bg {
+            background-color: #FF69B4; /* Rosa vibrante */
+        }
+        .dopamine-bg:hover {
+            background-color: #FF1493; /* Rosa más intenso */
+        }
+        /* Estilo para los pasos del formulario */
+        .step-indicator {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb; /* border-gray-200 */
+        }
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #9ca3af; /* text-gray-400 */
+            font-weight: 600;
+            position: relative;
+            flex: 1;
+        }
+        .step.active .step-circle {
+            background-color: #EC4899; /* bg-pink-500 */
+            color: white;
+            border-color: #EC4899; /* border-pink-500 */
+        }
+        .step.active .step-label {
+            color: #EC4899; /* text-pink-500 */
+        }
+        .step.completed .step-circle {
+            background-color: #10B981; /* bg-green-500 */
+            color: white;
+            border-color: #10B981; /* border-green-500 */
+        }
+        .step.completed .step-label {
+            color: #10B981; /* text-green-500 */
+        }
+        .step-circle {
+            width: 2.5rem; /* w-10 */
+            height: 2.5rem; /* h-10 */
+            border-radius: 9999px; /* rounded-full */
+            border: 2px solid #D1D5DB; /* border-gray-300 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .step-label {
+            font-size: 0.875rem; /* text-sm */
+            text-align: center;
+        }
+        /* Línea conectora (simplificada) */
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 1.25rem; /* Alineado con el centro del círculo */
+            left: calc(50% + 1.5rem); /* Empieza después del círculo */
+            width: calc(100% - 3rem); /* Ajusta para que no se superponga con el siguiente círculo */
+            height: 2px;
+            background-color: #D1D5DB; /* border-gray-300 */
+            z-index: -1;
+        }
+        .step.active:not(:last-child)::after, .step.completed:not(:last-child)::after {
+             background-color: #EC4899; /* border-pink-500 para activo/completado */
+        }
+        .form-input-public {
+        display: block; /* Asegura que tome el ancho completo y que los estilos de borde se apliquen bien */
+        width: 100%;
+        padding: 0.75rem 1rem; /* Ajusta según tu diseño */
+        font-size: 0.95rem; /* Ajusta según tu diseño */
+        line-height: 1.5;
+        color: #374151; /* Color de texto (ej: text-gray-700) */
+        background-color: #fff; /* Fondo blanco */
+        background-clip: padding-box;
+        border: 1px solid #FBCFE8; /* Color de borde (ej: border-pink-200 o un gris como #D1D5DB) */
+        border-radius: 0.5rem; /* Bordes redondeados (ej: rounded-lg) */
+        box-shadow: inset 0 1px 2px rgba(0,0,0,0.04); /* Sombra interna sutil */
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        -webkit-appearance: none; /* Para quitar estilos por defecto en selects/inputs en Safari/Chrome */
+        -moz-appearance: none;
+        appearance: none;
+        }
+
+        .form-input-public::placeholder {
+            color: #9CA3AF; /* text-gray-400 */
+            opacity: 1; /* Firefox */
+        }
+
+        .form-input-public:focus {
+            color: #374151;
+            background-color: #fff;
+            border-color: #EC4899; /* Color de borde en foco (ej: border-pink-500) */
+            outline: 0;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.04), 0 0 0 0.2rem rgba(236, 72, 153, 0.25); /* Anillo de foco */
+        }
+
+        /* Para que los selects también tengan la flecha desplegable si usas appearance: none */
+        select.form-input-public {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239CA3AF' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem; /* Espacio para la flecha */
+        }
+        .form-select {
+            background-color: #fff;
+            border: 1px solid #D1D5DB; /* border-gray-300 */
+            border-radius: 0.5rem; /* rounded-lg */
+            padding: 0.75rem 1rem;
+            width: 100%;
+            font-size: 0.95rem; /* text-sm */
+            line-height: 1.5;
+            color: #374151; /* text-gray-700 */
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .form-select:focus {
+            border-color: #EC4899; /* focus:border-pink-500 */
+            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.3); /* focus:ring-pink-500 focus:ring-opacity-50 */
+            outline: none;
+        }
+
+
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/public/casa/" class="text-4xl font-elegant-title text-pink-500">FiestaPerfecta</a>
+            <div class="flex space-x-6 items-center">
+                <a href="/public/casa/#servicios" class="text-gray-600 hover:text-pink-500 hidden md:block">Servicios</a>
+                <a href="/public/casa/#testimonios" class="text-gray-600 hover:text-pink-500 hidden md:block">Testimonios</a>
+                <a href="/public/casa/#contacto" class="text-gray-600 hover:text-pink-500 hidden md:block">Contacto</a>
+                <a href="/public/casa/" class="cta-button dopamine-bg text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:shadow-lg">
+                    Volver al Inicio
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 md:px-6 py-12 md:py-16">
+        <header class="text-center mb-10 md:mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold font-playfair text-pink-600 mb-4">Cotiza Tu Evento Soñado</h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                Completa el siguiente formulario con los detalles de tu celebración y te enviaremos una propuesta personalizada lo antes posible. ¡Estamos emocionados de ayudarte a crear un momento inolvidable!
+            </p>
+        </header>
+
+        {% if messages %}
+            <div class="max-w-3xl mx-auto mb-6">
+                {% for message in messages %}
+                    <div class="p-4 rounded-md {% if message.tags == 'success' %}bg-green-100 border-green-500 text-green-700{% elif message.tags == 'error' %}bg-red-100 border-red-500 text-red-700{% elif message.tags == 'warning' %}bg-yellow-100 border-yellow-500 text-yellow-700{% else %}bg-blue-100 border-blue-500 text-blue-700{% endif %} border-l-4" role="alert">
+                        <p>{{ message }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="step-indicator mb-10 md:mb-12">
+            <div class="step active" id="step-indicator-1">
+                <div class="step-circle">1</div>
+                <div class="step-label">Info del Evento</div>
+            </div>
+            <div class="step" id="step-indicator-2">
+                <div class="step-circle">2</div>
+                <div class="step-label">Servicios</div>
+            </div>
+            <div class="step" id="step-indicator-3">
+                <div class="step-circle">3</div>
+                <div class="step-label">Tus Datos</div>
+            </div>
+        </div>
+
+        <form id="cotizacionForm" action="#" method="POST" class="bg-white p-6 md:p-10 rounded-xl shadow-2xl max-w-3xl mx-auto">
+            {% csrf_token %}
+            
+            <input type="hidden" name="evento_id" value="{{ evento.id }}">
+
+            {% if form.non_field_errors %}
+                <div class="mb-6 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {# #}
+
+            <div id="form-step-1" class="form-step">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-6 border-b pb-3">Paso 1: Detalles de Tu Celebración</h2>
+        
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="{{ form.servicio.id_for_label }}" class="form-label">
+                            {{ form.servicio.label }}
+                            {% if form.servicio.field.required %}<span class="text-red-500">*</span>{% endif %}
+                        </label>
+                        {{ form.servicio }} {# Este campo usa la clase 'form-input-public' desde el widget en forms.py #}
+                        {% if form.servicio.errors %}
+                            <option value="{{ servicio.id }}" {% if servicio.id == evento.id %}selected{% endif %}>{{ servicio.nombre }}</option>
+                            <div class="text-red-500 text-xs mt-1">{{ form.servicio.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <label for="{{ form.otro_tipo_evento.id_for_label }}" class="form-label">{{ form.otro_tipo_evento.label }}</label>
+                        {{ form.otro_tipo_evento }}
+                        {% if form.otro_tipo_evento.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.otro_tipo_evento.errors|striptags }}</div>
+                        {% endif %}
+                         {% if form.otro_tipo_evento.help_text %}
+                            <p class="text-xs text-gray-500 mt-1">{{ form.otro_tipo_evento.help_text }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="{{ form.fecha_evento.id_for_label }}" class="form-label">
+                            {{ form.fecha_evento.label }}
+                            {% if form.fecha_evento.field.required %}<span class="text-red-500">*</span>{% endif %}
+                        </label>
+                        {{ form.fecha_evento }}
+                        {% if form.fecha_evento.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.fecha_evento.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <label for="{{ form.hora_evento.id_for_label }}" class="form-label">{{ form.hora_evento.label }}</label>
+                        {{ form.hora_evento }}
+                        {% if form.hora_evento.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.hora_evento.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="{{ form.cantidad_invitados.id_for_label }}" class="form-label">
+                            {{ form.cantidad_invitados.label }}
+                            {% if form.cantidad_invitados.field.required %}<span class="text-red-500">*</span>{% endif %}
+                        </label>
+                        {{ form.cantidad_invitados }}
+                        {% if form.cantidad_invitados.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.cantidad_invitados.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <label for="{{ form.locacion_evento.id_for_label }}" class="form-label">{{ form.locacion_evento.label }}</label>
+                        {{ form.locacion_evento }}
+                        {% if form.locacion_evento.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.locacion_evento.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label for="{{ form.direccion_evento.id_for_label }}" class="form-label">{{ form.direccion_evento.label }}</label>
+                    {{ form.direccion_evento }}
+                    {% if form.direccion_evento.errors %}
+                        <div class="text-red-500 text-xs mt-1">{{ form.direccion_evento.errors|striptags }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="flex justify-end">
+                    <button type="button" onclick="nextStep(1)" class="cta-button bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition-transform hover:scale-105">
+                        Siguiente <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="form-step-2" class="form-step hidden">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-6 border-b pb-3">Paso 2: ¿Qué Servicios Necesitas?</h2>
+                <p class="text-sm text-gray-500 mb-6">Selecciona todos los servicios que te interesan. Podemos adaptarnos a tus necesidades.</p>
+                
+                {# Estos checkboxes no están en SolicitudCotizacionForm. Se enviarán como request.POST.getlist('servicios_necesitados[]') #}
+                {# Si necesitas guardarlos, debes modificar el modelo y el formulario. #}
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4 mb-6">
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="planificacion_integral" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Planificación Integral</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="decoracion_tematica" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Decoración Temática</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="catering_menu" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Catering / Menú</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="barra_bebidas" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Barra de Bebidas</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="dj_musica" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>DJ y Música</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="fotografia_video" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Fotografía y Video</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="animacion_shows" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Animación / Shows</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="mobiliario" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Alquiler de Mobiliario</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="iluminacion_sonido" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Iluminación y Sonido</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="souvenirs" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Souvenirs / Recuerdos</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="mesa_dulce_torta" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Mesa Dulce / Torta</span></label></div>
+                    <div><label class="flex items-center space-x-2 text-sm text-gray-700 hover:text-pink-600 cursor-pointer"><input type="checkbox" name="servicios_necesitados[]" value="personal_asistencia" class="form-checkbox rounded text-pink-500 focus:ring-pink-400 focus:ring-offset-0"> <span>Personal de Asistencia</span></label></div>
+                </div>
+
+                <div class="mb-6">
+                    <label for="{{ form.presupuesto_estimado.id_for_label }}" class="form-label">{{ form.presupuesto_estimado.label }}</label>
+                    {{ form.presupuesto_estimado }}
+                    {% if form.presupuesto_estimado.errors %}
+                        <div class="text-red-500 text-xs mt-1">{{ form.presupuesto_estimado.errors|striptags }}</div>
+                    {% endif %}
+                    <p class="text-xs text-gray-500 mt-1">Saber tu rango de presupuesto nos ayuda a ofrecerte las mejores opciones.</p>
+                </div>
+
+                <div class="mb-6">
+                    <label for="{{ form.comentarios_adicionales_servicios.id_for_label }}" class="form-label">{{ form.comentarios_adicionales_servicios.label }}</label>
+                    {{ form.comentarios_adicionales_servicios }}
+                    {% if form.comentarios_adicionales_servicios.errors %}
+                        <div class="text-red-500 text-xs mt-1">{{ form.comentarios_adicionales_servicios.errors|striptags }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="flex justify-between">
+                    <button type="button" onclick="prevStep(2)" class="cta-button bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold py-3 px-8 rounded-lg shadow-md transition-transform hover:scale-105">
+                        <i class="fas fa-arrow-left mr-2"></i> Anterior
+                    </button>
+                    <button type="button" onclick="nextStep(2)" class="cta-button bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition-transform hover:scale-105">
+                        Siguiente <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="form-step-3" class="form-step hidden">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-6 border-b pb-3">Paso 3: Tus Datos de Contacto</h2>
+                <p class="text-sm text-gray-500 mb-6">Casi listo. Necesitamos esta información para enviarte tu cotización personalizada.</p>
+            
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="{{ form.nombre.id_for_label }}" class="form-label">
+                            {{ form.nombre.label }}
+                            {% if form.nombre.field.required %}<span class="text-red-500">*</span>{% endif %}
+                        </label>
+                        {{ form.nombre }}
+                        {% if form.nombre.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.nombre.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <label for="{{ form.apellido.id_for_label }}" class="form-label">
+                            {{ form.apellido.label }}
+                            {% if form.apellido.field.required %}<span class="text-red-500">*</span>{% endif %}
+                        </label>
+                        {{ form.apellido }}
+                        {% if form.apellido.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.apellido.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="{{ form.email.id_for_label }}" class="form-label">
+                            {{ form.email.label }}
+                            {% if form.email.field.required %}<span class="text-red-500">*</span>{% endif %}
+                        </label>
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.email.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <label for="{{ form.telefono.id_for_label }}" class="form-label">
+                            {{ form.telefono.label }}
+                            {% if form.telefono.field.required %}<span class="text-red-500">*</span>{% endif %}
+                        </label>
+                        {{ form.telefono }}
+                        {% if form.telefono.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.telefono.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="md:col-span-2">
+                        <label for="{{ form.medio_preferido_contacto.id_for_label }}" class="form-label">{{ form.medio_preferido_contacto.label }}</label>
+                        {{ form.medio_preferido_contacto }}
+                        {% if form.medio_preferido_contacto.errors %}
+                            <div class="text-red-500 text-xs mt-1">{{ form.medio_preferido_contacto.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="{{ form.como_nos_conocio.id_for_label }}" class="form-label">{{ form.como_nos_conocio.label }}</label>
+                    {{ form.como_nos_conocio }}
+                    {% if form.como_nos_conocio.errors %}
+                        <div class="text-red-500 text-xs mt-1">{{ form.como_nos_conocio.errors|striptags }}</div>
+                    {% endif %}
+                </div>
+            
+                <div class="mb-8">
+                    <label for="{{ form.terminos_condiciones.id_for_label }}" class="flex items-center space-x-2 text-sm text-gray-700 cursor-pointer">
+                        {{ form.terminos_condiciones }}
+                        <span>Acepto los <a href="{% url 'terminos' %}" target="_blank" class="text-pink-500 hover:underline font-semibold">Términos y Condiciones</a> y la <a href="{% url 'politicas' %}" target="_blank" class="text-pink-500 hover:underline font-semibold">Política de Privacidad</a>.{% if form.terminos_condiciones.field.required %}<span class="text-red-500">*</span>{% endif %}</span>
+                    </label>
+                    {% if form.terminos_condiciones.errors %}
+                        <div class="text-red-500 text-xs mt-1 pl-6">{{ form.terminos_condiciones.errors|striptags }}</div>
+                    {% endif %}
+                </div>
+            
+                <div class="flex justify-between items-center">
+                    <button type="button" onclick="prevStep(3)" class="cta-button bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold py-3 px-8 rounded-lg shadow-md transition-transform hover:scale-105">
+                        <i class="fas fa-arrow-left mr-2"></i> Anterior
+                    </button>
+                    <button type="submit" class="cta-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-10 text-lg rounded-lg shadow-xl transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-105">
+                        <i class="fas fa-paper-plane mr-2"></i> Enviar Solicitud
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        {# Mensajes de éxito/error del script original. Serán reemplazados por los mensajes de Django si el formulario se envía y recarga la página. #}
+        {# Si usas AJAX para enviar el formulario, estos mensajes podrían seguir siendo útiles. #}
+        <div id="successMessage" class="hidden mt-10 max-w-xl mx-auto bg-green-100 border-l-4 border-green-500 text-green-700 p-6 rounded-md shadow-md" role="alert">
+            <div class="flex">
+                <div class="py-1"><svg class="fill-current h-6 w-6 text-green-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                <div>
+                    <p class="font-bold">¡Solicitud Enviada con Éxito!</p>
+                    <p class="text-sm">Hemos recibido tu información. Nos pondremos en contacto contigo a la brevedad con una propuesta a medida. ¡Gracias por confiar en FiestaPerfecta!</p>
+                </div>
+            </div>
+        </div>
+         <div id="errorMessage" class="hidden mt-10 max-w-xl mx-auto bg-red-100 border-l-4 border-red-500 text-red-700 p-6 rounded-md shadow-md" role="alert">
+            <div class="flex">
+                <div class="py-1"><svg class="fill-current h-6 w-6 text-red-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 5v6h2V5H9zm0 8h2v2H9v-2z"/></svg></div>
+                <div>
+                    <p class="font-bold">Error al Enviar la Solicitud</p>
+                    <p class="text-sm">Hubo un problema al procesar tu solicitud. Por favor, verifica los campos e inténtalo de nuevo. Si el problema persiste, contáctanos directamente.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 py-12 mt-10 md:mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <h4 class="text-xl font-semibold font-playfair text-white mb-3">FiestaPerfecta</h4>
+            <p class="text-sm mb-4 max-w-md mx-auto">Transformando tus sueños en celebraciones inolvidables. Expertos en crear momentos mágicos.</p>
+            <div class="flex justify-center space-x-5 mb-6">
+                <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors"><i class="fab fa-whatsapp fa-lg"></i></a>
+            </div>
+            <p class="text-xs text-gray-500">&copy; {% now "Y" %} FiestaPerfecta. Todos los derechos reservados.</p>
+            <p class="text-xs mt-1 text-gray-500">
+                <a href="{% url 'politicas' %}" class="hover:text-pink-400 transition-colors">Política de Privacidad</a> | 
+                <a href="{% url 'terminos' %}" class="hover:text-pink-400 transition-colors">Términos y Condiciones</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        let currentStep = 1;
+        const formSteps = document.querySelectorAll('.form-step');
+        const stepIndicators = document.querySelectorAll('.step-indicator .step');
+        const cotizacionForm = document.getElementById('cotizacionForm');
+
+        function showStep(stepNumber) {
+            formSteps.forEach(step => step.classList.add('hidden'));
+            const currentFormStepDiv = document.getElementById(`form-step-${stepNumber}`);
+            if (currentFormStepDiv) {
+                currentFormStepDiv.classList.remove('hidden');
+            }
+
+            stepIndicators.forEach(indicator => {
+                indicator.classList.remove('active', 'completed');
+            });
+
+            for (let i = 1; i <= stepIndicators.length; i++) {
+                const indicator = document.getElementById(`step-indicator-${i}`);
+                if (indicator) {
+                    if (i < stepNumber) {
+                        indicator.classList.add('completed');
+                    } else if (i === stepNumber) {
+                        indicator.classList.add('active');
+                    }
+                }
+            }
+            // Scroll al inicio del formulario para mejor UX
+            if (cotizacionForm) {
+                 window.scrollTo({ top: cotizacionForm.offsetTop - 100, behavior: 'smooth' });
+            }
+        }
+
+        function validateCurrentStepFields() {
+            const currentFormStepDiv = document.getElementById(`form-step-${currentStep}`);
+            if (!currentFormStepDiv) return true; // No se puede validar si el div no existe
+
+            let isValidStep = true;
+            // Encuentra todos los inputs, selects y textareas que son requeridos DENTRO DEL PASO ACTUAL
+            const requiredFields = currentFormStepDiv.querySelectorAll('input[required], select[required], textarea[required]');
+
+            requiredFields.forEach(field => {
+                // Limpiar errores visuales previos de JS
+                field.classList.remove('border-red-500', 'focus:border-red-500');
+                const existingErrorMsgId = `js-error-${field.id || field.name}`;
+                const existingErrorMsg = document.getElementById(existingErrorMsgId);
+                if (existingErrorMsg) {
+                    existingErrorMsg.remove();
+                }
+
+                let fieldValid = true;
+                if (field.type === 'checkbox') {
+                    if (!field.checked) {
+                        fieldValid = false;
+                    }
+                } else if (field.type === 'radio') {
+                    // Validación para grupos de radio (un poco más compleja, se asume que al menos uno debe estar marcado si el grupo es required)
+                    // Esta validación simple asume que el atributo 'required' está en cada radio del grupo si el grupo es obligatorio.
+                    const radioGroup = currentFormStepDiv.querySelectorAll(`input[name="${field.name}"][required]`);
+                    let oneChecked = false;
+                    radioGroup.forEach(radio => { if (radio.checked) oneChecked = true; });
+                    if (!oneChecked && radioGroup.length > 0) {
+                        fieldValid = false;
+                        // Para radios, el error se muestra cerca del grupo, no de cada uno.
+                    }
+                } else {
+                    if (!field.value.trim()) {
+                        fieldValid = false;
+                    }
+                }
+
+                if (!fieldValid) {
+                    isValidStep = false;
+                    field.classList.add('border-red-500', 'focus:border-red-500');
+                    
+                    // Añadir mensaje de error específico de JS (opcional)
+                    const errorMsg = document.createElement('p');
+                    errorMsg.id = existingErrorMsgId;
+                    errorMsg.className = 'text-red-500 text-xs mt-1 js-validation-error'; // Clase para identificar errores de JS
+                    errorMsg.textContent = 'Este campo es obligatorio.';
+                    
+                    if (field.type === 'checkbox' || field.type === 'radio') {
+                        // Para checkboxes y radios, el mensaje se puede poner después del label o del grupo
+                        let parentLabel = field.closest('label');
+                        if (parentLabel) {
+                            parentLabel.insertAdjacentElement('afterend', errorMsg);
+                        } else {
+                            field.insertAdjacentElement('afterend', errorMsg);
+                        }
+                    } else {
+                        field.insertAdjacentElement('afterend', errorMsg);
+                    }
+                }
+            });
+            return isValidStep;
+        }
+
+        function nextStep() { // Se eliminó el parámetro 'step' ya que usamos 'currentStep' global
+            if (!validateCurrentStepFields()) {
+                 // Opcional: alert('Por favor, completa todos los campos obligatorios (*) en este paso.');
+                return; // No avanzar si la validación del paso actual falla
+            }
+            currentStep++;
+            if (currentStep > formSteps.length) {
+                currentStep = formSteps.length; 
+            }
+            showStep(currentStep);
+        }
+
+        function prevStep() { // Se eliminó el parámetro 'step'
+            // No se necesita validación al ir hacia atrás
+            currentStep--;
+            if (currentStep < 1) {
+                currentStep = 1; 
+            }
+            showStep(currentStep);
+        }
+        
+        if (cotizacionForm) {
+            cotizacionForm.addEventListener('submit', function(event) {
+                // Validar el paso actual (que debería ser el último paso) antes de enviar
+                if (!validateCurrentStepFields()) {
+                    event.preventDefault(); // Detener el envío del formulario si la validación falla
+                    // Opcional: alert('Por favor, completa todos los campos obligatorios (*) antes de enviar.');
+                    // Asegurarse de que el usuario esté en el paso correcto que contiene el error
+                    showStep(currentStep); 
+                }
+                // Si la validación JS pasa, el formulario se enviará y Django hará su validación del lado del servidor.
+            });
+        }
+
+        // Inicializar el primer paso al cargar la página
+        showStep(currentStep);
+    </script>
+
+</body>
+</html>

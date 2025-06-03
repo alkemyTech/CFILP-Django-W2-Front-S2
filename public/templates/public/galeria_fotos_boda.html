@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galeria de Boda - Fiesta Perfecta</title>
+
+    {# 1. SCRIPT DE TAILWIND CSS (Este DEBE permanecer) #}
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {# 2. TU HOJA DE ESTILOS PERSONALIZADA UNIFICADA #}
+    <link rel="stylesheet" href="/static/css/style.css"> {# Ajusta la ruta si es necesario #}
+
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/public/casa/" class="text-4xl font-elegant-title text-pink-600">FiestaPerfecta</a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="/public/casa/#inicio" class="nav-link-gallery text-gray-600 hover:text-pink-600">Inicio</a>
+                <a href="/public/boda/" class="nav-link-gallery text-gray-600 hover:text-pink-600">Bodas</a>
+                <a href="/public/catering/" class="nav-link-gallery text-gray-600 hover:text-pink-600">Catering</a>
+                <a href="/public/testimonios/" class="nav-link-gallery text-gray-600 hover:text-pink-600">Testimonios</a>
+                <a href="/public/cotizacion/?tipo_evento=boda" class="cta-button primary-gallery-cta-bg font-semibold py-2 px-5 rounded-md shadow-sm">
+                    Planear Mi Boda
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <a href="/public/casa/#inicio" class="block py-3 px-6 text-gray-600 hover:bg-pink-50 hover:text-pink-600">Inicio</a>
+            <a href="/public/boda/" class="block py-3 px-6 text-gray-600 hover:bg-pink-50 hover:text-pink-600">Bodas</a>
+            <a href="/public/catering/" class="block py-3 px-6 text-gray-600 hover:bg-pink-50 hover:text-pink-600">Catering</a>
+            <a href="/public/testimonios/" class="block py-3 px-6 text-gray-600 hover:bg-pink-50 hover:text-pink-600">Testimonios</a>
+            <a href="/public/cotizacion/?tipo_evento=boda" class="block py-3 px-6 text-center cta-button primary-gallery-cta-bg font-semibold rounded-md m-4">
+                Planear Mi Boda
+            </a>
+        </div>
+    </nav>
+
+    <header class="hero-gallery-bg text-white min-h-[50vh] md:min-h-[60vh] flex items-center">
+        <div class="bg-black bg-opacity-30 w-full h-full flex items-center">
+            <div class="container mx-auto px-6 text-center py-16 z-10">
+                <h1 class="text-4xl md:text-6xl font-display-title mb-4 leading-tight">
+                    Galería de <span class="text-pink-300">Bodas Soñadas</span>
+                </h1>
+                <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto font-light">
+                    Inspírate con momentos capturados de bodas inolvidables que hemos tenido el honor de organizar. Cada imagen cuenta una historia de amor, elegancia y felicidad.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 py-12 md:py-16">
+        <div class="text-center mb-12">
+            <h2 class="section-title-gallery">Revive la <span class="text-pink-500">Magia</span></h2>
+            <p class="text-gray-600 mt-2 max-w-lg mx-auto">Explora nuestra colección de fotografías y descubre la dedicación y el arte que ponemos en cada boda.</p>
+        </div>
+
+        <div id="gallery-grid" class="space-y-6 md:space-y-0">
+            <div class="gallery-item">
+                <img src="/static/img/46495212-todo-está-listo-para-la-ceremonia-de-boda-elegante-en-el-jardín-de-verano-sillas-pétalos-y-el.webp" alt="[Descripción de la foto de boda 1, ej: Pareja feliz en el altar]">
+                <div class="gallery-item-overlay">
+                    <h3 class="gallery-item-caption">Ana & Martín</h3>
+                    <p class="gallery-item-description">Ceremonia emotiva en Estancia El Retiro</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="/static/img/6.webp" alt="[Descripción de la foto de boda 2, ej: Detalle de centro de mesa floral]">
+                <div class="gallery-item-overlay">
+                    <h3 class="gallery-item-caption">Decoración Floral</h3>
+                    <p class="gallery-item-description">Arreglos románticos para la boda de S&L</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="/static/img/316199.webp" alt="[Descripción de la foto de boda 3, ej: Primer baile de los novios]">
+                 <div class="gallery-item-overlay">
+                    <h3 class="gallery-item-caption">Primer Baile Mágico</h3>
+                    <p class="gallery-item-description">Julieta y Marcos bajo las estrellas</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="/static/img/baile-de-novios-dannelle-bohane.webp" alt="[Descripción de la foto de boda 4, ej: Boda al aire libre con luces colgantes]">
+                <div class="gallery-item-overlay">
+                    <h3 class="gallery-item-caption">Ceremonia al Atardecer</h3>
+                    <p class="gallery-item-description">Viñedos del Sol</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="/static/img/como_hacer_un_brindis_de_boda_19119_600.webp" alt="[Descripción de la foto de boda 5, ej: Novios brindando felices]">
+                <div class="gallery-item-overlay">
+                    <h3 class="gallery-item-caption">¡Salud por el Amor!</h3>
+                    <p class="gallery-item-description">Boda de Carla y Diego</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="/static/img/unnamed.webp" alt="[Descripción de la foto de boda 6, ej: Elegante pastel de bodas de varios pisos]">
+                <div class="gallery-item-overlay">
+                    <h3 class="gallery-item-caption">Dulce Final</h3>
+                    <p class="gallery-item-description">Pastel de bodas artístico</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="/static/img/pista-de-baile-llena-en-boda-juliano-goncalves.webp" alt="[Descripción de la foto de boda 7, ej: Invitados bailando y disfrutando la fiesta]">
+                <div class="gallery-item-overlay">
+                    <h3 class="gallery-item-caption">Fiesta Inolvidable</h3>
+                    <p class="gallery-item-description">La alegría de celebrar juntos</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="/static/img/salon-boda-elegante.webp" alt="[Descripción de la foto de boda 8, ej: Detalles personalizados de la boda, como papelería o souvenirs]">
+                <div class="gallery-item-overlay">
+                    <h3 class="gallery-item-caption">Pequeños Grandes Detalles</h3>
+                    <p class="gallery-item-description">Personalización en cada rincón</p>
+                </div>
+            </div>
+
+            </div>
+
+        <div class="text-center mt-16">
+             <a href="/public/cotizacion/" class="cta-button primary-gallery-cta-bg font-semibold py-3 px-10 rounded-md shadow-md text-lg">
+                <i class="fas fa-ring mr-2"></i> Inspira Tu Propia Boda
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-2xl font-display-title font-bold text-pink-400 mb-4">FiestaPerfecta</p>
+            <div class="flex justify-center space-x-5 mb-6">
+                <a href="#" aria-label="Facebook de FiestaPerfecta" class="text-gray-400 hover:text-pink-400 transition-colors duration-300"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#" aria-label="Instagram de FiestaPerfecta" class="text-gray-400 hover:text-pink-400 transition-colors duration-300"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" aria-label="Pinterest de FiestaPerfecta" class="text-gray-400 hover:text-pink-400 transition-colors duration-300"><i class="fab fa-pinterest-p fa-lg"></i></a>
+            </div>
+            <p class="text-xs">&copy; 2025 FiestaPerfecta. Capturando la esencia de tu amor.</p>
+            <p class="text-xs mt-1">
+                <a href="/public/politicas/" class="hover:text-purple-300 transition-colors duration-300">Política de Privacidad</a> | 
+                <a href="/public/terminos/" class="hover:text-purple-300 transition-colors duration-300">Términos y Condiciones</a>
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        // Script para menú móvil
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+    </script>
+
+</body>
+</html>

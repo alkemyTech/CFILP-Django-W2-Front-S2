@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Testimonios - Fiesta Perfecta</title>
+
+    {# 1. SCRIPT DE TAILWIND CSS (Este DEBE permanecer) #}
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {# 2. TU HOJA DE ESTILOS PERSONALIZADA UNIFICADA #}
+    <link rel="stylesheet" href="/static/css/style.css"> {# Ajusta la ruta si es necesario #}
+
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/public/casa/" class="text-4xl font-elegant-title text-pink-500">FiestaPerfecta</a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="/public/casa/#inicio" class="nav-link-testimonial text-gray-600 hover:text-pink-600">Inicio</a>
+                <a href="/public/casa/#servicios" class="nav-link-testimonial text-gray-600 hover:text-pink-600">Servicios</a>
+                <a href="/public/cotizacion/" class="nav-link-testimonial text-gray-600 hover:text-pink-600">Cotizar</a>
+                <a href="/public/casa/#contacto" class="nav-link-testimonial text-gray-600 hover:text-pink-600">Contacto</a>
+                <a href="/public/cotizacion/" class="cta-button primary-cta-bg font-semibold py-2 px-5 rounded-md shadow-sm">
+                    Organizar Mi Evento
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <a href="/public/casa/#inicio" class="block py-3 px-6 text-gray-600 hover:bg-pink-50 hover:text-pink-600">Inicio</a>
+            <a href="/public/casa/#servicios" class="block py-3 px-6 text-gray-600 hover:bg-pink-50 hover:text-pink-600">Servicios</a>
+            <a href="/public/cotizacion/" class="block py-3 px-6 text-gray-600 hover:bg-pink-50 hover:text-pink-600">Cotizar</a>
+            <a href="/public/casa/#contacto" class="block py-3 px-6 text-gray-600 hover:bg-pink-50 hover:text-pink-600">Contacto</a>
+            <a href="/public/cotizacion/" class="block py-3 px-6 text-center cta-button primary-cta-bg font-semibold rounded-md m-4">
+                Organizar Mi Evento
+            </a>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-r from-pink-500 to-purple-600 py-20 md:py-28 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-display-title font-bold mb-4">Historias de Éxito y Sonrisas</h1>
+            <p class="text-lg md:text-xl max-w-2xl mx-auto font-light">
+                Descubre por qué nuestros clientes nos eligen para sus celebraciones más importantes. Sus palabras son nuestro mejor aval.
+            </p>
+        </div>
+    </header>
+
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-10">
+                <button class="filter-button active py-2 px-5 rounded-full text-sm font-semibold" data-filter="all">Todos</button>
+                <button class="filter-button py-2 px-5 rounded-full text-sm font-semibold" data-filter="boda">Bodas</button>
+                <button class="filter-button py-2 px-5 rounded-full text-sm font-semibold" data-filter="infantil">Cumpleaños Infantiles</button>
+                <button class="filter-button py-2 px-5 rounded-full text-sm font-semibold" data-filter="corporativo">Eventos Corporativos</button>
+                <button class="filter-button py-2 px-5 rounded-full text-sm font-semibold" data-filter="otro">Otros Eventos</button>
+            </div>
+
+            <div id="testimonials-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                <div class="testimonial-item" data-category="boda">
+                    <div class="testimonial-card p-6 md:p-8">
+                        <div class="flex items-center mb-4">
+                            <img src="https://placehold.co/50x50/E9D8FD/333333?text=S&L" alt="[Foto de Sofía y Leonardo]" class="w-12 h-12 rounded-full mr-4 border-2 border-pink-200">
+                            <div>
+                                <p class="testimonial-author">Sofía & Leonardo G.</p>
+                                <p class="testimonial-event">Boda Elegante - Abril 2025</p>
+                            </div>
+                        </div>
+                        <p class="testimonial-quote mb-5">
+                            "FiestaPerfecta hizo de nuestra boda un sueño hecho realidad. Cada detalle fue cuidado con una elegancia y profesionalismo increíbles. Desde la decoración hasta la coordinación, todo fue impecable. ¡Nuestros invitados no dejan de hablar de lo mágica que fue la noche! Mil gracias."
+                        </p>
+                        <div class="text-yellow-400 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-item" data-category="infantil">
+                    <div class="testimonial-card p-6 md:p-8">
+                        <div class="flex items-center mb-4">
+                            <img src="https://placehold.co/50x50/A7F3D0/333333?text=MV" alt="[Foto de mamá de Valentina]" class="w-12 h-12 rounded-full mr-4 border-2 border-pink-200">
+                            <div>
+                                <p class="testimonial-author">Mariana V.</p>
+                                <p class="testimonial-event">Cumpleaños de Valentina (5 años)</p>
+                            </div>
+                        </div>
+                        <p class="testimonial-quote mb-5">
+                            "¡El cumpleaños temático de unicornios para mi hija fue espectacular! Los animadores, la decoración, la torta... todo superó nuestras expectativas. Los niños se divirtieron muchísimo y nosotros pudimos relajarnos. ¡Totalmente recomendados!"
+                        </p>
+                        <div class="text-yellow-400 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-item" data-category="corporativo">
+                    <div class="testimonial-card p-6 md:p-8">
+                        <div class="flex items-center mb-4">
+                            <img src="https://placehold.co/50x50/BFDBFE/333333?text=JR" alt="[Foto de Juan R.]" class="w-12 h-12 rounded-full mr-4 border-2 border-pink-200">
+                            <div>
+                                <p class="testimonial-author">Juan Rodríguez</p>
+                                <p class="testimonial-event">Evento de Fin de Año - TechGlobal</p>
+                            </div>
+                        </div>
+                        <p class="testimonial-quote mb-5">
+                            "Confiamos en FiestaPerfecta para nuestra fiesta de fin de año y fue un éxito rotundo. La organización fue profesional, el catering excelente y el ambiente muy festivo. Nuestro equipo quedó encantado. Sin duda, los volveremos a contactar."
+                        </p>
+                         <div class="text-yellow-400 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-item" data-category="boda">
+                    <div class="testimonial-card p-6 md:p-8">
+                         <div class="flex items-center mb-4">
+                            <img src="https://placehold.co/50x50/FBCFE8/333333?text=A&M" alt="[Foto de Ana y Martín]" class="w-12 h-12 rounded-full mr-4 border-2 border-pink-200">
+                            <div>
+                                <p class="testimonial-author">Ana y Martín L.</p>
+                                <p class="testimonial-event">Boda Rústica Chic - Noviembre 2024</p>
+                            </div>
+                        </div>
+                        <p class="testimonial-quote mb-5">
+                            "No podríamos estar más felices con el servicio de FiestaPerfecta. Entendieron perfectamente nuestra visión para una boda rústica y romántica. La atención al detalle fue asombrosa. ¡Gracias por hacer nuestro día inolvidable!"
+                        </p>
+                        <div class="text-yellow-400 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-item" data-category="otro">
+                    <div class="testimonial-card p-6 md:p-8">
+                         <div class="flex items-center mb-4">
+                            <img src="https://placehold.co/50x50/FDE68A/333333?text=CP" alt="[Foto de Carlos P.]" class="w-12 h-12 rounded-full mr-4 border-2 border-pink-200">
+                            <div>
+                                <p class="testimonial-author">Carlos P.</p>
+                                <p class="testimonial-event">Aniversario de Bodas de Oro</p>
+                            </div>
+                        </div>
+                        <p class="testimonial-quote mb-5">
+                            "Organizaron el 50 aniversario de mis padres y fue emocionante. Cuidaron cada aspecto con delicadeza y profesionalismo, creando un ambiente cálido y familiar. Todos los invitados se sintieron muy a gusto. ¡Un servicio excepcional!"
+                        </p>
+                        <div class="text-yellow-400 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="testimonial-item" data-category="infantil">
+                    <div class="testimonial-card p-6 md:p-8">
+                        <div class="flex items-center mb-4">
+                            <img src="https://placehold.co/50x50/86EFAC/333333?text=LF" alt="[Foto de Laura F.]" class="w-12 h-12 rounded-full mr-4 border-2 border-pink-200">
+                            <div>
+                                <p class="testimonial-author">Laura F.</p>
+                                <p class="testimonial-event">Cumpleaños de Mateo (8 años) - Temática Fútbol</p>
+                            </div>
+                        </div>
+                        <p class="testimonial-quote mb-5">
+                            "El cumple de fútbol de Mateo fue un golazo gracias a FiestaPerfecta. La decoración, los juegos, ¡todo increíble! Los chicos no pararon de jugar y Mateo tuvo el mejor cumpleaños. ¡Gracias por la dedicación!"
+                        </p>
+                        <div class="text-yellow-400 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                 <a href="/public/cotizacion/" class="cta-button primary-cta-bg font-semibold py-3 px-8 rounded-md shadow-md text-lg">
+                    <i class="fas fa-calendar-alt mr-2"></i> Planifica Tu Evento Perfecto
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-20 bg-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-display-title font-bold text-pink-600 mb-6">¿Te Ayudamos a Celebrar?</h2>
+            <p class="text-lg text-gray-600 mb-8 max-w-xl mx-auto">
+                Si ya has celebrado con nosotros y quieres compartir tu experiencia, ¡nos encantaría escucharla! Tu opinión nos ayuda a seguir mejorando.
+            </p>
+            <a href="/public/agregar_testimonio/" class="cta-button bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-8 rounded-md shadow-sm">
+                <i class="fas fa-pen-alt mr-2"></i> Comparte Tu Experiencia
+            </a>
+        </div>
+    </section>
+
+
+    <footer class="bg-gray-800 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-2xl font-display-title font-bold text-pink-400 mb-4">FiestaPerfecta</p>
+            <div class="flex justify-center space-x-5 mb-6">
+                <a href="#" aria-label="Facebook de FiestaPerfecta" class="text-gray-400 hover:text-pink-400 transition-colors duration-300"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#" aria-label="Instagram de FiestaPerfecta" class="text-gray-400 hover:text-pink-400 transition-colors duration-300"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" aria-label="WhatsApp de FiestaPerfecta" class="text-gray-400 hover:text-pink-400 transition-colors duration-300"><i class="fab fa-whatsapp fa-lg"></i></a>
+            </div>
+            <p class="text-xs">&copy; 2025 FiestaPerfecta. Creando momentos inolvidables.</p>
+            <p class="text-xs mt-1">
+                <a href="/public/politicas/" class="hover:text-pink-400 transition-colors duration-300">Política de Privacidad</a> | 
+                <a href="/public/terminos/" class="hover:text-pink-400 transition-colors duration-300">Términos y Condiciones</a>
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        // Script para menú móvil
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+        // Script para filtrar testimonios
+        const filterButtons = document.querySelectorAll('.filter-button');
+        const testimonialItems = document.querySelectorAll('.testimonial-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Manejar clase activa en botones
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filter = button.dataset.filter;
+
+                testimonialItems.forEach(item => {
+                    if (filter === 'all' || item.dataset.category === filter) {
+                        item.style.display = 'block'; // O 'flex', 'grid' según tu layout
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

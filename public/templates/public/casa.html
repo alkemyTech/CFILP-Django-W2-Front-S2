@@ -1,0 +1,362 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fiesta Perfecta</title>
+
+    {# 1. SCRIPT DE TAILWIND CSS (Este DEBE permanecer) #}
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {# 2. TU HOJA DE ESTILOS PERSONALIZADA UNIFICADA #}
+    <link rel="stylesheet" href="/static/css/style.css"> {# Ajusta la ruta si es necesario #}
+
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="/public/casa/" class="text-4xl font-elegant-title text-pink-500">FiestaPerfecta</a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#inicio" class="text-gray-600 hover:text-pink-500">Inicio</a>
+                <a href="#servicios" class="text-gray-600 hover:text-pink-500">Servicios</a>
+                <a href="#paquetes" class="text-gray-600 hover:text-pink-500">Paquetes</a>
+                <a href="#testimonios" class="text-gray-600 hover:text-pink-500">Testimonios</a>
+                <a href="#contacto" class="text-gray-600 hover:text-pink-500">Contacto</a>
+                <a href="/public/cotizacion/" class="cta-button dopamine-bg text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:shadow-lg">
+                    Cotizar Ahora
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <a href="#inicio" class="block py-2 px-6 text-gray-600 hover:bg-pink-50 hover:text-pink-500">Inicio</a>
+            <a href="#servicios" class="block py-2 px-6 text-gray-600 hover:bg-pink-50 hover:text-pink-500">Servicios</a>
+            <a href="#paquetes" class="text-gray-600 hover:text-pink-500">Paquetes</a>
+            <a href="#testimonios" class="block py-2 px-6 text-gray-600 hover:bg-pink-50 hover:text-pink-500">Testimonios</a>
+            <a href="#contacto" class="block py-2 px-6 text-gray-600 hover:bg-pink-50 hover:text-pink-500">Contacto</a>
+            <a href="/public/cotizacion/" class="block py-3 px-6 text-center cta-button dopamine-bg text-white font-semibold rounded-lg m-4">
+                Cotizar Ahora
+            </a>
+        </div>
+    </nav>
+
+    <header id="inicio" class="hero-bg text-white min-h-screen flex items-center">
+        <div class="bg-black bg-opacity-50 w-full h-full flex items-center">
+            <div class="container mx-auto px-6 text-center py-20">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                    Tu Fiesta Perfecta, <span class="text-pink-400">Hecha Realidad</span> Sin Estrés
+                </h1>
+                <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+                    Nos encargamos de cada detalle para que tú solo te preocupes por Disfrutar y Crear Recuerdos Inolvidables
+                </p>
+                <a href="#servicios" class="cta-button dopamine-bg text-white font-bold py-4 px-10 text-lg rounded-lg shadow-xl hover:shadow-2xl">
+                    Descubre Nuestros Servicios
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section id="servicios" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-center mb-4 text-pink-600">¿Qué Hacemos por Ti?</h2>
+            <p class="text-center text-gray-600 mb-12 md:mb-16 max-w-xl mx-auto">
+                Transformamos tus ideas en celebraciones espectaculares. Ofrecemos una gama completa de servicios para cada ocasión:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover-lift text-center">
+                    <div class="text-pink-500 mb-4">
+                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">Planificación Integral</h3>
+                    <p class="text-gray-600">Desde el concepto hasta la ejecución, lo manejamos todo para que tú no te preocupes por nada.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover-lift text-center">
+                    <div class="text-pink-500 mb-4">
+                         <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7.014A8.003 8.003 0 0121.5 10c.003 1.476-.363 2.87-.986 4.014L17.657 18.657z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">Decoración Temática</h3>
+                    <p class="text-gray-600">Creamos ambientes únicos y personalizados que cuentan tu historia y sorprenden a tus invitados.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover-lift text-center">
+                    <div class="text-pink-500 mb-4">
+                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0c-.454-.303-.977-.454-1.5-.454V5.73c0-1.268.51-2.429 1.336-3.255A4.512 4.512 0 0112 1.5a4.512 4.512 0 014.164.975A4.512 4.512 0 0121 5.73v9.816z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0c-.454-.303-.977-.454-1.5-.454"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">Catering Exquisito</h3>
+                    <p class="text-gray-600">Sabores que deleitan. Menús adaptados a tus gustos y necesidades, con ingredientes de primera calidad.</p>
+                </div>
+                 <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover-lift text-center md:col-span-1 lg:col-span-1">
+                     <div class="text-pink-500 mb-4">
+                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">Entretenimiento Vibrante</h3>
+                    <p class="text-gray-600">Música, shows y actividades para todas las edades que garantizan la diversión.</p>
+                </div>
+                 <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover-lift text-center md:col-span-2 lg:col-span-2">
+                     <div class="text-pink-500 mb-4">
+                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">Alquiler de Equipamiento</h3>
+                    <p class="text-gray-600">Todo lo que necesitas en un solo lugar: sonido, luces, mobiliario, carpas y más.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="como-funciona" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-center mb-4 text-pink-600">¡Así de Fácil es Planear Tu Fiesta!</h2>
+            <p class="text-center text-gray-600 mb-12 md:mb-16 max-w-xl mx-auto">
+                Tu celebración perfecta está a solo unos pasos. Nuestro proceso es simple y transparente:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="p-6">
+                    <div class="bg-pink-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6 shadow-lg">1</div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Cuéntanos Tu Idea</h3>
+                    <p class="text-gray-600">Completa nuestro <a href="#contacto" class="text-pink-500 hover:underline font-semibold">formulario de contacto</a> o llámanos. Queremos conocer tus sueños y necesidades.</p>
+                </div>
+                <div class="p-6">
+                    <div class="bg-pink-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6 shadow-lg">2</div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Recibe Tu Propuesta</h3>
+                    <p class="text-gray-600">Diseñaremos un plan a medida y un presupuesto detallado, ajustado a tus expectativas y sin compromiso.</p>
+                </div>
+                <div class="p-6">
+                    <div class="bg-pink-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6 shadow-lg">3</div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">¡A Celebrar!</h3>
+                    <p class="text-gray-600">Una vez aprobado, nosotros nos encargamos de toda la organización. Tú solo relájate y disfruta de tu evento inolvidable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="paquetes" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-center mb-4 text-pink-600">Paquetes Destacados para Inspirarte</h2>
+            <p class="text-center text-gray-600 mb-12 md:mb-16 max-w-xl mx-auto">
+                Hemos diseñado algunas opciones populares, ¡pero recuerda que todo es personalizable!
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl shadow-lg overflow-hidden hover-lift flex flex-col">
+                    <img src="https://placehold.co/600x400/B9F6D2/333333?text=Cumple+Infantil" alt="[Imagen de un cumpleaños infantil temático]" class="w-full h-56 object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-semibold mb-2 text-gray-800">Cumpleaños Infantil Mágico</h3>
+                        <p class="text-gray-600 mb-4 flex-grow">Decoración temática, animación, catering divertido y ¡mucha alegría para los peques!</p>
+                        <p class="text-xl font-bold text-pink-500 mb-4">Consultar Precio</p>
+                        <a href="/public/cumple/" class="mt-auto cta-button dopamine-bg text-white text-center font-semibold py-2 px-6 rounded-lg shadow-md">Ver Detalles</a>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-xl shadow-lg overflow-hidden hover-lift flex flex-col">
+                    <img src="https://placehold.co/600x400/E9D8FD/333333?text=Boda+Elegante" alt="[Imagen de una boda elegante]" class="w-full h-56 object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-semibold mb-2 text-gray-800">Boda Elegante & Romántica</h3>
+                        <p class="text-gray-600 mb-4 flex-grow">Planificación completa, ambientación sofisticada, catering gourmet y todos los detalles para tu gran día.</p>
+                        <p class="text-xl font-bold text-pink-500 mb-4">Consultar Precio</p>
+                        <a href="/public/boda/" class="mt-auto cta-button dopamine-bg text-white text-center font-semibold py-2 px-6 rounded-lg shadow-md">Ver Detalles</a>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-xl shadow-lg overflow-hidden hover-lift flex flex-col">
+                    <img src="https://placehold.co/600x400/2563EB/333333?text=Evento+Corporativo" alt="[Imagen de un evento corporativo exitoso]" class="w-full h-56 object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-semibold mb-2 text-gray-800">Evento Corporativo Exitoso</h3>
+                        <p class="text-gray-600 mb-4 flex-grow">Soluciones profesionales para lanzamientos, aniversarios o reuniones. Impacta a tus clientes y equipo.</p>
+                        <p class="text-xl font-bold text-pink-500 mb-4">Consultar Precio</p>
+                        <a href="/public/ejecutivo/" class="mt-auto cta-button dopamine-bg text-white text-center font-semibold py-2 px-6 rounded-lg shadow-md">Ver Detalles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonios" class="py-16 md:py-24 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-center mb-4 text-pink-600">Lo Que Nuestros Clientes Dicen</h2>
+            <p class="text-center text-gray-600 mb-12 md:mb-16 max-w-xl mx-auto">
+                La satisfacción de nuestros clientes es nuestra mejor carta de presentación.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg hover-lift">
+                    <p class="text-gray-600 mb-6 italic">"¡FiestaPerfecta superó todas mis expectativas! La organización fue impecable y la decoración, un sueño. Mis invitados quedaron encantados. ¡Totalmente recomendados!"</p>
+                    <div class="flex items-center">
+                        <img src="https://placehold.co/50x50/FFC0CB/333333?text=LC" alt="[Foto de Laura C.]" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <p class="font-semibold text-gray-800">Laura C.</p>
+                            <p class="text-sm text-pink-500">Cumpleaños de 15</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg hover-lift">
+                    <p class="text-gray-600 mb-6 italic">"Contratamos a FiestaPerfecta para nuestro evento corporativo y fue un éxito total. Profesionalismo, creatividad y una atención al detalle increíble. Sin duda, volveremos a trabajar con ellos."</p>
+                    <div class="flex items-center">
+                        <img src="https://placehold.co/50x50/A0DEFF/333333?text=MJ" alt="[Foto de Marcos J.]" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <p class="font-semibold text-gray-800">Marcos J.</p>
+                            <p class="text-sm text-pink-500">Evento Corporativo</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg hover-lift md:col-span-2 lg:col-span-1">
+                    <p class="text-gray-600 mb-6 italic">"Desde el primer contacto hasta el final de la fiesta, el equipo de FiestaPerfecta fue amable, eficiente y muy creativo. Hicieron de nuestra boda un día mágico e inolvidable. ¡Gracias!"</p>
+                    <div class="flex items-center">
+                        <img src="https://placehold.co/50x50/C4F1C4/333333?text=SA" alt="[Foto de Sofía y Andrés]" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <p class="font-semibold text-gray-800">Sofía & Andrés P.</p>
+                            <p class="text-sm text-pink-500">Boda</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="/public/testimonios/" class="cta-button secondary-cta-bg text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-lg">
+                    Ver Más Testimonios
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="py-16 md:py-24 bg-pink-600 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">¿Listo para Empezar a Planear?</h2>
+            <p class="text-lg md:text-xl mb-10 max-w-xl mx-auto">
+                No dejes pasar la oportunidad de tener la fiesta que siempre quisiste. Contáctanos hoy mismo para una consulta gratuita y sin compromiso.
+            </p>
+            <div class="md:flex justify-center items-center space-y-4 md:space-y-0 md:space-x-6 mb-12">
+                <a href="#formulario-contacto" class="cta-button bg-white text-pink-600 font-bold py-4 px-10 text-lg rounded-lg shadow-xl hover:bg-gray-100">
+                    Solicitar Consulta Gratuita
+                </a>
+                <a href="{% static 'documentos/guia-planificacion.pdf' %}" download class="cta-button border-2 border-white text-white font-bold py-3.5 px-10 text-lg rounded-lg shadow-xl hover:bg-white hover:text-pink-600">
+                    <i class="fas fa-download mr-2"></i> Descargar Guía (PDF)
+                </a>
+            </div>
+
+            <div id="formulario-contacto" class="max-w-2xl mx-auto bg-white text-gray-800 p-8 md:p-10 rounded-xl shadow-2xl">
+                <h3 class="text-2xl font-semibold mb-6 text-pink-600">Hablemos de Tu Evento</h3>
+                <form action="#" method="POST">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label for="nombre" class="block text-sm font-medium text-gray-700 text-left mb-1">Nombre Completo</label>
+                            <input type="text" name="nombre" id="nombre" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 sm:text-sm" placeholder="Tu nombre">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 text-left mb-1">Correo Electrónico</label>
+                            <input type="email" name="email" id="email" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 sm:text-sm" placeholder="tu@email.com">
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label for="tipo_evento" class="block text-sm font-medium text-gray-700 text-left mb-1">Tipo de Evento</label>
+                        <select id="tipo_evento" name="tipo_evento" class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 sm:text-sm">
+                            <option>Selecciona uno...</option>
+                            <option>Cumpleaños</option>
+                            <option>Boda</option>
+                            <option>Evento Corporativo</option>
+                            <option>Aniversario</option>
+                            <option>Otro</option>
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <label for="mensaje" class="block text-sm font-medium text-gray-700 text-left mb-1">Cuéntanos más sobre tu idea</label>
+                        <textarea id="mensaje" name="mensaje" rows="4" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 sm:text-sm" placeholder="Fecha estimada, cantidad de invitados, ideas especiales, etc."></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full cta-button dopamine-bg text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg text-lg">
+                            Enviar Mensaje
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-gray-300 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="text-xl font-semibold text-white mb-4">FiestaPerfecta</h4>
+                    <p class="text-sm">Creamos momentos inolvidables, fiestas que cuentan tu historia. Tu celebración soñada, hecha realidad.</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold text-white mb-4">Enlaces Rápidos</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#inicio" class="hover:text-pink-400">Volver arriba</a></li>
+                        <li><a href="#servicios" class="hover:text-pink-400">Servicios</a></li>
+                        <li><a href="/public/new_provider/" class="hover:text-pink-400">Nuevos Proveedores</a></li>
+                        <li><a href="/public/politicas/" class="hover:text-pink-400">Política de Privacidad</a></li>
+                        <li><a href="/public/terminos/" class="hover:text-pink-400">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold text-white mb-4">Contacto</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><i class="fas fa-envelope mr-2 text-pink-400"></i> info@fiestaperfecta.com</li>
+                        <li><i class="fas fa-phone mr-2 text-pink-400"></i> +54 9 11 1234-5678</li>
+                        <li><i class="fas fa-map-marker-alt mr-2 text-pink-400"></i> Buenos Aires, Argentina</li>
+                    </ul>
+                    <div class="mt-4 flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-pink-400"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-pink-400"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-pink-400"><i class="fab fa-whatsapp fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center text-sm">
+                <p>&copy; 2025 FiestaPerfecta. Todos los derechos reservados. Diseñado con <i class="fas fa-heart text-pink-400"></i>.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button id="whatsappButton" title="Chatea con nosotros por WhatsApp" class="fixed bottom-6 right-6 bg-pink-500 text-white w-14 h-14 rounded-full shadow-xl flex items-center justify-center cta-button hover:bg-pink-600">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+    </button>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const whatsappButton = document.getElementById('whatsappButton');
+        if (whatsappButton) {
+            whatsappButton.addEventListener('click', function() {
+                window.open('https://www.whatsapp.com/?lang=es_LA', '_blank');
+                // Si prefieres que se abra en la misma pestaña:
+                // window.location.href = 'https://www.whatsapp.com/?lang=es_LA';
+            });
+        }
+    });
+</script>
+
+    <script>
+        // Script para menú móvil
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Cerrar menú móvil al hacer clic en un enlace
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Smooth scroll para enlaces ancla
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                // Evitar error si el target es solo "#" o no existe
+                if (targetId.length > 1 && document.querySelector(targetId)) {
+                     document.querySelector(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

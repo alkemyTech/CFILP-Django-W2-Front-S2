@@ -1,0 +1,226 @@
+{% load static %}
+{% load widget_tweaks %} {# Útil si usas Django Forms para renderizar campos individualmente #}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrar Proveedor - Gestión FiestaPerfecta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f9fafb; /* bg-gray-50 */
+        }
+        main {
+            flex-grow: 1;
+        }
+        .font-display-title {
+            font-family: 'Playfair Display', serif;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 2rem; /* p-8 */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); /* shadow-md */
+            max-width: 768px; /* md:max-w-3xl */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem; /* mb-2 */
+            font-weight: 600; /* font-semibold */
+            color: #374151; /* text-gray-700 */
+        }
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem; /* py-3 px-4 */
+            border: 1px solid #D1D5DB; /* border-gray-300 */
+            border-radius: 0.375rem; /* rounded-md */
+            box-shadow: inset 0 1px 2px 0 rgba(0,0,0,0.05); /* shadow-sm */
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: #EC4899; /* border-pink-500 */
+            box-shadow: 0 0 0 0.2rem rgba(236, 72, 153, 0.25); /* Sombra de foco rosa */
+        }
+        .form-textarea {
+            min-height: 120px;
+        }
+        .form-group {
+            margin-bottom: 1.5rem; /* mb-6 */
+        }
+
+        /* Botones (reutilizando y añadiendo específicos si es necesario) */
+        .cta-button {
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+            padding: 0.75rem 1.5rem; /* Ajustado para botones de formulario */
+            border-radius: 0.375rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+        }
+        .cta-button-primary {
+            background-color: #EC4899; /* bg-pink-500 */
+            color: white;
+            border: 1px solid transparent;
+        }
+        .cta-button-primary:hover {
+            background-color: #D93782; /* Un rosa más oscuro para el hover */
+        }
+        .cta-button-secondary {
+            background-color: #6B7280; /* bg-gray-500 */
+            color: white;
+            border: 1px solid transparent;
+        }
+        .cta-button-secondary:hover {
+            background-color: #4B5563; /* bg-gray-600 */
+        }
+        .cta-button-outline-light {
+            background-color: transparent;
+            border: 1px solid #d1d5db;
+            color: #d1d5db;
+        }
+        .cta-button-outline-light:hover {
+            background-color: #4b5563;
+            color: white;
+            border-color: #4b5563;
+        }
+        .button-group {
+            display: flex;
+            gap: 0.75rem; /* space-x-3 */
+            margin-top: 2rem; /* mt-8 */
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="bg-gray-800 shadow-md">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a class="text-2xl font-display-title font-bold text-pink-400" href="{% url 'home' %}">FiestaPerfecta <span class="text-xs font-light text-gray-400">Admin</span></a>
+            <div>
+                <a href="{% url 'list_providers' %}" class="cta-button cta-button-outline-light text-sm">
+                    <i class="fas fa-arrow-left mr-1 opacity-75"></i> Volver al listado
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto py-10 md:py-16 px-6">
+        <div class="form-container">
+            <h1 class="text-2xl md:text-3xl font-bold font-display-title text-pink-600 mb-8 text-center">Registrar Nuevo Proveedor</h1>
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="form-group">
+                        <label for="{{ form.nombre.id_for_label }}" class="form-label">{{ form.nombre.label }}</label>
+                        {% render_field form.nombre class="form-input" placeholder="Nombre" %}
+                        {{ form.nombre.errors }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.apellido.id_for_label }}" class="form-label">{{ form.apellido.label }}</label>
+                        {% render_field form.apellido class="form-input" placeholder="Apellido" %}
+                        {{ form.apellido.errors }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.numero_documento.id_for_label }}" class="form-label">{{ form.numero_documento.label }}</label>
+                    {% render_field form.numero_documento class="form-input" placeholder="Ej: 12345678" %}
+                    {{ form.numero_documento.errors }}
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="form-group">
+                        <label for="{{ form.rubro.id_for_label }}" class="form-label">{{ form.rubro.label }}</label>
+                        {% render_field form.rubro class="form-select" %}
+                        {{ form.rubro.errors }}
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="form-group">
+                        <label for="{{ form.direccion.id_for_label }}" class="form-label">{{ form.direccion.label }}</label>
+                        {% render_field form.direccion class="form-input" placeholder="Ej: Calle Falsa 123" %}
+                        {{ form.direccion.errors }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.ciudad.id_for_label }}" class="form-label">{{ form.ciudad.label }}</label>
+                        {% render_field form.ciudad class="form-input" placeholder="Ej: Buenos Aires" %}
+                        {{ form.ciudad.errors }}
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="form-group">
+                        <label for="{{ form.provincia.id_for_label }}" class="form-label">{{ form.provincia.label }}</label>
+                        {% render_field form.provincia class="form-input" placeholder="Ej: Buenos Aires" %}
+                        {{ form.provincia.errors }}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.pais.id_for_label }}" class="form-label">{{ form.pais.label }}</label>
+                        {% render_field form.pais class="form-input" placeholder="Ej: Argentina" %}
+                        {{ form.pais.errors }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.codigo_postal.id_for_label }}" class="form-label">{{ form.codigo_postal.label }}</label>
+                    {% render_field form.codigo_postal class="form-input" placeholder="Ej: 1406" %}
+                    {{ form.codigo_postal.errors }}
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="form-group">
+                        <label for="{{ form.email.id_for_label }}" class="form-label">{{ form.email.label }}</label>
+                        {% render_field form.email class="form-input" placeholder="contacto@ejemplo.com" %}
+                        {{ form.email.errors }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.telefono.id_for_label }}" class="form-label">{{ form.telefono.label }}</label>
+                        {% render_field form.telefono class="form-input" placeholder="+54 9 11 1234-5678" %}
+                        {{ form.telefono.errors }}
+                    </div>
+                </div>
+                    
+                <div class="form-group">
+                    <label for="{{ form.activo.id_for_label }}" class="form-label">{{ form.activo.label }}</label>
+                    {% render_field form.activo class="form-input" %}
+                    {{ form.activo.errors }}
+                </div>
+            
+                <div class="button-group">
+                    <a href="{% url 'list_providers' %}" class="cta-button cta-button-secondary">Cancelar</a>
+                    <button type="submit" class="cta-button cta-button-primary">
+                       <i class="fas fa-save mr-2"></i> Guardar Proveedor
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 text-center py-4 mt-auto">
+        <small>&copy; {% now "Y" %} FiestaPerfecta Admin Panel. Todos los derechos reservados.</small>
+    </footer>
+
+    {# Asumiendo que pop_up_modal.html es genérico o no se necesita aquí específicamente #}
+    {% include "pop_up_modal.html" %}
+
+</body>
+</html>

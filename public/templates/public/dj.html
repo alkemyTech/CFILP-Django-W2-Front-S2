@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Música y DJ - Fiesta Perfecta</title>
+
+    {# 1. SCRIPT DE TAILWIND CSS (Este DEBE permanecer) #}
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {# 2. TU HOJA DE ESTILOS PERSONALIZADA UNIFICADA #}
+    <link rel="stylesheet" href="/static/css/style.css"> {# Ajusta la ruta si es necesario #}
+
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/public/casa/" class="text-4xl font-elegant-title text-purple-600">FiestaPerfecta</a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="/public/casa/#inicio" class="nav-link-music text-gray-600 hover:text-purple-600">Inicio</a>
+                <a href="/public/casa/#servicios" class="nav-link-music text-gray-600 hover:text-purple-600">Servicios</a>
+                <a href="/public/deco/" class="nav-link-music text-gray-600 hover:text-purple-600">Decoración</a>
+                <a href="/public/testimonios/" class="nav-link-music text-gray-600 hover:text-purple-600">Testimonios</a>
+                <a href="/public/cotizacion/" class="cta-button primary-music-cta-bg font-semibold py-2 px-5 rounded-md shadow-sm">
+                    Cotizar Música
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <a href="/public/casa/#inicio" class="block py-3 px-6 text-gray-600 hover:bg-purple-50 hover:text-purple-600">Inicio</a>
+            <a href="/public/casa/#servicios" class="block py-3 px-6 text-gray-600 hover:bg-purple-50 hover:text-purple-600">Servicios</a>
+            <a href="/public/deco/" class="block py-3 px-6 text-gray-600 hover:bg-purple-50 hover:text-purple-600">Decoración</a>
+            <a href="/public/testimonios/" class="block py-3 px-6 text-gray-600 hover:bg-purple-50 hover:text-purple-600">Testimonios</a>
+            <a href="/public/cotizacion/" class="block py-3 px-6 text-center cta-button primary-music-cta-bg font-semibold rounded-md m-4">
+                Cotizar Música
+            </a>
+        </div>
+    </nav>
+
+    <header class="hero-music-bg text-white min-h-[65vh] md:min-h-[75vh] flex items-center">
+        <div class="bg-black bg-opacity-40 w-full h-full flex items-center">
+            <div class="container mx-auto px-6 text-center py-16 z-10">
+                <h1 class="text-5xl md:text-7xl font-display-title mb-4 leading-tight">
+                    La Banda Sonora <span class="font-accent-title text-purple-300">Perfecta</span> para Tu Evento
+                </h1>
+                <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto font-light">
+                    Desde la melodía más sutil hasta el ritmo que llena la pista de baile, en FiestaPerfecta creamos la atmósfera musical ideal para cada momento de tu celebración.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-10 md:py-12 bg-gray-50 sticky top-[68px] md:top-[76px] z-40 shadow-sm">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-wrap justify-center gap-3 md:gap-4">
+                <button class="filter-button-music active rounded-md text-sm font-semibold" data-filter="todos">Todas las Opciones</button>
+                <button class="filter-button-music rounded-md text-sm font-semibold" data-filter="bodas">Música para Bodas</button>
+                <button class="filter-button-music rounded-md text-sm font-semibold" data-filter="ejecutivos">DJ para Eventos Ejecutivos</button>
+                <button class="filter-button-music rounded-md text-sm font-semibold" data-filter="cumpleanos">Música para Cumpleaños</button>
+            </div>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-6 py-12 md:py-16">
+        <div id="musica-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
+            
+            <div class="music-item" data-category="bodas cumpleanos ejecutivos">
+                <div class="music-card">
+                    <img src="/static/img/46098184_1147293792100938_1866569100096962560_o-1024x683.webp" alt="[Imagen de DJ profesional mezclando en un evento]" class="music-card-image">
+                    <div class="music-card-content">
+                        <h3 class="music-card-title">DJ Profesional Versátil</h3>
+                        <div class="music-card-tags">
+                            <span class="tag">Todos los Eventos</span><span class="tag">Mix Personalizado</span>
+                        </div>
+                        <p class="music-card-description">
+                            Nuestro DJ estrella se adapta a cualquier tipo de evento, creando listas de reproducción personalizadas que van desde música ambiental hasta los hits más bailables. Equipamiento de sonido e iluminación profesional.
+                        </p>
+                        <a href="/public/casa/#contacto" class="music-card-cta">Consultar Disponibilidad <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="music-item" data-category="bodas">
+                <div class="music-card">
+                    <img src="/static/img/dj-para-bodas.webp" alt="[Imagen de pista de baile animada en una boda]" class="music-card-image">
+                    <div class="music-card-content">
+                        <h3 class="music-card-title">DJ para Bodas Mágicas</h3>
+                         <div class="music-card-tags">
+                            <span class="tag">Bodas</span><span class="tag">Recepción</span><span class="tag">Fiesta</span>
+                        </div>
+                        <p class="music-card-description">
+                            Creamos la atmósfera perfecta para cada momento de tu boda: música emotiva para la ceremonia, melodías elegantes para la recepción y los mejores ritmos para que la fiesta sea inolvidable. Coordinación de momentos clave.
+                        </p>
+                        <a href="https://open.spotify.com/intl-es/" class="music-card-cta">Diseñar Playlist de Boda <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="music-item" data-category="ejecutivos">
+                <div class="music-card">
+                    <img src="/static/img/dj-bodas-678x381.webp" alt="[Imagen de evento corporativo con música ambiental elegante]" class="music-card-image">
+                    <div class="music-card-content">
+                        <h3 class="music-card-title">Ambientación Musical Ejecutiva</h3>
+                        <div class="music-card-tags">
+                            <span class="tag">Ejecutivo</span><span class="tag">Networking</span><span class="tag">Profesional</span>
+                        </div>
+                        <p class="music-card-description">
+                            Selección musical sofisticada y adaptable para conferencias, lanzamientos, cócteles de networking o cenas de gala. Desde música instrumental suave hasta sets de DJ lounge que fomentan la conversación.
+                        </p>
+                        <a href="/public/casa/#contacto" class="music-card-cta">Solicitar Propuesta Corporativa <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="music-item" data-category="cumpleanos">
+                <div class="music-card">
+                    <img src="/static/img/full_576214413021f_2703801158660903895.webp" alt="[Imagen de DJ animando una fiesta de cumpleaños divertida]" class="music-card-image">
+                    <div class="music-card-content">
+                        <h3 class="music-card-title">DJ Animador para Cumpleaños</h3>
+                        <div class="music-card-tags">
+                            <span class="tag">Cumpleaños</span><span class="tag">Infantil</span><span class="tag">Adultos</span><span class="tag">Interactivo</span>
+                        </div>
+                        <p class="music-card-description">
+                            ¡La diversión está garantizada! DJ con carisma que no solo pasa la mejor música, sino que también interactúa, propone juegos (opcional para infantiles) y mantiene la energía de la fiesta al máximo.
+                        </p>
+                        <a href="/public/cotizacion/" class="music-card-cta">Reservar DJ para Cumple <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="music-item" data-category="bodas ejecutivos">
+                <div class="music-card">
+                    <img src="/static/img/BODA_MUSICA_GRUPO_EN_VIVO_TIPS_FOR_BRIDES03.webp" alt="[Imagen de banda en vivo tocando en un evento elegante]" class="music-card-image">
+                    <div class="music-card-content">
+                        <h3 class="music-card-title">Música en Vivo: Bandas y Solistas</h3>
+                        <div class="music-card-tags">
+                            <span class="tag">Bodas</span><span class="tag">Ejecutivo</span><span class="tag">Premium</span>
+                        </div>
+                        <p class="music-card-description">
+                            Añade un toque de distinción con música en vivo. Contamos con una selección de bandas de covers, jazz, bossa nova, tango, y solistas (saxofonistas, violinistas) para crear una atmósfera única y sofisticada.
+                        </p>
+                        <a href="/public/casa/#contacto" class="music-card-cta">Consultar Opciones en Vivo <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="music-item" data-category="cumpleanos">
+                <div class="music-card">
+                    <img src="/static/img/canciones-para-noche-de-karaoke-con-tus-amigas.webp" alt="[Imagen de gente divirtiéndose en una fiesta de karaoke]" class="music-card-image">
+                    <div class="music-card-content">
+                        <h3 class="music-card-title">Noche de Karaoke Inolvidable</h3>
+                        <div class="music-card-tags">
+                            <span class="tag">Cumpleaños</span><span class="tag">Diversión</span><span class="tag">Interactivo</span>
+                        </div>
+                        <p class="music-card-description">
+                            ¡Saca la estrella que llevas dentro! Ofrecemos servicio de karaoke con un amplio catálogo de canciones, equipamiento profesional y un animador para que todos se diviertan cantando sus temas favoritos.
+                        </p>
+                        <a href="/public/cotizacion/" class="music-card-cta">Organizar Noche de Karaoke <i class="fas fa-chevron-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-16">
+             <a href="/public/cotizacion/?evento_id={{ 9 }}" class="cta-button primary-music-cta-bg font-semibold py-3 px-10 rounded-md shadow-md text-lg">
+                <i class="fas fa-headphones-alt mr-2"></i> Ponerle Música a Tu Evento
+            </a>
+        </div>
+    </main>
+    
+    <section class="py-16 md:py-24 bg-purple-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="section-title-music mb-6">Calidad de Sonido y <span class="text-pink-500">Profesionalismo Garantizado</span></h2>
+                <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                    En FiestaPerfecta, la excelencia musical es nuestra prioridad. Nos aseguramos de que cada nota suene perfecta y cada momento esté acompañado por la atmósfera adecuada.
+                </p>
+                <ul class="text-left text-gray-600 space-y-3 inline-block">
+                    <li class="flex items-center"><i class="fas fa-volume-up text-purple-500 mr-3"></i>Equipamiento de sonido e iluminación de última generación.</li>
+                    <li class="flex items-center"><i class="fas fa-record-vinyl text-purple-500 mr-3"></i>DJs y músicos profesionales con amplia experiencia.</li>
+                    <li class="flex items-center"><i class="fas fa-tasks text-purple-500 mr-3"></i>Planificación detallada y coordinación con otros servicios.</li>
+                    <li class="flex items-center"><i class="fas fa-music text-purple-500 mr-3"></i>Amplio repertorio musical adaptable a tus gustos y al tipo de evento.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="bg-gray-800 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-2xl font-display-title font-bold text-pink-400 mb-4">FiestaPerfecta</p>
+            <div class="flex justify-center space-x-5 mb-6">
+                <a href="#" aria-label="Facebook de FiestaPerfecta" class="text-gray-400 hover:text-pink-400 transition-colors duration-300"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#" aria-label="Instagram de FiestaPerfecta" class="text-gray-400 hover:text-pink-400 transition-colors duration-300"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" aria-label="Spotify de FiestaPerfecta" class="text-gray-400 hover:text-pink-400 transition-colors duration-300"><i class="fab fa-spotify fa-lg"></i></a>
+            </div>
+            <p class="text-xs">&copy; 2025 FiestaPerfecta. La banda sonora de tus mejores momentos.</p>
+            <p class="text-xs mt-1">
+                <a href="/public/politicas/" class="hover:text-purple-300 transition-colors duration-300">Política de Privacidad</a> | 
+                <a href="/public/terminos/" class="hover:text-purple-300 transition-colors duration-300">Términos y Condiciones</a>
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        // Script para menú móvil
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+        // Script para filtrar opciones musicales
+        const filterButtonsMusic = document.querySelectorAll('.filter-button-music');
+        const musicItems = document.querySelectorAll('.music-item');
+
+        filterButtonsMusic.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtonsMusic.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filter = button.dataset.filter;
+
+                musicItems.forEach(item => {
+                    const categories = item.dataset.category.split(' '); 
+                    if (filter === 'todos' || categories.includes(filter)) {
+                        item.style.display = 'block'; 
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

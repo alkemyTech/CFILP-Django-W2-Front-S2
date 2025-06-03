@@ -46,10 +46,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
     'api',
     'rest_framework',
     'servicio_eventos',
     'widget_tweaks',
+    'public',
 ]
 
 MIDDLEWARE = [
@@ -67,8 +70,8 @@ ROOT_URLCONF = 'two_and_a_half_dev.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["templates"], # Dirrecciones de donde sacar mis propios templates para 'heredar'
-        'APP_DIRS': True,
+        'DIRS': [BASE_DIR / "two_and_a_half_dev" /"templates"],  # Apunta a la carpeta global de templates
+        'APP_DIRS': True,  # Esto buscará también en los templates de cada app
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
@@ -78,7 +81,6 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = 'two_and_a_half_dev.wsgi.application'
 
 
@@ -128,9 +130,13 @@ LOGIN_URL = reverse_lazy('login')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
+import os
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -150,4 +156,8 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
   ],
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }

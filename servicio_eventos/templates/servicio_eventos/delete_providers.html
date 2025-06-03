@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eliminar Proveedor - Gestión FiestaPerfecta</title>
+
+    {# Script de Tailwind CSS (Este DEBE permanecer) #}
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {# TU HOJA DE ESTILOS PERSONALIZADA UNIFICADA #}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body class="font-lato flex flex-col min-h-screen bg-gray-50">
+
+    <nav class="bg-gray-800 shadow-md">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            {# Asegúrate que .font-elegant-title esté en tu style.css global si es diferente a .font-display-title #}
+            <a class="text-2xl font-elegant-title font-bold text-pink-400" href="{% url 'home' %}">FiestaPerfecta <span class="text-xs font-light text-gray-400">Admin</span></a>
+            <div>
+                <a href="{% url 'list_providers' %}" class="cta-button cta-button-outline-light text-sm">
+                    <i class="fas fa-arrow-left mr-1 opacity-75"></i> Volver al listado
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto py-10 md:py-16 px-6 flex-grow">
+        <div class="form-container">
+            <h1 class="text-2xl md:text-3xl font-bold font-elegant-title text-red-600 mb-6 text-center">Confirmar Eliminación</h1>
+            
+            <p class="text-center text-gray-700 mb-4">
+                ¿Estás seguro de que deseas eliminar permanentemente al proveedor:
+            </p>
+            <p class="text-center text-xl font-semibold text-gray-800 mb-6">
+                {{ object.nombre|default_if_none:'' }} {{ object.apellido|default_if_none:'' }}
+            </p>
+            
+            {% if object.rubro %}
+            <p class="text-center text-gray-600 text-sm mb-1"><strong>Rubro:</strong> {{ object.rubro }}</p>
+            {% endif %}
+            {% if object.email %}
+            <p class="text-center text-gray-600 text-sm mb-6"><strong>Email:</strong> {{ object.email }}</p>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+                <div class="button-group justify-center">
+                    <a href="{% url 'list_providers' %}" class="cta-button cta-button-secondary">
+                        <i class="fas fa-times mr-2"></i> Cancelar
+                    </a>
+                    <button type="submit" class="cta-button cta-button-danger">
+                        <i class="fas fa-trash-alt mr-2"></i> Confirmar Eliminación
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 text-center py-4 mt-auto">
+        <small>&copy; {% now "Y" %} FiestaPerfecta Admin Panel. Todos los derechos reservados.</small>
+    </footer>
+
+    {% if POPUP_MODAL_INCLUDED %}
+        {% include "pop_up_modal.html" %}
+    {% endif %}
+</body>
+</html>
